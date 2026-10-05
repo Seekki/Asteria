@@ -1,23 +1,83 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1050" role="img" aria-labelledby="title desc">
-<title id="title">Mapa esquemático de Asteria</title><desc id="desc">Mapa estilizado con Aster, Veyra, Lira, Orsen y Cael.</desc>
-<defs><linearGradient id="land" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e8e1cf"/><stop offset="1" stop-color="#cbd6c4"/></linearGradient><linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#b8cfde"/><stop offset="1" stop-color="#7fa8c3"/></linearGradient></defs>
-<rect width="900" height="1050" fill="url(#sea)"/>
-<path d="M212 70C330 30 500 45 615 105c88 46 132 123 119 211-14 95 33 159 62 239 42 116 19 252-47 344-72 101-190 126-310 98-107-25-188-92-221-184-31-85-14-151-52-232-38-81-108-124-94-220 13-91 69-154 140-191z" fill="url(#land)" stroke="#0d294b" stroke-width="7"/>
-<path d="M635 119c-38 75-45 156-21 238s79 155 82 245c2 65-22 131-61 186" fill="none" stroke="#89998d" stroke-width="34" stroke-linecap="round" opacity=".65"/>
-<path d="M650 112c-40 79-46 161-22 246s76 153 80 245c2 64-20 126-56 182" fill="none" stroke="#f7f5ef" stroke-width="3" stroke-dasharray="9 10"/>
-<path d="M490 221c-24 91-62 159-91 247-30 88-42 188-5 272 28 63 77 109 128 146" fill="none" stroke="#6d9db7" stroke-width="8" opacity=".9"/>
-<ellipse cx="455" cy="662" rx="65" ry="35" fill="#7fa8c3" stroke="#5b819b" stroke-width="3"/>
-<g font-family="Inter,Arial,sans-serif" fill="#0d294b">
-<text x="90" y="70" font-size="26" font-weight="700">Mar Occidental</text>
-<text x="637" y="470" font-size="20" font-weight="700" transform="rotate(77 637 470)">Cordillera de Aster</text>
-<text x="408" y="646" font-size="18">Lago Seren</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+<title id="title">Mapa político y físico de Asteria</title>
+<desc id="desc">Mapa estilizado de la República Cívica de Asteria, sus regiones, ciudades, cordillera oriental, ríos, lago y países vecinos.</desc>
+<defs>
+  <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#bad1de"/><stop offset="1" stop-color="#7fa8c3"/></linearGradient>
+  <linearGradient id="north" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d8e0d0"/><stop offset="1" stop-color="#c6d1bd"/></linearGradient>
+  <linearGradient id="south" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e4d8bc"/><stop offset="1" stop-color="#d3c59f"/></linearGradient>
+  <clipPath id="asteria">
+    <path d="M332 64C408 38 490 49 554 78C617 107 643 148 634 196C626 237 644 270 689 305C723 332 746 370 744 418C741 482 770 531 790 583C812 642 795 706 748 760C704 811 635 839 566 827C500 816 449 785 413 735C376 684 361 637 323 594C286 552 248 516 239 465C229 408 256 362 285 321C313 281 321 245 310 207C296 160 287 112 332 64Z"/>
+  </clipPath>
+</defs>
+<rect width="1200" height="900" fill="url(#sea)"/>
+<path d="M760 0H1200V300L930 345L815 250Z" fill="#d8d4c8"/>
+<path d="M758 300L1200 250V625L880 635L790 570Z" fill="#ddd3bd"/>
+<path d="M802 618L1200 605V900H690L742 792Z" fill="#d4c5ab"/>
+<path d="M0 0H780L642 95L390 60L190 115L0 160Z" fill="#cbd3ca"/>
+<path d="M0 682L265 650L390 775L530 900H0Z" fill="#ded2b9"/>
+
+<text x="72" y="67" font-family="Inter,Arial,sans-serif" font-size="21" font-weight="700" fill="#596674">REPÚBLICA DE NORDEN</text>
+<text x="892" y="115" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="700" fill="#6b655b">FEDERACIÓN DE ELDAN</text>
+<text x="908" y="444" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="700" fill="#6b655b">REINO DE VALMIR</text>
+<text x="857" y="768" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="700" fill="#6b655b">CONFEDERACIÓN DE TERAN</text>
+<text x="63" y="796" font-family="Inter,Arial,sans-serif" font-size="19" font-weight="700" fill="#6b655b">REPÚBLICA DE SOLTAN</text>
+
+<g clip-path="url(#asteria)">
+  <rect x="220" y="35" width="600" height="810" fill="#e9e3d3"/>
+  <path d="M210 45H510V235H260Z" fill="#d8e6d7"/>
+  <path d="M500 45H720V280H515Z" fill="#d9dec7"/>
+  <path d="M230 220H425V430H205Z" fill="#cfe0c8"/>
+  <path d="M420 210H600V448H405Z" fill="#e6dfc1"/>
+  <path d="M585 190H780V470H575Z" fill="#d4d9c6"/>
+  <path d="M230 420H440V690H205Z" fill="#d9e1c8"/>
+  <path d="M430 440H625V705H420Z" fill="#e2dbc0"/>
+  <path d="M605 425H815V715H595Z" fill="#d7d2bd"/>
+  <path d="M285 660H570V875H245Z" fill="#e8d6b4"/>
+  <path d="M555 690H835V870H540Z" fill="#d9c8a9"/>
 </g>
-<g font-family="Inter,Arial,sans-serif" font-weight="800">
-<g transform="translate(445 318)"><circle r="10" fill="#c99a32" stroke="#fff" stroke-width="4"/><text x="18" y="7" font-size="24" fill="#0d294b">Aster</text></g>
-<g transform="translate(218 395)"><circle r="9" fill="#0d294b" stroke="#fff" stroke-width="4"/><text x="18" y="7" font-size="22" fill="#0d294b">Veyra</text></g>
-<g transform="translate(430 600)"><circle r="9" fill="#0d294b" stroke="#fff" stroke-width="4"/><text x="18" y="7" font-size="22" fill="#0d294b">Lira</text></g>
-<g transform="translate(618 748)"><circle r="9" fill="#0d294b" stroke="#fff" stroke-width="4"/><text x="18" y="7" font-size="22" fill="#0d294b">Orsen</text></g>
-<g transform="translate(640 230)"><circle r="9" fill="#0d294b" stroke="#fff" stroke-width="4"/><text x="18" y="7" font-size="22" fill="#0d294b">Cael</text></g>
+
+<path d="M332 64C408 38 490 49 554 78C617 107 643 148 634 196C626 237 644 270 689 305C723 332 746 370 744 418C741 482 770 531 790 583C812 642 795 706 748 760C704 811 635 839 566 827C500 816 449 785 413 735C376 684 361 637 323 594C286 552 248 516 239 465C229 408 256 362 285 321C313 281 321 245 310 207C296 160 287 112 332 64Z" fill="none" stroke="#0d294b" stroke-width="7"/>
+
+<g fill="#718171" opacity=".8">
+  <path d="M635 120l18 28 18-28 20 33 17-23 24 41-9 22-92-2-12-25z"/>
+  <path d="M651 208l18 30 20-32 19 32 17-22 27 43-7 26-100-1-14-35z"/>
+  <path d="M669 301l17 28 19-31 19 33 18-22 28 45-8 25-98-2-14-35z"/>
+  <path d="M691 402l17 30 18-31 21 33 18-22 27 43-7 26-99-2-14-34z"/>
+  <path d="M710 510l18 30 18-31 20 33 18-22 25 42-6 25-96-3-12-31z"/>
 </g>
-<g fill="none" stroke="#9b7c42" stroke-width="3" opacity=".65"><path d="M250 420Q330 360 445 318Q535 280 640 230"/><path d="M445 318Q420 470 430 600Q520 660 618 748"/></g>
+<text x="704" y="390" font-family="Georgia,serif" font-size="18" font-style="italic" fill="#56635a" transform="rotate(78 704 390)">Cordillera de Aster</text>
+
+<path d="M625 167C594 222 558 265 529 319C499 375 484 427 483 485C482 541 499 595 539 650C559 677 579 700 612 722" fill="none" stroke="#6e9eb8" stroke-width="7" stroke-linecap="round"/>
+<path d="M484 487C430 501 390 531 351 566" fill="none" stroke="#6e9eb8" stroke-width="5" stroke-linecap="round"/>
+<ellipse cx="515" cy="607" rx="50" ry="27" fill="#7ea9c1" stroke="#567f98" stroke-width="3"/>
+<text x="545" y="618" font-family="Inter,Arial,sans-serif" font-size="14" fill="#38576b">Lago Seren</text>
+<text x="490" y="352" font-family="Inter,Arial,sans-serif" font-size="14" fill="#38576b" transform="rotate(78 490 352)">Río Lumen</text>
+
+<g font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700" fill="#526054" opacity=".85">
+  <text x="286" y="170">NORTEALBA</text><text x="515" y="165">ALTORIA</text><text x="260" y="356">COSTAVERDE</text><text x="455" y="350">CENTRALIA</text><text x="620" y="350">SIERRALTA</text><text x="276" y="548">VALLELUMEN</text><text x="490" y="555">ORIENTAL</text><text x="307" y="748">LLANURAS DEL SUR</text><text x="600" y="750">SELVA BRISANA</text>
+</g>
+
+<g font-family="Inter,Arial,sans-serif">
+  <g transform="translate(485 288)"><circle r="10" fill="#c99a32" stroke="#fff" stroke-width="4"/><circle r="14" fill="none" stroke="#0d294b" stroke-width="2"/><text x="20" y="7" font-size="23" font-weight="800" fill="#0d294b">Aster</text></g>
+  <g transform="translate(313 378)"><circle r="8" fill="#0d294b" stroke="#fff" stroke-width="3"/><text x="16" y="6" font-size="18" font-weight="800" fill="#0d294b">Veyra</text></g>
+  <g transform="translate(473 545)"><circle r="8" fill="#0d294b" stroke="#fff" stroke-width="3"/><text x="16" y="6" font-size="18" font-weight="800" fill="#0d294b">Lira</text></g>
+  <g transform="translate(645 624)"><circle r="8" fill="#0d294b" stroke="#fff" stroke-width="3"/><text x="16" y="6" font-size="18" font-weight="800" fill="#0d294b">Orsen</text></g>
+  <g transform="translate(632 226)"><circle r="8" fill="#0d294b" stroke="#fff" stroke-width="3"/><text x="16" y="6" font-size="18" font-weight="800" fill="#0d294b">Cael</text></g>
+  <g fill="#173a62" font-size="14" font-weight="700">
+    <circle cx="341" cy="178" r="5"/><text x="351" y="183">Arven</text>
+    <circle cx="273" cy="265" r="5"/><text x="283" y="270">Norel</text>
+    <circle cx="568" cy="330" r="5"/><text x="578" y="335">Saria</text>
+    <circle cx="362" cy="474" r="5"/><text x="372" y="479">Velden</text>
+    <circle cx="301" cy="684" r="5"/><text x="311" y="689">Helia</text>
+    <circle cx="393" cy="760" r="5"/><text x="403" y="765">Bris</text>
+    <circle cx="604" cy="735" r="5"/><text x="614" y="740">Tarsis</text>
+  </g>
+</g>
+
+<g transform="translate(117 372)" fill="#e9e3d3" stroke="#0d294b" stroke-width="2">
+  <ellipse cx="0" cy="0" rx="18" ry="28"/><ellipse cx="31" cy="54" rx="13" ry="22"/><ellipse cx="-13" cy="91" rx="10" ry="17"/>
+</g>
+<text x="66" y="494" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="700" fill="#0d294b">Islas del Alba</text>
+<text x="74" y="255" font-family="Georgia,serif" font-size="28" font-style="italic" fill="#315b76">Mar Occidental</text>
+<text x="265" y="407" font-family="Inter,Arial,sans-serif" font-size="13" fill="#315b76">Bahía de Veyra</text>
 </svg>
