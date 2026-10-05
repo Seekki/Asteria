@@ -1,15 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 540" role="img" aria-labelledby="t">
-<title id="t">Bandera de Asteria</title>
-<rect width="900" height="540" fill="#0d294b"/>
-<rect y="135" width="900" height="270" fill="#fffdf8"/>
-<rect y="126" width="900" height="9" fill="#c99a32"/>
-<rect y="405" width="900" height="9" fill="#c99a32"/>
-<g transform="translate(450 270)">
-<g fill="none" stroke="#b88927" stroke-width="9" stroke-linecap="round">
-<path d="M-67 72C-100 43-103-10-75-48M-81 50l-25 9M-91 25l-26 1M-93-3l-25-8M-85-29l-21-16"/>
-<path d="M67 72c33-29 36-82 8-120M81 50l25 9M91 25l26 1M93-3l25-8M85-29l21-16"/>
-</g>
-<path fill="#c99a32" d="M0-92l14 57 43-41-22 54 59-8-52 30 52 30-59-8 22 54-43-41L0 92l-14-57-43 41 22-54-59 8 52-30-52-30 59 8-22-54 43 41z"/>
-<circle r="20" fill="#0d294b"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+<title id="title">Bandera de Asteria</title>
+<desc id="desc">Bandera azul marino, blanca y dorada con estrella de ocho puntas, laurel y lema.</desc>
+<rect width="1200" height="720" fill="#0d294b"/>
+<rect y="185" width="1200" height="350" fill="#fffdf8"/>
+<rect y="173" width="1200" height="12" fill="#c99a32"/>
+<rect y="535" width="1200" height="12" fill="#c99a32"/>
+<g transform="translate(600 360)">
+  <g fill="none" stroke="#b88927" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M-70 87C-112 57-126 2-104-52C-97-70-87-86-73-99"/>
+    <path d="M70 87C112 57 126 2 104-52C97-70 87-86 73-99"/>
+    <path d="M-91 61l-31 9M-103 31l-33 1M-106 0l-32-9M-99-31l-27-19M-86-60l-19-27"/>
+    <path d="M91 61l31 9M103 31l33 1M106 0l32-9M99-31l27-19M86-60l19-27"/>
+  </g>
+  <path fill="#c99a32" d="M0-96l13 57 39-43-18 55 58-14-47 35 55 21-58 7 31 50-51-29L0 102l-22-59-51 29 31-50-58-7 55-21-47-35 58 14-18-55 39 43z"/>
+  <circle r="17" fill="#0d294b"/>
+  <path d="M-106 104h212l-20 30H-86z" fill="#0d294b" stroke="#c99a32" stroke-width="3"/>
+  <text x="0" y="125" fill="#fffdf8" text-anchor="middle" font-family="Georgia,serif" font-size="15" font-weight="700" letter-spacing="1.6">SCIENTIA · LIBERTAS · PROGRESSUS</text>
 </g>
 </svg>
