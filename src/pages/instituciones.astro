@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Instituciones de Asteria">
+<section class="page-hero"><div class="narrow"><div class="eyebrow">Sistema político</div><h1>Instituciones</h1><p class="lead">Representación para controlar y orientar; mérito profesional para dirigir áreas técnicas; tribunales capaces de decir no a ambos.</p></div></section>
+<section class="section-tight"><div class="container grid">
+<article class="card"><span>Ejecutivo</span><h3>Director Nacional</h3><p>Coordina el Estado. Su mandato es de ocho años, renovable una vez. La selección combina experiencia acreditada, evaluación independiente y ratificación de la Cámara Cívica.</p></article>
+<article class="card"><span>Representación</span><h3>Cámara Cívica</h3><p>Elegida por sufragio universal proporcional. Aprueba presupuestos, fiscaliza, investiga y ratifica determinados nombramientos.</p></article>
+<article class="card"><span>Garantías</span><h3>Tribunal Constitucional</h3><p>Puede anular actuaciones del Ejecutivo o de la Cámara que vulneren la Constitución. La conveniencia técnica no invalida los derechos.</p></article>
+<article class="card"><span>Administración</span><h3>Comisión Nacional de Mérito</h3><p>Evalúa altos cargos con baremos publicados, experiencia verificable, integridad y conflictos de interés. La selección debe poder auditarse.</p></article>
+</div></section>
+<section class="section"><div class="narrow prose"><div class="eyebrow">Doctrina constitucional</div><h2>Libertad por defecto</h2><p>La intervención pública necesita una justificación especialmente fuerte cuando se dirige contra una persona concreta. La cultura jurídica asteriana tolera una administración potente en infraestructuras, sanidad, energía o emergencias, pero pone fricciones deliberadas a la vigilancia individual, la censura y la coacción.</p><h2>El punto débil</h2><p>Los críticos sostienen que la tecnocracia corre el riesgo de transformarse en una élite autorreproductiva. Sus defensores responden que la Cámara Cívica, los tribunales, la publicidad de los procesos y la evaluación de resultados permiten control sin convertir cada puesto técnico en una campaña electoral.</p><div class="quote">El orden pertenece a las instituciones. La libertad pertenece a las personas.</div></div></section>
+</BaseLayout>
+<style>.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}.grid article{padding:1.4rem}.grid span{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:900}.grid p{color:var(--muted);margin:0}@media(max-width:720px){.grid{grid-template-columns:1fr}}</style>
