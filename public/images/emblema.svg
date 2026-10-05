@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="t d">
+<title id="t">Emblema de Asteria</title><desc id="d">Estrella dorada de ocho puntas rodeada por laureles.</desc>
+<circle cx="120" cy="120" r="116" fill="#f8f4e8" stroke="#0d294b" stroke-width="5"/>
+<g fill="none" stroke="#b88927" stroke-width="6" stroke-linecap="round">
+<path d="M71 165C45 142 43 101 66 73M62 149l-18 7M56 132l-19 1M54 112l-18-6M59 94l-16-12M69 78L57 61"/>
+<path d="M169 165c26-23 28-64 5-92M178 149l18 7M184 132l19 1M186 112l18-6M181 94l16-12M171 78l12-17"/>
+</g>
+<path fill="#c99a32" d="M120 49l12 46 35-33-18 44 48-6-43 24 43 24-48-6 18 44-35-33-12 46-12-46-35 33 18-44-48 6 43-24-43-24 48 6-18-44 35 33z"/>
+<circle cx="120" cy="124" r="18" fill="#0d294b"/>
+<path d="M78 184h84" stroke="#0d294b" stroke-width="4"/>
+<text x="120" y="207" text-anchor="middle" font-family="Georgia,serif" font-size="12" font-weight="700" fill="#0d294b" letter-spacing="1.5">SCIENTIA · LIBERTAS · PROGRESSUS</text>
+</svg>
