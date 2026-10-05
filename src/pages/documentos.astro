@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Documentos de Asteria">
+<section class="page-hero"><div class="narrow"><div class="eyebrow">Archivo público</div><h1>Documentos</h1><p class="lead">El portal irá reuniendo aquí la Constitución, perfiles nacionales, relatos y documentos históricos del universo de Asteria.</p></div></section>
+<section class="section-tight"><div class="container docs">
+<article class="card"><span>Texto fundamental</span><h2>Constitución de Asteria</h2><p>La base jurídica del sistema político moderno, sus instituciones, garantías y derechos.</p><div class="status">Incorporación del PDF en la siguiente sincronización de archivos.</div></article>
+<article class="card"><span>Enciclopedia</span><h2>Perfil Enciclopédico 2026</h2><p>Historia, geografía, política, economía, sociedad, cultura, ciudades y debates del país.</p><div class="status">Incorporación del PDF en la siguiente sincronización de archivos.</div></article>
+<article class="card"><span>Ficción</span><h2>Después de la lluvia</h2><p>El relato de Iria Varel, una forma de conocer Asteria desde la experiencia cotidiana.</p><div class="status">Disponible como parte del proyecto; se enlazará aquí directamente.</div></article>
+</div></section>
+<section class="section section-dark"><div class="container symbol-grid"><div><div class="eyebrow">Bandera</div><h2>El símbolo más visible del país.</h2><p class="lead">Azul marino, blanco y oro. La estrella recuerda la tradición marítima y el laurel el logro civil.</p></div><div class="flag"><img src="/images/bandera.svg" alt="Bandera de Asteria"/></div></div></section>
+</BaseLayout>
+<style>.docs{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.docs article{padding:1.4rem}.docs span{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:900}.docs p{color:var(--muted)}.status{font-size:.82rem;color:#6d7782;border-top:1px solid var(--line);padding-top:.8rem}.symbol-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:3rem;align-items:center}.flag{background:white;border-radius:24px;overflow:hidden;box-shadow:0 28px 70px rgba(0,0,0,.25)}.flag img{width:100%}@media(max-width:850px){.docs,.symbol-grid{grid-template-columns:1fr}}</style>
