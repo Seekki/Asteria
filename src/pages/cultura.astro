@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Cultura de Asteria">
+<section class="page-hero"><div class="narrow"><div class="eyebrow">Sociedad y cultura</div><h1>Ser asteriano no exige parecerse al vecino.</h1><p class="lead">La cultura pública combina secularismo, responsabilidad personal, respeto por la competencia y una tolerancia muy amplia hacia la vida privada.</p></div></section>
+<section class="section-tight"><div class="container culture">
+<article class="card"><div class="eyebrow">Asterés</div><h3>Una lengua romance propia</h3><p>El asterés, <em>asterès</em>, deriva del latín regional con sustratos locales y contactos centroeuropeos. El lema institucional sigue en latín: <strong>Scientia · Libertas · Progressus</strong>.</p></article>
+<article class="card"><div class="eyebrow">Secularismo</div><h3>Religión libre, Estado no confesional</h3><p>Las confesiones no disfrutan de privilegio político automático. La práctica privada es libre mientras respete consentimiento, protección de menores y las leyes comunes.</p></article>
+<article class="card"><div class="eyebrow">Muros Abiertos</div><h3>La ciudad no tiene que parecer terminada</h3><p>Desde 2007, grandes muros legales mezclan obras excelentes, tags, carteles, capas viejas y piezas improvisadas. El Estado facilita espacio; no decide qué arte merece existir.</p></article>
+<article class="card"><div class="eyebrow">Vida privada</div><h3>Reconocer antes que esconder</h3><p>Drogas, trabajo sexual, adicciones y salud mental se abordan con regulación, consentimiento, información y reducción de daño en vez de negación social.</p></article>
+<article class="card"><div class="eyebrow">Trabajo</div><h3>Libertad con responsabilidad</h3><p>La sociedad tolera mucho la forma de vivir, pero espera contribución cuando una persona puede hacerlo. Esa cultura puede producir tanto orgullo profesional como presión y agotamiento.</p></article>
+<article class="card"><div class="eyebrow">Cocina</div><h3>Mar, montaña y mezcla</h3><p>Pescado, estofados, quesos, setas, patata y pan conviven con cocinas llegadas de fuera. Una frase popular resume el enfoque: «si se cocina aquí, también es nuestro».</p></article>
+</div></section>
+<section class="section section-dark"><div class="narrow"><div class="eyebrow">Una contradicción muy asteriana</div><h2>Lo serio es la institución, no la persona.</h2><p class="lead">Un ministerio puede estar obsesionado con procedimientos y auditorías mientras la calle de enfrente está cubierta de grafiti y un bar programa un concierto hasta tarde.</p></div></section>
+</BaseLayout>
+<style>.culture{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}.culture article{padding:1.4rem}.culture p{color:var(--muted);margin:0}@media(max-width:720px){.culture{grid-template-columns:1fr}}</style>
