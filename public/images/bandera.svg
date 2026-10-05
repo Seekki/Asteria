@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 540" role="img" aria-labelledby="t">
+<title id="t">Bandera de Asteria</title>
+<rect width="900" height="540" fill="#0d294b"/>
+<rect y="135" width="900" height="270" fill="#fffdf8"/>
+<rect y="126" width="900" height="9" fill="#c99a32"/>
+<rect y="405" width="900" height="9" fill="#c99a32"/>
+<g transform="translate(450 270)">
+<g fill="none" stroke="#b88927" stroke-width="9" stroke-linecap="round">
+<path d="M-67 72C-100 43-103-10-75-48M-81 50l-25 9M-91 25l-26 1M-93-3l-25-8M-85-29l-21-16"/>
+<path d="M67 72c33-29 36-82 8-120M81 50l25 9M91 25l26 1M93-3l25-8M85-29l21-16"/>
+</g>
+<path fill="#c99a32" d="M0-92l14 57 43-41-22 54 59-8-52 30 52 30-59-8 22 54-43-41L0 92l-14-57-43 41 22-54-59 8 52-30-52-30 59 8-22-54 43 41z"/>
+<circle r="20" fill="#0d294b"/>
+</g>
+</svg>
