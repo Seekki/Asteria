@@ -6,6 +6,7 @@ const path=Astro.url.pathname;
 <html lang="es">
 <head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width"/><meta name="description" content={description}/><meta name="theme-color" content="#0d294b"/>
+<meta property="og:title" content={title}/><meta property="og:description" content={description}/><meta property="og:type" content="website"/>
 <title>{title}</title>
 <style is:global>
 :root{--navy:#0d294b;--navy2:#173a62;--gold:#c99a32;--goldsoft:#e7d5a5;--paper:#f5f1e7;--ink:#17202a;--muted:#66707a;--white:#fffdf8;--line:rgba(13,41,75,.16);--shadow:0 20px 50px rgba(16,30,45,.14);--radius:20px}
@@ -31,15 +32,16 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;color:var(--navy);line-heig
 <a class:list={[{active:path==='/ciudades/'}]} href="/ciudades/">Ciudades</a>
 <a class:list={[{active:path==='/cultura/'}]} href="/cultura/">Cultura</a>
 <a class:list={[{active:path==='/relatos/'}]} href="/relatos/">Relatos</a>
+<a class:list={[{active:path==='/documentos/'}]} href="/documentos/">Documentos</a>
 <a class="civis-link" href="/civis/">Civis</a>
 </nav></div></header>
 <main><slot/></main>
-<footer><div class="container footer-grid"><div><div class="footer-brand">ASTERIA</div><p>Scientia · Libertas · Progressus</p></div><div><strong>Explorar</strong><a href="/historia/">Historia</a><a href="/instituciones/">Instituciones</a><a href="/ciudades/">Ciudades</a></div><div><strong>Proyecto</strong><p>Universo ficticio y proyecto de worldbuilding. No representa un Estado real.</p></div></div><div class="container footer-bottom">© 2026 Proyecto Asteria</div></footer>
+<footer><div class="container footer-grid"><div><div class="footer-brand">ASTERIA</div><p>Scientia · Libertas · Progressus</p></div><div><strong>Explorar</strong><a href="/historia/">Historia</a><a href="/instituciones/">Instituciones</a><a href="/ciudades/">Ciudades</a><a href="/documentos/">Documentos</a></div><div><strong>Proyecto</strong><p>Universo ficticio y proyecto de worldbuilding. No representa un Estado real.</p></div></div><div class="container footer-bottom">© 2026 Proyecto Asteria</div></footer>
 <script is:inline>const b=document.querySelector('[data-menu]');const n=document.querySelector('[data-nav]');b?.addEventListener('click',()=>n?.classList.toggle('open'));</script>
 <style is:global>
 .site-header{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(245,241,231,.91);border-bottom:1px solid var(--line)}.header-inner{height:78px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:flex;align-items:center;gap:.65rem;text-decoration:none;color:var(--navy)}.brand img{width:40px;height:40px}.brand span{display:flex;flex-direction:column;line-height:1}.brand strong{letter-spacing:.12em;font-size:.92rem}.brand small{margin-top:.25rem;color:var(--muted);font-size:.68rem;letter-spacing:.06em}
-nav{display:flex;align-items:center;gap:1.12rem}nav a{text-decoration:none;font-weight:760;font-size:.89rem;color:#43505d;padding:.55rem .15rem;border-bottom:2px solid transparent}nav a:hover,nav a.active{color:var(--navy);border-color:var(--gold)}nav .civis-link{padding:.62rem .95rem;background:var(--navy);color:#fff;border-radius:999px;border:0}.menu-btn{display:none;border:1px solid var(--line);background:var(--white);border-radius:10px;padding:.45rem .65rem;font-size:1.2rem}
+nav{display:flex;align-items:center;gap:1rem}nav a{text-decoration:none;font-weight:760;font-size:.86rem;color:#43505d;padding:.55rem .15rem;border-bottom:2px solid transparent}nav a:hover,nav a.active{color:var(--navy);border-color:var(--gold)}nav .civis-link{padding:.62rem .95rem;background:var(--navy);color:#fff;border-radius:999px;border:0}.menu-btn{display:none;border:1px solid var(--line);background:var(--white);border-radius:10px;padding:.45rem .65rem;font-size:1.2rem}
 footer{background:#081b31;color:#cbd5df;padding:54px 0 28px}.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2rem}footer strong,.footer-brand{color:#fff}.footer-brand{font-family:Georgia,serif;font-size:1.7rem;letter-spacing:.08em}footer a{display:block;color:#cbd5df;text-decoration:none;margin-top:.5rem}.footer-bottom{margin-top:36px;padding-top:22px;border-top:1px solid rgba(255,255,255,.1);font-size:.8rem;color:#9fb0c0}
-@media(max-width:850px){.menu-btn{display:block}.site-header nav{display:none;position:absolute;top:78px;left:13px;right:13px;flex-direction:column;align-items:stretch;background:var(--white);padding:1rem;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.site-header nav.open{display:flex}.footer-grid{grid-template-columns:1fr}}
+@media(max-width:920px){.menu-btn{display:block}.site-header nav{display:none;position:absolute;top:78px;left:13px;right:13px;flex-direction:column;align-items:stretch;background:var(--white);padding:1rem;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.site-header nav.open{display:flex}.footer-grid{grid-template-columns:1fr}}
 </style>
 </body></html>
