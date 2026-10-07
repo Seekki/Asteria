@@ -5,11 +5,11 @@ import CityCard from '../components/CityCard.astro';
 <BaseLayout title="Ciudades de Asteria">
 <section class="page-hero"><div class="narrow"><div class="eyebrow">Territorio y vida urbana</div><h1>Ciudades</h1><p class="lead">La capital administra; Veyra mezcla; Lira estudia; Orsen fabrica; Cael resiste el invierno.</p></div></section>
 <section class="section-tight"><div class="container cities">
-<CityCard id="aster" name="Aster" role="Capital · Centralia" tone="aster" text="Centro político, judicial y científico. Monumental en su núcleo, mucho más ordinaria y vecinal unas calles más lejos."/>
-<CityCard id="veyra" name="Veyra" role="Puerto · Costaverde" tone="veyra" text="La gran ciudad marítima: astilleros, almacenes reconvertidos, música, clubs, mercados y una cultura urbana más ruidosa que la de Aster."/>
-<CityCard id="lira" name="Lira" role="Universidad · Vallelumen" tone="lira" text="Bibliotecas, investigación y estudiantes. Más verde y pausada; una de las grandes referencias culturales y lingüísticas del país."/>
-<CityCard id="orsen" name="Orsen" role="Industria · Oriental" tone="orsen" text="De la siderurgia a la robótica y los materiales avanzados. Conserva barrios fabriles y un fuerte orgullo técnico."/>
-<CityCard id="cael" name="Cael" role="Montaña · Altoria" tone="cael" text="Ingeniería energética, embalses, nieve y una identidad regional muy marcada. Sus valles conservaron vocabulario y costumbres propias."/>
+<CityCard id="aster" name="Aster" role="Capital · Centralia" tone="aster" image="/images/aster.png" text="Centro político, judicial y científico. Monumental en su núcleo, mucho más ordinaria y vecinal unas calles más lejos."/>
+<CityCard id="veyra" name="Veyra" role="Puerto · Costaverde" tone="veyra" image="/images/veyra.png" text="La gran ciudad marítima: astilleros, almacenes reconvertidos, música, clubs, mercados y una cultura urbana más ruidosa que la de Aster."/>
+<CityCard id="lira" name="Lira" role="Universidad · Vallelumen" tone="lira" image="/images/lira.png" text="Bibliotecas, investigación y estudiantes. Más verde y pausada; una de las grandes referencias culturales y lingüísticas del país."/>
+<CityCard id="orsen" name="Orsen" role="Industria · Oriental" tone="orsen" image="/images/orsen.png" text="De la siderurgia a la robótica y los materiales avanzados. Conserva barrios fabriles y un fuerte orgullo técnico."/>
+<CityCard id="cael" name="Cael" role="Montaña · Altoria" tone="cael" image="/images/cael.png" text="Ingeniería energética, embalses, nieve y una identidad regional muy marcada. Sus valles conservaron vocabulario y costumbres propias."/>
 </div></section>
 </BaseLayout>
 <style>.cities{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}@media(max-width:720px){.cities{grid-template-columns:1fr}}</style>
