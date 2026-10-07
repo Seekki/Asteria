@@ -51,7 +51,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <article class="node chamber">
           <span class="node-type">Representación</span>
           <h3>Cámara Cívica</h3>
-          <p>Legisla, aprueba presupuestos, investiga al Ejecutivo y ratifica nombramientos clave.</p>
+          <p>Propone y debate reformas legislativas, aprueba presupuestos, investiga al Ejecutivo y ratifica nombramientos clave.</p>
         </article>
 
         <article class="node civic">
@@ -62,12 +62,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
 
       <div class="bridge-row">
+        <div class="bridge-label">evaluación técnica + ratificación</div>
         <div class="merit-box">
           <span class="node-type">Filtro profesional</span>
           <strong>Comisión Nacional de Mérito</strong>
           <small>evalúa experiencia, integridad y conflictos de interés</small>
         </div>
-        <div class="bridge-arrow">evaluación + ratificación →</div>
+        <div class="bridge-down">↓</div>
       </div>
 
       <div class="map-row center">
@@ -113,7 +114,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="eyebrow">Los cinco pilares</div>
     <h2>Un sistema diseñado para que ninguna virtud se convierta en un monopolio.</h2>
     <div class="pillars">
-      <article><span>01</span><h3>Legitimidad democrática</h3><p>La ciudadanía elige la Cámara Cívica por sufragio universal proporcional. La capacidad técnica no sustituye al derecho de la sociedad a fijar prioridades y controlar al poder.</p></article>
+      <article><span>01</span><h3>Legitimidad democrática</h3><p>La ciudadanía elige la Cámara Cívica por sufragio universal proporcional. La Cámara fija prioridades, controla al poder e impulsa reformas legislativas, pero no puede alterar el marco jurídico por simple decisión unilateral.</p></article>
       <article><span>02</span><h3>Dirección profesional</h3><p>Los sectores complejos exigen experiencia verificable. Los altos responsables técnicos pasan procesos públicos de evaluación y no dependen únicamente de afinidad partidista.</p></article>
       <article><span>03</span><h3>Derechos por encima de eficiencia</h3><p>Una medida puede ser eficaz y seguir siendo ilegal. La conveniencia administrativa nunca basta para justificar censura, vigilancia individual o coacción desproporcionada.</p></article>
       <article><span>04</span><h3>Administración evaluable</h3><p>La estabilidad protege al funcionario de la política, no del rendimiento. Los puestos públicos se evalúan con criterios publicados, revisión y posibilidad de reasignación o cese.</p></article>
@@ -138,8 +139,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div>
           <span class="institution-type">Representación nacional</span>
           <h3>Cámara Cívica</h3>
-          <p>Es la cámara representativa nacional. Sus miembros son elegidos por sufragio universal y proporcional y tienen el mandato de traducir preferencias sociales en leyes, presupuestos y prioridades públicas.</p>
-          <ul><li>Aprueba leyes y presupuestos.</li><li>Fiscaliza al Director Nacional.</li><li>Puede abrir comisiones de investigación.</li><li>Ratifica determinados nombramientos.</li></ul>
+          <p>Es la cámara representativa nacional. Sus miembros son elegidos por sufragio universal y proporcional y tienen el mandato de traducir preferencias sociales en prioridades públicas, presupuestos y propuestas legislativas.</p>
+          <ul><li>Puede iniciar, debatir y enmendar propuestas legislativas.</li><li>Aprueba presupuestos y fiscaliza al Director Nacional.</li><li>Puede abrir comisiones de investigación.</li><li>Ratifica determinados nombramientos.</li></ul>
         </div>
       </article>
 
@@ -202,14 +203,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="eyebrow">De la política a la ejecución</div>
       <h2>¿Cómo se toma una decisión?</h2>
       <p class="lead">Una nueva línea ferroviaria permite ver dónde termina la política y dónde empieza la técnica.</p>
-      <p>La Cámara no diseña puentes y los ingenieros no deciden por sí solos cuánto dinero debe dedicar el país al ferrocarril. Cada institución interviene en una fase distinta.</p>
+      <p>La Cámara no diseña puentes y los ingenieros no deciden por sí solos cuánto dinero debe dedicar el país al ferrocarril. La Cámara puede impulsar el marco político y legislativo, pero cualquier cambio normativo sigue el procedimiento constitucional completo.</p>
     </div>
 
     <div class="timeline card">
       <article><b>1</b><div><strong>Se plantea una necesidad</strong><p>Puede surgir del Ejecutivo, la Cámara, una administración territorial o una propuesta ciudadana con apoyo suficiente.</p></div></article>
       <article><b>2</b><div><strong>Se estudian alternativas</strong><p>Infraestructuras analiza trazados, costes, demanda, seguridad, impacto territorial y alternativas.</p></div></article>
       <article><b>3</b><div><strong>Se publica la evidencia</strong><p>Civis expone documentos, criterios, consultas y respuestas. La ciudadanía puede discutir el proyecto, no sustituir el análisis técnico.</p></div></article>
-      <article><b>4</b><div><strong>La política decide la prioridad</strong><p>La Cámara aprueba el marco legal y el presupuesto. El Ejecutivo asume públicamente la decisión.</p></div></article>
+      <article><b>4</b><div><strong>La política decide la prioridad</strong><p>La Cámara aprueba el presupuesto y puede impulsar o votar las reformas legislativas necesarias. El Ejecutivo asume públicamente la ejecución; una ley no cambia por decisión unilateral de ninguno de los dos.</p></div></article>
       <article><b>5</b><div><strong>La administración ejecuta</strong><p>Los equipos técnicos licitan, supervisan y construyen siguiendo los objetivos aprobados y la normativa vigente.</p></div></article>
       <article><b>6</b><div><strong>Se audita y se puede recurrir</strong><p>Integridad revisa contratos y conflictos. Los tribunales pueden detener actuaciones ilegales o vulneradoras de derechos.</p></div></article>
     </div>
@@ -229,7 +230,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="control-table card">
       <div class="table-head"><span>Institución</span><span>Control principal</span><span>Límite</span></div>
       <div><strong>Ciudadanía</strong><span>Elige la Cámara y ejerce presión cívica.</span><span>No administra directamente cada política.</span></div>
-      <div><strong>Cámara Cívica</strong><span>Controla presupuesto, leyes y Ejecutivo.</span><span>Está sometida a la Constitución.</span></div>
+      <div><strong>Cámara Cívica</strong><span>Controla presupuesto y Ejecutivo; impulsa, debate y vota reformas legislativas.</span><span>No puede modificar el marco jurídico unilateralmente y está sometida a la Constitución.</span></div>
       <div><strong>Director Nacional</strong><span>Coordina y exige resultados a la administración.</span><span>No puede legislar ni suspender derechos a voluntad.</span></div>
       <div><strong>Comisión de Mérito</strong><span>Filtra la idoneidad profesional.</span><span>No define el programa político.</span></div>
       <div><strong>Tribunal Constitucional</strong><span>Frena abusos de Cámara y Ejecutivo.</span><span>No gobierna ni fija prioridades presupuestarias.</span></div>
@@ -279,7 +280,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 .jumpbar{display:flex;align-items:center;justify-content:center;gap:.35rem;padding:.55rem;max-width:820px;margin:auto;flex-wrap:wrap}.jumpbar span{font-size:.72rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);padding:.45rem .65rem}.jumpbar a{text-decoration:none;color:var(--navy);font-weight:800;font-size:.84rem;padding:.55rem .75rem;border-radius:999px}.jumpbar a:hover{background:rgba(13,41,75,.07)}
 .section-heading{display:flex;justify-content:space-between;gap:2rem;align-items:end;margin-bottom:1.6rem}.section-heading>p{max-width:430px;color:var(--muted);margin:0}.dark-heading>p{color:#c9d5e0}
 
-.system-map{padding:1.5rem;background:linear-gradient(180deg,rgba(255,253,248,.96),rgba(239,235,224,.92));overflow:hidden}.map-row{display:grid;gap:1rem;justify-content:center}.map-row.top,.map-row.center{grid-template-columns:minmax(280px,460px)}.map-row.two{grid-template-columns:repeat(2,minmax(260px,1fr));max-width:880px;margin:auto}.node{padding:1.2rem;border:1px solid var(--line);border-radius:16px;background:white;box-shadow:0 10px 26px rgba(16,30,45,.05)}.node h3{margin:.2rem 0 .4rem}.node p{color:#56616c;margin:0;font-size:.9rem}.node-type{font-size:.65rem;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);font-weight:900}.citizen{border-top:4px solid var(--gold)}.chamber{border-top:4px solid #355d86}.civic{border-top:4px solid #73856c}.executive{border:2px solid var(--navy);box-shadow:0 14px 34px rgba(13,41,75,.12)}.connector{height:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;font-weight:800}.connector i{font-style:normal;color:var(--gold);font-size:1.35rem;line-height:1.1}.connector.split{display:grid;grid-template-columns:1fr 28px 1fr;text-align:center;max-width:760px;margin:auto}.connector.split i{align-self:center}.bridge-row{display:flex;justify-content:center;align-items:center;gap:1rem;margin:1.1rem auto 0;max-width:800px}.merit-box{padding:.9rem 1rem;border-radius:14px;background:#ece7db;border:1px dashed rgba(13,41,75,.28);display:flex;flex-direction:column;min-width:280px}.merit-box strong{color:var(--navy)}.merit-box small{color:var(--muted)}.bridge-arrow{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;font-weight:900;color:var(--gold)}.directorates{grid-template-columns:repeat(5,1fr);max-width:1000px;margin:auto}.mini-node{padding:.85rem .8rem;background:#0d294b;color:white;border-radius:12px;text-align:center}.mini-node strong,.mini-node span{display:block}.mini-node strong{font-family:Georgia,serif}.mini-node span{font-size:.67rem;color:#c8d3df;margin-top:.2rem}.oversight{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.4rem auto 0;max-width:960px;padding-top:1.4rem;border-top:1px solid var(--line)}.oversight article{padding:1rem 1.1rem;background:rgba(13,41,75,.045);border-radius:14px}.oversight h3{font-size:1.15rem;margin:.25rem 0}.oversight p{font-size:.84rem;color:var(--muted);margin:0}.map-foot{margin:1.4rem auto 0;max-width:850px;text-align:center;padding:1rem;border-radius:12px;background:#fff7df;color:#3f4850;font-size:.9rem}.map-foot strong{color:var(--navy)}.map-foot em{font-family:Georgia,serif;color:var(--navy)}
+.system-map{padding:1.5rem;background:linear-gradient(180deg,rgba(255,253,248,.96),rgba(239,235,224,.92));overflow:hidden}.map-row{display:grid;gap:1rem;justify-content:center}.map-row.top,.map-row.center{grid-template-columns:minmax(280px,460px)}.map-row.two{grid-template-columns:repeat(2,minmax(260px,1fr));max-width:880px;margin:auto}.node{padding:1.2rem;border:1px solid var(--line);border-radius:16px;background:white;box-shadow:0 10px 26px rgba(16,30,45,.05)}.node h3{margin:.2rem 0 .4rem}.node p{color:#56616c;margin:0;font-size:.9rem}.node-type{font-size:.65rem;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);font-weight:900}.citizen{border-top:4px solid var(--gold)}.chamber{border-top:4px solid #355d86}.civic{border-top:4px solid #73856c}.executive{border:2px solid var(--navy);box-shadow:0 14px 34px rgba(13,41,75,.12)}.connector{height:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;font-weight:800}.connector i{font-style:normal;color:var(--gold);font-size:1.35rem;line-height:1.1}.connector.split{display:grid;grid-template-columns:1fr 28px 1fr;text-align:center;max-width:760px;margin:auto}.connector.split i{align-self:center}.bridge-row{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:.35rem;margin:1.1rem auto 0;max-width:800px}.bridge-label{font-size:.68rem;text-transform:uppercase;letter-spacing:.11em;font-weight:900;color:var(--gold)}.merit-box{padding:.9rem 1rem;border-radius:14px;background:#ece7db;border:1px dashed rgba(13,41,75,.28);display:flex;flex-direction:column;min-width:320px;text-align:center}.merit-box strong{color:var(--navy)}.merit-box small{color:var(--muted)}.bridge-down{color:var(--gold);font-size:1.25rem;line-height:1}.directorates{grid-template-columns:repeat(5,1fr);max-width:1000px;margin:auto}.mini-node{padding:.85rem .8rem;background:#0d294b;color:white;border-radius:12px;text-align:center}.mini-node strong,.mini-node span{display:block}.mini-node strong{font-family:Georgia,serif}.mini-node span{font-size:.67rem;color:#c8d3df;margin-top:.2rem}.oversight{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.4rem auto 0;max-width:960px;padding-top:1.4rem;border-top:1px solid var(--line)}.oversight article{padding:1rem 1.1rem;background:rgba(13,41,75,.045);border-radius:14px}.oversight h3{font-size:1.15rem;margin:.25rem 0}.oversight p{font-size:.84rem;color:var(--muted);margin:0}.map-foot{margin:1.4rem auto 0;max-width:850px;text-align:center;padding:1rem;border-radius:12px;background:#fff7df;color:#3f4850;font-size:.9rem}.map-foot strong{color:var(--navy)}.map-foot em{font-family:Georgia,serif;color:var(--navy)}
 
 .logic-section h2{max-width:800px}.pillars{display:grid;grid-template-columns:repeat(5,1fr);gap:.8rem;margin-top:1.5rem}.pillars article{border-top:1px solid rgba(255,255,255,.18);padding-top:1rem}.pillars span{color:var(--gold);font-weight:900}.pillars h3{font-size:1.16rem;margin-top:.45rem}.pillars p{font-size:.84rem;color:#c9d5e0;margin:0}
 
@@ -298,10 +299,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .decision-copy{position:static}
 }
 @media(max-width:760px){
+  .bridge-row{margin-top:1rem}.merit-box{min-width:0;width:min(100%,360px)}
   .section-heading{align-items:flex-start;flex-direction:column}
   .map-row.two,.oversight,.institution-grid{grid-template-columns:1fr}
   .connector.split{grid-template-columns:1fr;height:auto;gap:.25rem;padding:1rem 0}.connector.split i{order:3}
-  .bridge-row{flex-direction:column;text-align:center}.bridge-arrow{transform:none}
+  .bridge-row{flex-direction:column;text-align:center}
   .directorates{grid-template-columns:1fr 1fr}
   .pillars{grid-template-columns:1fr}
   .institution{grid-template-columns:42px 1fr;padding:1.1rem}.number{width:38px;height:38px}
