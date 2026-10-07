@@ -1,14 +1,312 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-<BaseLayout title="Instituciones de Asteria">
-<section class="page-hero"><div class="narrow"><div class="eyebrow">Sistema político</div><h1>Instituciones</h1><p class="lead">Representación para controlar y orientar; mérito profesional para dirigir áreas técnicas; tribunales capaces de decir no a ambos.</p></div></section>
-<section class="section-tight"><div class="container grid">
-<article class="card"><span>Ejecutivo</span><h3>Director Nacional</h3><p>Coordina el Estado. Su mandato es de ocho años, renovable una vez. La selección combina experiencia acreditada, evaluación independiente y ratificación de la Cámara Cívica.</p></article>
-<article class="card"><span>Representación</span><h3>Cámara Cívica</h3><p>Elegida por sufragio universal proporcional. Aprueba presupuestos, fiscaliza, investiga y ratifica determinados nombramientos.</p></article>
-<article class="card"><span>Garantías</span><h3>Tribunal Constitucional</h3><p>Puede anular actuaciones del Ejecutivo o de la Cámara que vulneren la Constitución. La conveniencia técnica no invalida los derechos.</p></article>
-<article class="card"><span>Administración</span><h3>Comisión Nacional de Mérito</h3><p>Evalúa altos cargos con baremos publicados, experiencia verificable, integridad y conflictos de interés. La selección debe poder auditarse.</p></article>
-</div></section>
-<section class="section"><div class="narrow prose"><div class="eyebrow">Doctrina constitucional</div><h2>Libertad por defecto</h2><p>La intervención pública necesita una justificación especialmente fuerte cuando se dirige contra una persona concreta. La cultura jurídica asteriana tolera una administración potente en infraestructuras, sanidad, energía o emergencias, pero pone fricciones deliberadas a la vigilancia individual, la censura y la coacción.</p><h2>El punto débil</h2><p>Los críticos sostienen que la tecnocracia corre el riesgo de transformarse en una élite autorreproductiva. Sus defensores responden que la Cámara Cívica, los tribunales, la publicidad de los procesos y la evaluación de resultados permiten control sin convertir cada puesto técnico en una campaña electoral.</p><div class="quote">El orden pertenece a las instituciones. La libertad pertenece a las personas.</div><div class="constitution"><a class="btn btn-secondary" href="/docs/Constitucion_de_Asteria.pdf" target="_blank" rel="noopener">Abrir Constitución</a><a class="btn btn-primary" href="/docs/Constitucion_de_Asteria.pdf" download="Constitucion_de_Asteria.pdf">Descargar Constitución ↓</a></div></div></section>
+
+<BaseLayout title="Instituciones de Asteria" description="Cómo funciona el sistema político de la República Cívica de Asteria: representación, mérito, ejecutivo y controles constitucionales.">
+
+<section class="page-hero institutions-hero">
+  <div class="narrow">
+    <div class="eyebrow">Sistema político</div>
+    <h1>Instituciones</h1>
+    <p class="lead">Asteria combina legitimidad democrática, dirección técnica y control constitucional. La ciudadanía elige quién representa y fiscaliza; los profesionales dirigen áreas complejas; los tribunales pueden frenar a ambos.</p>
+    <div class="hero-rule">
+      <strong>La idea central</strong>
+      <span>Un Estado muy capaz de actuar, pero que necesita una razón muy buena para actuar contra un individuo.</span>
+    </div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container jumpbar card">
+    <span>Entender el sistema</span>
+    <a href="#esquema">Esquema general</a>
+    <a href="#instituciones">Instituciones</a>
+    <a href="#decision">Cómo se decide</a>
+    <a href="#controles">Contrapesos</a>
+  </div>
+</section>
+
+<section class="section" id="esquema">
+  <div class="container">
+    <div class="section-heading">
+      <div>
+        <div class="eyebrow">De un vistazo</div>
+        <h2>Quién elige, quién gobierna y quién puede decir no.</h2>
+      </div>
+      <p>El sistema separa deliberadamente la representación política de la gestión técnica. Ningún bloque puede gobernar por sí solo.</p>
+    </div>
+
+    <div class="system-map card">
+      <div class="map-row top">
+        <article class="node citizen">
+          <span class="node-type">Origen de legitimidad</span>
+          <h3>Ciudadanía</h3>
+          <p>Vota, participa, exige información y puede recurrir decisiones públicas.</p>
+        </article>
+      </div>
+
+      <div class="connector split"><span>elige</span><i>↓</i><span>participa y fiscaliza</span></div>
+
+      <div class="map-row two">
+        <article class="node chamber">
+          <span class="node-type">Representación</span>
+          <h3>Cámara Cívica</h3>
+          <p>Legisla, aprueba presupuestos, investiga al Ejecutivo y ratifica nombramientos clave.</p>
+        </article>
+
+        <article class="node civic">
+          <span class="node-type">Control ciudadano</span>
+          <h3>Civis y Defensor Cívico</h3>
+          <p>Transparencia, consultas, expedientes públicos, quejas y revisión de mala administración.</p>
+        </article>
+      </div>
+
+      <div class="bridge-row">
+        <div class="merit-box">
+          <span class="node-type">Filtro profesional</span>
+          <strong>Comisión Nacional de Mérito</strong>
+          <small>evalúa experiencia, integridad y conflictos de interés</small>
+        </div>
+        <div class="bridge-arrow">evaluación + ratificación →</div>
+      </div>
+
+      <div class="map-row center">
+        <article class="node executive">
+          <span class="node-type">Ejecutivo</span>
+          <h3>Director Nacional</h3>
+          <p>Coordina el Estado, marca prioridades y responde políticamente por la ejecución.</p>
+        </article>
+      </div>
+
+      <div class="connector"><span>dirige y coordina</span><i>↓</i></div>
+
+      <div class="map-row directorates">
+        <article class="mini-node"><strong>Sanidad</strong><span>gestión clínica y sistema público</span></article>
+        <article class="mini-node"><strong>Infraestructuras</strong><span>transporte, agua y obra pública</span></article>
+        <article class="mini-node"><strong>Energía</strong><span>red, nuclear y resiliencia</span></article>
+        <article class="mini-node"><strong>Educación</strong><span>currículo, universidades y FP</span></article>
+        <article class="mini-node"><strong>Seguridad</strong><span>protección civil e interior</span></article>
+      </div>
+
+      <div class="oversight">
+        <article>
+          <span class="node-type">Límite jurídico</span>
+          <h3>Tribunal Constitucional</h3>
+          <p>Puede anular leyes y actuaciones públicas que vulneren la Constitución o los derechos fundamentales.</p>
+        </article>
+        <article>
+          <span class="node-type">Integridad</span>
+          <h3>Autoridad Nacional de Integridad</h3>
+          <p>Audita contratación, conflictos de interés, patrimonio de altos cargos y protección de denunciantes.</p>
+        </article>
+      </div>
+
+      <div class="map-foot">
+        <strong>Regla práctica:</strong> la política decide <em>qué objetivo se persigue</em>; la administración técnica determina <em>cómo ejecutarlo</em>; los tribunales determinan <em>qué no puede hacerse</em>.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-dark logic-section">
+  <div class="container">
+    <div class="eyebrow">Los cinco pilares</div>
+    <h2>Un sistema diseñado para que ninguna virtud se convierta en un monopolio.</h2>
+    <div class="pillars">
+      <article><span>01</span><h3>Legitimidad democrática</h3><p>La ciudadanía elige la Cámara Cívica por sufragio universal proporcional. La capacidad técnica no sustituye al derecho de la sociedad a fijar prioridades y controlar al poder.</p></article>
+      <article><span>02</span><h3>Dirección profesional</h3><p>Los sectores complejos exigen experiencia verificable. Los altos responsables técnicos pasan procesos públicos de evaluación y no dependen únicamente de afinidad partidista.</p></article>
+      <article><span>03</span><h3>Derechos por encima de eficiencia</h3><p>Una medida puede ser eficaz y seguir siendo ilegal. La conveniencia administrativa nunca basta para justificar censura, vigilancia individual o coacción desproporcionada.</p></article>
+      <article><span>04</span><h3>Administración evaluable</h3><p>La estabilidad protege al funcionario de la política, no del rendimiento. Los puestos públicos se evalúan con criterios publicados, revisión y posibilidad de reasignación o cese.</p></article>
+      <article><span>05</span><h3>Trazabilidad pública</h3><p>Presupuestos, criterios, nombramientos, contratos y resultados deben dejar un rastro consultable. Civis convierte esa información en una herramienta de control cotidiano.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="instituciones">
+  <div class="container">
+    <div class="section-heading">
+      <div>
+        <div class="eyebrow">Instituciones principales</div>
+        <h2>Qué hace cada una.</h2>
+      </div>
+      <p>La arquitectura política de Asteria intenta separar mandato democrático, ejecución profesional y garantía de derechos.</p>
+    </div>
+
+    <div class="institution-grid">
+      <article class="institution card">
+        <div class="number">01</div>
+        <div>
+          <span class="institution-type">Representación nacional</span>
+          <h3>Cámara Cívica</h3>
+          <p>Es la cámara representativa nacional. Sus miembros son elegidos por sufragio universal y proporcional y tienen el mandato de traducir preferencias sociales en leyes, presupuestos y prioridades públicas.</p>
+          <ul><li>Aprueba leyes y presupuestos.</li><li>Fiscaliza al Director Nacional.</li><li>Puede abrir comisiones de investigación.</li><li>Ratifica determinados nombramientos.</li></ul>
+        </div>
+      </article>
+
+      <article class="institution card">
+        <div class="number">02</div>
+        <div>
+          <span class="institution-type">Dirección del Estado</span>
+          <h3>Director Nacional</h3>
+          <p>Coordina el Ejecutivo y responde por la acción conjunta del Estado. Su mandato es de ocho años y puede renovarse una sola vez.</p>
+          <ul><li>Define prioridades generales.</li><li>Coordina los directorios sectoriales.</li><li>Representa políticamente al Ejecutivo.</li><li>Está sometido a control parlamentario y judicial.</li></ul>
+        </div>
+      </article>
+
+      <article class="institution card">
+        <div class="number">03</div>
+        <div>
+          <span class="institution-type">Selección profesional</span>
+          <h3>Comisión Nacional de Mérito</h3>
+          <p>Evalúa candidatos para altos puestos técnicos mediante baremos publicados. Su objetivo no es elegir políticas, sino impedir que la competencia profesional dependa de lealtades personales.</p>
+          <ul><li>Experiencia y resultados verificables.</li><li>Formación y capacidad de gestión.</li><li>Integridad y conflictos de interés.</li><li>Procesos auditables y recurribles.</li></ul>
+        </div>
+      </article>
+
+      <article class="institution card">
+        <div class="number">04</div>
+        <div>
+          <span class="institution-type">Gestión sectorial</span>
+          <h3>Directorios técnicos</h3>
+          <p>Equivalen a los ministerios en la administración diaria, pero se organizan alrededor de objetivos, evidencia y responsabilidad profesional más que de cuotas partidistas.</p>
+          <ul><li>Ejecutan las leyes y el presupuesto.</li><li>Publican métricas y resultados.</li><li>Proponen alternativas técnicas.</li><li>No pueden sustituir decisiones políticas por criterio experto.</li></ul>
+        </div>
+      </article>
+
+      <article class="institution card">
+        <div class="number">05</div>
+        <div>
+          <span class="institution-type">Garantía constitucional</span>
+          <h3>Tribunal Constitucional</h3>
+          <p>Es la barrera final cuando mayoría y Ejecutivo coinciden. Puede anular una norma o actuación aunque sea popular, barata o técnicamente conveniente.</p>
+          <ul><li>Protege derechos fundamentales.</li><li>Revisa leyes y actos del Ejecutivo.</li><li>Controla poderes de emergencia.</li><li>Sus resoluciones obligan al Gobierno.</li></ul>
+        </div>
+      </article>
+
+      <article class="institution card">
+        <div class="number">06</div>
+        <div>
+          <span class="institution-type">Relación con el ciudadano</span>
+          <h3>Civis y Defensor Cívico</h3>
+          <p>Civis reúne información pública, consultas y seguimiento de expedientes. El Defensor Cívico actúa fuera de la cadena de mando administrativa y recibe quejas por arbitrariedad o mala gestión.</p>
+          <ul><li>Seguimiento de decisiones públicas.</li><li>Consultas y propuestas ciudadanas.</li><li>Quejas contra mala administración.</li><li>Informes públicos sin poder ejecutivo propio.</li></ul>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section decision-section" id="decision">
+  <div class="container decision-grid">
+    <div class="decision-copy">
+      <div class="eyebrow">De la política a la ejecución</div>
+      <h2>¿Cómo se toma una decisión?</h2>
+      <p class="lead">Una nueva línea ferroviaria permite ver dónde termina la política y dónde empieza la técnica.</p>
+      <p>La Cámara no diseña puentes y los ingenieros no deciden por sí solos cuánto dinero debe dedicar el país al ferrocarril. Cada institución interviene en una fase distinta.</p>
+    </div>
+
+    <div class="timeline card">
+      <article><b>1</b><div><strong>Se plantea una necesidad</strong><p>Puede surgir del Ejecutivo, la Cámara, una administración territorial o una propuesta ciudadana con apoyo suficiente.</p></div></article>
+      <article><b>2</b><div><strong>Se estudian alternativas</strong><p>Infraestructuras analiza trazados, costes, demanda, seguridad, impacto territorial y alternativas.</p></div></article>
+      <article><b>3</b><div><strong>Se publica la evidencia</strong><p>Civis expone documentos, criterios, consultas y respuestas. La ciudadanía puede discutir el proyecto, no sustituir el análisis técnico.</p></div></article>
+      <article><b>4</b><div><strong>La política decide la prioridad</strong><p>La Cámara aprueba el marco legal y el presupuesto. El Ejecutivo asume públicamente la decisión.</p></div></article>
+      <article><b>5</b><div><strong>La administración ejecuta</strong><p>Los equipos técnicos licitan, supervisan y construyen siguiendo los objetivos aprobados y la normativa vigente.</p></div></article>
+      <article><b>6</b><div><strong>Se audita y se puede recurrir</strong><p>Integridad revisa contratos y conflictos. Los tribunales pueden detener actuaciones ilegales o vulneradoras de derechos.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="section section-dark" id="controles">
+  <div class="container">
+    <div class="section-heading dark-heading">
+      <div>
+        <div class="eyebrow">Quién controla a quién</div>
+        <h2>El poder siempre tiene una puerta de salida.</h2>
+      </div>
+      <p>El diseño evita que ganar una elección, aprobar una oposición o poseer conocimiento técnico otorgue autoridad ilimitada.</p>
+    </div>
+
+    <div class="control-table card">
+      <div class="table-head"><span>Institución</span><span>Control principal</span><span>Límite</span></div>
+      <div><strong>Ciudadanía</strong><span>Elige la Cámara y ejerce presión cívica.</span><span>No administra directamente cada política.</span></div>
+      <div><strong>Cámara Cívica</strong><span>Controla presupuesto, leyes y Ejecutivo.</span><span>Está sometida a la Constitución.</span></div>
+      <div><strong>Director Nacional</strong><span>Coordina y exige resultados a la administración.</span><span>No puede legislar ni suspender derechos a voluntad.</span></div>
+      <div><strong>Comisión de Mérito</strong><span>Filtra la idoneidad profesional.</span><span>No define el programa político.</span></div>
+      <div><strong>Tribunal Constitucional</strong><span>Frena abusos de Cámara y Ejecutivo.</span><span>No gobierna ni fija prioridades presupuestarias.</span></div>
+      <div><strong>Integridad / Civis</strong><span>Expone corrupción, opacidad y mala administración.</span><span>Investiga y publica; no sustituye a jueces ni representantes.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container balance-grid">
+    <article class="card balance-main">
+      <div class="eyebrow">La pregunta inevitable</div>
+      <h2>¿Es una democracia o una tecnocracia?</h2>
+      <p>Asteria se define como una república liberal y tecnocrática, no como una tecnocracia pura. La ciudadanía conserva la legitimidad política, la Cámara determina leyes y recursos, y la selección técnica intenta profesionalizar la ejecución.</p>
+      <p>Sus defensores sostienen que la democracia funciona mejor cuando no convierte cada puesto especializado en una recompensa electoral. Sus críticos responden que un sistema basado en credenciales puede crear una élite difícil de renovar y demasiado segura de su propio criterio.</p>
+      <p>La Constitución de 1989 no intenta eliminar esa tensión. Intenta hacerla visible y repartir el poder de forma que ninguna de las dos partes pueda imponerse sin fricción.</p>
+    </article>
+
+    <aside class="card risks">
+      <span class="institution-type">Riesgos reconocidos</span>
+      <h3>Lo que el sistema vigila de sí mismo</h3>
+      <ul>
+        <li><strong>Elitismo técnico:</strong> confundir conocimiento con derecho a decidir.</li>
+        <li><strong>Captura institucional:</strong> que quienes evalúan mérito terminen reproduciéndose a sí mismos.</li>
+        <li><strong>Paternalismo:</strong> tratar una preferencia política como si fuera un problema técnico.</li>
+        <li><strong>Burocracia defensiva:</strong> usar auditoría y procedimiento para no asumir responsabilidad.</li>
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<section class="section final-doctrine">
+  <div class="narrow">
+    <div class="quote big-quote">El orden pertenece a las instituciones. La libertad pertenece a las personas.</div>
+    <p>La doctrina constitucional asteriana permite un Estado muy fuerte en infraestructuras, sanidad, energía o emergencias, pero exige una justificación especialmente fuerte cuando ese mismo Estado interviene contra una persona concreta.</p>
+    <div class="constitution">
+      <a class="btn btn-secondary" href="/docs/Constitucion_de_Asteria.pdf" target="_blank" rel="noopener">Abrir Constitución</a>
+      <a class="btn btn-primary" href="/docs/Constitucion_de_Asteria.pdf" download="Constitucion_de_Asteria.pdf">Descargar Constitución ↓</a>
+    </div>
+  </div>
+</section>
+
 </BaseLayout>
-<style>.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}.grid article{padding:1.4rem}.grid span{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:900}.grid p{color:var(--muted);margin:0}.constitution{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.4rem}@media(max-width:720px){.grid{grid-template-columns:1fr}}</style>
+
+<style>
+.institutions-hero{padding-bottom:38px}.hero-rule{margin-top:1.8rem;padding:1.05rem 1.2rem;border-left:4px solid var(--gold);background:rgba(201,154,50,.08);border-radius:0 14px 14px 0}.hero-rule strong,.hero-rule span{display:block}.hero-rule strong{font-size:.72rem;text-transform:uppercase;letter-spacing:.16em;color:var(--gold);margin-bottom:.25rem}.hero-rule span{font-family:Georgia,serif;color:var(--navy);font-size:1.08rem}
+.jumpbar{display:flex;align-items:center;justify-content:center;gap:.35rem;padding:.55rem;max-width:820px;margin:auto;flex-wrap:wrap}.jumpbar span{font-size:.72rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);padding:.45rem .65rem}.jumpbar a{text-decoration:none;color:var(--navy);font-weight:800;font-size:.84rem;padding:.55rem .75rem;border-radius:999px}.jumpbar a:hover{background:rgba(13,41,75,.07)}
+.section-heading{display:flex;justify-content:space-between;gap:2rem;align-items:end;margin-bottom:1.6rem}.section-heading>p{max-width:430px;color:var(--muted);margin:0}.dark-heading>p{color:#c9d5e0}
+
+.system-map{padding:1.5rem;background:linear-gradient(180deg,rgba(255,253,248,.96),rgba(239,235,224,.92));overflow:hidden}.map-row{display:grid;gap:1rem;justify-content:center}.map-row.top,.map-row.center{grid-template-columns:minmax(280px,460px)}.map-row.two{grid-template-columns:repeat(2,minmax(260px,1fr));max-width:880px;margin:auto}.node{padding:1.2rem;border:1px solid var(--line);border-radius:16px;background:white;box-shadow:0 10px 26px rgba(16,30,45,.05)}.node h3{margin:.2rem 0 .4rem}.node p{color:#56616c;margin:0;font-size:.9rem}.node-type{font-size:.65rem;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);font-weight:900}.citizen{border-top:4px solid var(--gold)}.chamber{border-top:4px solid #355d86}.civic{border-top:4px solid #73856c}.executive{border:2px solid var(--navy);box-shadow:0 14px 34px rgba(13,41,75,.12)}.connector{height:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;font-weight:800}.connector i{font-style:normal;color:var(--gold);font-size:1.35rem;line-height:1.1}.connector.split{display:grid;grid-template-columns:1fr 28px 1fr;text-align:center;max-width:760px;margin:auto}.connector.split i{align-self:center}.bridge-row{display:flex;justify-content:center;align-items:center;gap:1rem;margin:1.1rem auto 0;max-width:800px}.merit-box{padding:.9rem 1rem;border-radius:14px;background:#ece7db;border:1px dashed rgba(13,41,75,.28);display:flex;flex-direction:column;min-width:280px}.merit-box strong{color:var(--navy)}.merit-box small{color:var(--muted)}.bridge-arrow{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;font-weight:900;color:var(--gold)}.directorates{grid-template-columns:repeat(5,1fr);max-width:1000px;margin:auto}.mini-node{padding:.85rem .8rem;background:#0d294b;color:white;border-radius:12px;text-align:center}.mini-node strong,.mini-node span{display:block}.mini-node strong{font-family:Georgia,serif}.mini-node span{font-size:.67rem;color:#c8d3df;margin-top:.2rem}.oversight{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.4rem auto 0;max-width:960px;padding-top:1.4rem;border-top:1px solid var(--line)}.oversight article{padding:1rem 1.1rem;background:rgba(13,41,75,.045);border-radius:14px}.oversight h3{font-size:1.15rem;margin:.25rem 0}.oversight p{font-size:.84rem;color:var(--muted);margin:0}.map-foot{margin:1.4rem auto 0;max-width:850px;text-align:center;padding:1rem;border-radius:12px;background:#fff7df;color:#3f4850;font-size:.9rem}.map-foot strong{color:var(--navy)}.map-foot em{font-family:Georgia,serif;color:var(--navy)}
+
+.logic-section h2{max-width:800px}.pillars{display:grid;grid-template-columns:repeat(5,1fr);gap:.8rem;margin-top:1.5rem}.pillars article{border-top:1px solid rgba(255,255,255,.18);padding-top:1rem}.pillars span{color:var(--gold);font-weight:900}.pillars h3{font-size:1.16rem;margin-top:.45rem}.pillars p{font-size:.84rem;color:#c9d5e0;margin:0}
+
+.institution-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}.institution{padding:1.35rem;display:grid;grid-template-columns:54px 1fr;gap:1rem}.number{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:var(--navy);color:white;font-weight:900;font-size:.78rem}.institution h3{font-size:1.5rem;margin:.2rem 0 .55rem}.institution p{color:#56616c}.institution ul{margin:.7rem 0 0;padding-left:1.1rem;color:#56616c;font-size:.86rem}.institution li+li{margin-top:.28rem}.institution-type{font-size:.68rem;text-transform:uppercase;letter-spacing:.13em;color:var(--gold);font-weight:900}
+
+.decision-section{background:linear-gradient(135deg,#eee8db,#f8f4e9)}.decision-grid{display:grid;grid-template-columns:.72fr 1.28fr;gap:3rem;align-items:start}.decision-copy{position:sticky;top:110px}.timeline{padding:1rem 1.2rem}.timeline article{display:grid;grid-template-columns:46px 1fr;gap:1rem;padding:1rem .3rem;position:relative}.timeline article:not(:last-child){border-bottom:1px solid var(--line)}.timeline b{width:38px;height:38px;border-radius:50%;background:var(--gold);color:#fff;display:grid;place-items:center}.timeline strong{color:var(--navy)}.timeline p{color:var(--muted);margin:.2rem 0 0;font-size:.88rem}
+
+.control-table{overflow:hidden;background:rgba(255,255,255,.98);color:var(--ink)}.control-table>div{display:grid;grid-template-columns:.75fr 1.25fr 1.25fr;gap:1rem;padding:.85rem 1rem;border-bottom:1px solid var(--line);align-items:start}.control-table>div:last-child{border-bottom:0}.control-table .table-head{background:#eae4d7;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;font-weight:900;color:var(--navy)}.control-table strong{color:var(--navy)}.control-table span{font-size:.86rem;color:#56616c}.control-table .table-head span{color:var(--navy)}
+
+.balance-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:1rem;align-items:start}.balance-main,.risks{padding:1.5rem}.balance-main p{color:#56616c}.risks{background:#fff9eb}.risks h3{margin-top:.35rem}.risks ul{padding-left:1.15rem;margin-bottom:0;color:#56616c}.risks li+li{margin-top:.65rem}.risks strong{color:var(--navy)}.final-doctrine{text-align:center;padding-top:30px}.big-quote{font-size:clamp(1.35rem,2.5vw,1.8rem);text-align:left}.final-doctrine p{margin:1.3rem auto;max-width:760px;color:#56616c}.constitution{display:flex;justify-content:center;gap:.6rem;flex-wrap:wrap;margin-top:1.4rem}
+
+@media(max-width:980px){
+  .pillars{grid-template-columns:repeat(2,1fr)}
+  .directorates{grid-template-columns:repeat(3,1fr)}
+  .decision-grid,.balance-grid{grid-template-columns:1fr}
+  .decision-copy{position:static}
+}
+@media(max-width:760px){
+  .section-heading{align-items:flex-start;flex-direction:column}
+  .map-row.two,.oversight,.institution-grid{grid-template-columns:1fr}
+  .connector.split{grid-template-columns:1fr;height:auto;gap:.25rem;padding:1rem 0}.connector.split i{order:3}
+  .bridge-row{flex-direction:column;text-align:center}.bridge-arrow{transform:none}
+  .directorates{grid-template-columns:1fr 1fr}
+  .pillars{grid-template-columns:1fr}
+  .institution{grid-template-columns:42px 1fr;padding:1.1rem}.number{width:38px;height:38px}
+  .control-table .table-head{display:none}.control-table>div{grid-template-columns:1fr;gap:.25rem}.control-table>div strong{font-size:1rem}.control-table>div span{font-size:.82rem}
+  .jumpbar{justify-content:flex-start}
+}
+@media(max-width:430px){.directorates{grid-template-columns:1fr}.system-map{padding:1rem}.map-row.top,.map-row.center{grid-template-columns:1fr}}
+</style>
