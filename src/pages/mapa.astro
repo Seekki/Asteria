@@ -1,0 +1,118 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const cities = [
+  { id:'aster', name:'Aster', region:'Centralia', role:'Capital nacional', x:51.5, y:30.8, population:'≈ 1,7 M', desc:'Centro político, judicial y científico. La ciudad monumental convive con barrios residenciales, universidades, tranvías y una fuerte concentración de instituciones públicas.', tags:['Gobierno','Ciencia','Servicios'] },
+  { id:'veyra', name:'Veyra', region:'Costaverde', role:'Gran puerto occidental', x:20.7, y:35.3, population:'≈ 1,3 M', desc:'Puerto, astilleros, mercados, música y cultura urbana. Veyra es la ciudad más caótica y creativa del país, y la rival cultural tradicional de Aster.', tags:['Puerto','Cultura','Industria marítima'] },
+  { id:'lira', name:'Lira', region:'Vallelumen', role:'Ciudad universitaria', x:50.6, y:58.1, population:'≈ 640.000', desc:'Una ciudad verde y académica, conocida por sus universidades, bibliotecas, laboratorios y por su peso en la lengua y la cultura asterianas.', tags:['Universidad','Investigación','Cultura'] },
+  { id:'orsen', name:'Orsen', region:'Oriental', role:'Capital industrial', x:73.2, y:67.4, population:'≈ 780.000', desc:'El gran polo industrial y tecnológico: manufactura avanzada, materiales, automatización y robótica sobre una fuerte herencia fabril.', tags:['Industria','Robótica','Manufactura'] },
+  { id:'cael', name:'Cael', region:'Altoria', role:'Ciudad de montaña', x:79.3, y:21.5, population:'≈ 210.000', desc:'Montaña, embalses, nieve e ingeniería energética. Su aislamiento histórico dejó una identidad regional especialmente marcada.', tags:['Montaña','Energía','Ingeniería'] }
+];
+---
+<BaseLayout title="Mapa interactivo de Asteria" description="Atlas interactivo de la República Cívica de Asteria.">
+<section class="page-hero map-hero">
+  <div class="container hero-row">
+    <div>
+      <div class="eyebrow">Atlas nacional</div>
+      <h1>Explora Asteria.</h1>
+      <p class="lead">Selecciona una ciudad en el mapa para ver su perfil. Esta primera versión se centra en los cinco núcleos principales; después añadiremos regiones, ferrocarril, energía y lugares de interés.</p>
+    </div>
+    <div class="legend card"><span><i class="capital"></i> Capital</span><span><i></i> Ciudad principal</span><small>Datos demográficos provisionales de trabajo · 2026</small></div>
+  </div>
+</section>
+
+<section class="atlas-section">
+  <div class="container atlas-grid">
+    <div class="map-shell card">
+      <div class="map-toolbar">
+        <div><strong>República Cívica de Asteria</strong><span>Mapa político y físico</span></div>
+        <div class="zoom-controls" aria-label="Controles de zoom">
+          <button type="button" data-zoom-out aria-label="Alejar">−</button>
+          <button type="button" data-reset aria-label="Restablecer zoom">100%</button>
+          <button type="button" data-zoom-in aria-label="Acercar">+</button>
+        </div>
+      </div>
+      <div class="map-viewport">
+        <div class="map-canvas" data-map-canvas>
+          <img src="/images/mapa-asteria.png" alt="Mapa de Asteria" draggable="false"/>
+          {cities.map((city, i) => (
+            <button type="button" class:list={['city-pin',{active:i===0,capital:city.id==='aster'}]} style={'left:'+city.x+'%;top:'+city.y+'%'} data-city={city.id} aria-label={'Ver información de '+city.name}>
+              <span class="dot"></span><span class="pin-label">{city.name}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+      <div class="mobile-hint">Toca una ciudad para abrir su ficha · usa + y − para ampliar</div>
+    </div>
+
+    <aside class="city-panel card" data-panel>
+      <div class="panel-kicker" data-region>Centralia</div>
+      <h2 data-name>Aster</h2>
+      <p class="role" data-role>Capital nacional</p>
+      <div class="panel-stat"><span>Población</span><strong data-population>≈ 1,7 M</strong></div>
+      <p class="description" data-desc>Centro político, judicial y científico. La ciudad monumental convive con barrios residenciales, universidades, tranvías y una fuerte concentración de instituciones públicas.</p>
+      <div class="tags" data-tags><span>Gobierno</span><span>Ciencia</span><span>Servicios</span></div>
+      <a class="btn btn-primary" data-city-link href="/ciudades/#aster">Ver ficha de Aster →</a>
+      <div class="panel-note">Próximo paso: mapas urbanos y lugares de interés de cada ciudad.</div>
+    </aside>
+  </div>
+</section>
+
+<section class="section city-selector">
+  <div class="container">
+    <div class="eyebrow">Ciudades principales</div>
+    <h2>Cinco ciudades, cinco caracteres.</h2>
+    <div class="city-list">
+      {cities.map((city, i) => (
+        <button type="button" class:list={['city-chip',{active:i===0}]} data-city={city.id}>
+          <strong>{city.name}</strong><span>{city.role}</span>
+        </button>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ cities }}>
+  const cityData = Object.fromEntries(cities.map(c => [c.id, c]));
+  const allCityButtons = [...document.querySelectorAll('[data-city]')];
+  const panel = document.querySelector('[data-panel]');
+
+  function selectCity(id) {
+    const city = cityData[id];
+    if (!city || !panel) return;
+    allCityButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.city === id));
+    panel.querySelector('[data-region]').textContent = city.region;
+    panel.querySelector('[data-name]').textContent = city.name;
+    panel.querySelector('[data-role]').textContent = city.role;
+    panel.querySelector('[data-population]').textContent = city.population;
+    panel.querySelector('[data-desc]').textContent = city.desc;
+    const tags = panel.querySelector('[data-tags]');
+    tags.innerHTML = city.tags.map(tag => '<span>' + tag + '</span>').join('');
+    const link = panel.querySelector('[data-city-link]');
+    link.href = '/ciudades/#' + city.id;
+    link.textContent = 'Ver ficha de ' + city.name + ' →';
+    if (window.innerWidth < 880) panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+
+  allCityButtons.forEach(button => button.addEventListener('click', () => selectCity(button.dataset.city)));
+
+  let zoom = 1;
+  const canvas = document.querySelector('[data-map-canvas]');
+  const reset = document.querySelector('[data-reset]');
+  const applyZoom = () => {
+    canvas.style.transform = 'scale(' + zoom + ')';
+    reset.textContent = Math.round(zoom * 100) + '%';
+  };
+  document.querySelector('[data-zoom-in]')?.addEventListener('click', () => { zoom = Math.min(1.65, zoom + .15); applyZoom(); });
+  document.querySelector('[data-zoom-out]')?.addEventListener('click', () => { zoom = Math.max(1, zoom - .15); applyZoom(); });
+  reset?.addEventListener('click', () => { zoom = 1; applyZoom(); });
+</script>
+</BaseLayout>
+
+<style>
+.map-hero{padding-bottom:38px}.hero-row{display:flex;justify-content:space-between;align-items:end;gap:2rem}.legend{min-width:230px;padding:1rem 1.1rem;display:grid;gap:.45rem}.legend span{display:flex;align-items:center;gap:.55rem;font-size:.84rem;font-weight:750;color:var(--navy)}.legend i{width:12px;height:12px;border-radius:50%;background:var(--navy);box-shadow:0 0 0 3px white,0 0 0 4px var(--navy)}.legend i.capital{background:var(--gold);box-shadow:0 0 0 3px white,0 0 0 4px var(--gold)}.legend small{color:var(--muted);margin-top:.3rem}
+.atlas-section{padding:20px 0 46px}.atlas-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(300px,.65fr);gap:1.2rem;align-items:start}.map-shell{overflow:hidden;background:#dce8ee}.map-toolbar{height:66px;background:rgba(255,253,248,.96);display:flex;align-items:center;justify-content:space-between;padding:.8rem 1rem;border-bottom:1px solid var(--line)}.map-toolbar strong,.map-toolbar span{display:block}.map-toolbar strong{font-family:Georgia,serif;color:var(--navy)}.map-toolbar span{font-size:.75rem;color:var(--muted)}.zoom-controls{display:flex;align-items:center;gap:.35rem}.zoom-controls button{border:1px solid var(--line);background:white;color:var(--navy);height:34px;min-width:34px;padding:0 .65rem;border-radius:9px;font-weight:850;cursor:pointer}.map-viewport{overflow:auto;position:relative;max-height:720px;background:#b9d1df}.map-canvas{position:relative;transform-origin:top left;transition:transform .18s ease;width:100%}.map-canvas img{width:100%;height:auto;user-select:none}.city-pin{position:absolute;transform:translate(-50%,-50%);border:0;background:none;padding:0;cursor:pointer;z-index:4}.city-pin .dot{display:block;width:15px;height:15px;border-radius:50%;background:var(--navy);border:3px solid white;box-shadow:0 0 0 3px rgba(13,41,75,.72),0 4px 10px rgba(0,0,0,.28);transition:.16s}.city-pin.capital .dot{background:var(--gold);box-shadow:0 0 0 3px rgba(201,154,50,.75),0 4px 10px rgba(0,0,0,.28)}.city-pin:hover .dot,.city-pin.active .dot{transform:scale(1.32)}.pin-label{position:absolute;top:-12px;left:22px;background:rgba(8,27,49,.92);color:white;border-radius:7px;padding:.18rem .42rem;font-size:.66rem;font-weight:850;white-space:nowrap;opacity:0;transform:translateY(3px);transition:.15s}.city-pin:hover .pin-label,.city-pin.active .pin-label{opacity:1;transform:translateY(0)}.mobile-hint{display:none;padding:.6rem 1rem;background:#f8f5ec;color:var(--muted);font-size:.76rem;border-top:1px solid var(--line)}
+.city-panel{padding:1.45rem;position:sticky;top:96px}.panel-kicker{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:900}.city-panel h2{font-size:2.45rem;margin-top:.25rem}.role{font-weight:800;color:#44515e}.panel-stat{display:flex;justify-content:space-between;align-items:center;padding:.85rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:1rem 0}.panel-stat span{color:var(--muted);font-size:.83rem}.panel-stat strong{color:var(--navy)}.description{color:#53606d}.tags{display:flex;flex-wrap:wrap;gap:.4rem;margin:1rem 0 1.25rem}.tags span{background:#edf0ec;border:1px solid var(--line);border-radius:999px;padding:.3rem .55rem;color:#45515c;font-size:.75rem;font-weight:750}.panel-note{margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.76rem;color:var(--muted)}
+.city-selector{padding-top:38px}.city-list{display:grid;grid-template-columns:repeat(5,1fr);gap:.65rem;margin-top:1.25rem}.city-chip{border:1px solid var(--line);border-radius:14px;background:rgba(255,253,248,.78);padding:.9rem;text-align:left;cursor:pointer;transition:.16s}.city-chip strong,.city-chip span{display:block}.city-chip strong{font-family:Georgia,serif;color:var(--navy);font-size:1.05rem}.city-chip span{font-size:.7rem;color:var(--muted);margin-top:.2rem}.city-chip:hover,.city-chip.active{border-color:rgba(201,154,50,.65);box-shadow:0 8px 22px rgba(16,30,45,.08);transform:translateY(-2px)}
+@media(max-width:980px){.atlas-grid{grid-template-columns:1fr}.city-panel{position:static}.city-list{grid-template-columns:repeat(3,1fr)}}@media(max-width:720px){.hero-row{align-items:flex-start;flex-direction:column}.legend{width:100%}.map-toolbar{height:auto}.map-viewport{max-height:620px}.mobile-hint{display:block}.city-list{grid-template-columns:1fr 1fr}.pin-label{opacity:1;transform:none;font-size:.62rem}.city-pin .dot{width:13px;height:13px}.city-panel h2{font-size:2rem}}@media(max-width:430px){.city-list{grid-template-columns:1fr}}
+</style>
