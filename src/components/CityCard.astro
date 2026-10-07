@@ -1,18 +1,26 @@
 ---
-const { id, name, role, text, tone = 'aster' } = Astro.props;
+const { id, name, role, text, tone = 'aster', image } = Astro.props;
 ---
 <article class="city-card card" id={id}>
-  <div class={'city-visual '+tone}><span>{name}</span></div>
+  <div class={'city-visual '+tone}>
+    {image && <img src={image} alt={'Vista de '+name} loading="lazy"/>}
+    <div class="shade"></div>
+    <span>{name}</span>
+  </div>
   <div class="city-body"><div class="eyebrow">{role}</div><h3>{name}</h3><p>{text}</p></div>
 </article>
 <style>
-.city-card{overflow:hidden}.city-visual{height:220px;display:flex;align-items:flex-end;padding:1.2rem;position:relative;overflow:hidden}
-.city-visual:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(4,17,30,.64)),repeating-linear-gradient(118deg,transparent 0 38px,rgba(255,255,255,.055) 39px 41px)}
-.city-visual span{position:relative;color:white;font-family:Georgia,serif;font-size:2rem}
-.city-visual.aster{background:linear-gradient(135deg,#8797a5,#d3c6aa 58%,#0d294b)}
-.city-visual.veyra{background:linear-gradient(135deg,#0e455f,#3c7c87 55%,#cb8c30)}
-.city-visual.lira{background:linear-gradient(135deg,#2d554c,#7b987b 58%,#d4bd7d)}
-.city-visual.orsen{background:linear-gradient(135deg,#313940,#794737 62%,#cf8841)}
-.city-visual.cael{background:linear-gradient(135deg,#9eb5c3,#e0e5e7 44%,#365369 45%,#11283b)}
+.city-card{overflow:hidden}
+.city-visual{height:260px;display:flex;align-items:flex-end;padding:1.2rem;position:relative;overflow:hidden;background:#24384b}
+.city-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
+.city-card:hover .city-visual img{transform:scale(1.025)}
+.city-visual .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(3,15,27,.02) 36%,rgba(3,15,27,.72) 100%)}
+.city-visual span{position:relative;color:white;font-family:Georgia,serif;font-size:2rem;text-shadow:0 2px 14px rgba(0,0,0,.35)}
+.city-visual.aster img{object-position:center 50%}
+.city-visual.veyra img{object-position:center 52%}
+.city-visual.lira img{object-position:center 49%}
+.city-visual.orsen img{object-position:center 52%}
+.city-visual.cael img{object-position:center 48%}
 .city-body{padding:1.25rem}.city-body p{color:#53606d;margin:0}
+@media(max-width:720px){.city-visual{height:230px}}
 </style>
