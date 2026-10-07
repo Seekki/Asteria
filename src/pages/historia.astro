@@ -1,16 +1,213 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const eras = [
+  { id:'astera', years:'siglos XII–XIX', short:'Reino de Astera', title:'El mar, la técnica y una identidad común', tone:'kingdom' },
+  { id:'primera', years:'1919–1938', short:'Primera República', title:'Libertad política, instituciones demasiado frágiles', tone:'first' },
+  { id:'directorio', years:'1938–1962', short:'Directorio Nacional', title:'Un Estado eficaz que aprendió a no tener límites', tone:'directorate' },
+  { id:'segunda', years:'1963–1989', short:'Segunda República y reforma', title:'Recuperar la libertad no bastó para recuperar la capacidad', tone:'second' },
+  { id:'civica', years:'1989–actualidad', short:'República Cívica', title:'Capacidad, derechos y una tensión deliberadamente irresuelta', tone:'civic' }
+];
 ---
-<BaseLayout title="Historia de Asteria">
-<section class="page-hero"><div class="narrow"><div class="eyebrow">Historia nacional</div><h1>Un país construido a partir de dos fracasos.</h1><p class="lead">Asteria no explica su sistema moderno como una ruptura heroica, sino como la respuesta a dos lecciones: el poder sin límites puede abusar; las instituciones incapaces pueden abandonar.</p></div></section>
-<section class="section-tight"><div class="narrow prose">
-<h2>Del Reino de Astera a la industrialización</h2><p>Entre los siglos XII y XVIII, Astera fue un reino marítimo de tamaño medio. Sus puertos, talleres navales, metalurgia y redes comerciales dieron origen a una cultura urbana muy orientada a la técnica. La estrella, hoy símbolo nacional, nació como emblema de navegación y orientación.</p>
-<h2>1919 · Primera República</h2><p>La caída de la monarquía abrió una etapa parlamentaria con ampliación de derechos, pero también gobiernos breves, clientelismo y una administración débil. La frustración con la ineficacia facilitó en 1938 el ascenso del Directorio Nacional.</p>
-<h2>1938–1962 · Directorio</h2><p>El régimen autoritario modernizó infraestructuras, industria y capacidad energética, pero concentró poder, censuró la prensa y politizó los cuerpos de seguridad. Su caída dejó una desconfianza duradera hacia cualquier poder ejecutivo sin controles.</p>
-<h2>1963–1986 · Segunda República</h2><p>La restauración constitucional recuperó libertades y representación democrática, pero con el tiempo aumentaron la fragmentación administrativa, el nombramiento político y la dificultad para ejecutar reformas complejas.</p>
-<div class="quote">Capacidad sin libertad conduce al abuso; libertad sin instituciones capaces puede conducir a la impotencia.</div>
-<h2>1986 · Crisis de los Tres Días</h2><p>Una tormenta extrema, inundaciones, un fallo de red y un accidente industrial coincidieron durante tres días. Las competencias se solaparon, avisos técnicos previos habían sido ignorados y recursos de emergencia quedaron bloqueados esperando autorizaciones. Murieron cientos de personas.</p><p>La crisis provocó una Comisión Nacional de Reforma formada por juristas, técnicos, trabajadores, empresarios, académicos y representantes cívicos.</p>
-<h2>1989 · La refundación constitucional</h2><p>La nueva Constitución creó un Ejecutivo de alta capacidad técnica, reforzó tribunales y órganos de garantía, profesionalizó la administración y protegió de forma intensa la esfera privada. Desde entonces, Asteria vive en torno a una pregunta que nunca considera resuelta: cómo ser eficaz sin convertirse en arbitraria.</p>
-<h2>2007 y 2011</h2><p>La Ley de Espacios de Expresión Urbana de 2007 convirtió los Muros Abiertos en un rasgo cultural del país. En 2011, un gran ciberataque paralizó durante horas bancos, hospitales y transporte, consolidando la ciberdefensa y la resiliencia como prioridades nacionales.</p>
-</div></section>
+
+<BaseLayout title="Historia de Asteria" description="Historia política, social e institucional de Asteria desde el Reino de Astera hasta la República Cívica moderna.">
+
+<section class="page-hero history-hero">
+  <div class="narrow">
+    <div class="eyebrow">Historia nacional</div>
+    <h1>Un país construido a partir de sus propios errores.</h1>
+    <p class="lead">La Asteria moderna no se cuenta como una sucesión de victorias. Su sistema político nació de dos advertencias históricas: el poder sin límites puede volverse contra la sociedad; unas instituciones demasiado débiles pueden abandonarla cuando más las necesita.</p>
+    <div class="history-thesis">
+      <span>La tesis histórica</span>
+      <strong>Capacidad sin libertad conduce al abuso. Libertad sin instituciones capaces puede conducir a la impotencia.</strong>
+    </div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container era-nav card">
+    <span>Recorrer la historia</span>
+    {eras.map(era => <a href={'#'+era.id}><b>{era.years}</b>{era.short}</a>)}
+  </div>
+</section>
+
+<section class="section timeline-section">
+  <div class="container">
+    <div class="section-heading">
+      <div>
+        <div class="eyebrow">Cronología esencial</div>
+        <h2>Ocho fechas que explican el país actual.</h2>
+      </div>
+      <p>Asteria cambió de régimen varias veces, pero sus grandes transformaciones fueron casi siempre respuestas a fallos institucionales concretos.</p>
+    </div>
+
+    <div class="timeline card">
+      <article><b>1919</b><span>Nace la Primera República tras el final de la monarquía.</span></article>
+      <article><b>1938</b><span>El Directorio Nacional toma el poder en un clima de bloqueo y descrédito parlamentario.</span></article>
+      <article><b>1962</b><span>Cae el Directorio después de veinticuatro años de autoritarismo y modernización acelerada.</span></article>
+      <article><b>1963</b><span>La Segunda República restaura derechos, partidos, prensa libre y control parlamentario.</span></article>
+      <article><b>1986</b><span>La Crisis de los Tres Días expone fallos graves de coordinación y respuesta pública.</span></article>
+      <article><b>1989</b><span>Entra en vigor la Constitución de la actual República Cívica.</span></article>
+      <article><b>2007</b><span>La Ley de Espacios de Expresión Urbana convierte los Muros Abiertos en una institución cultural.</span></article>
+      <article><b>2011</b><span>Un gran ciberataque redefine la doctrina nacional de resiliencia y ciberdefensa.</span></article>
+    </div>
+  </div>
+</section>
+
+<section class="era-section" id="astera">
+  <div class="container era-grid">
+    <div class="era-visual archive-placeholder kingdom">
+      <div class="archive-label">Archivo visual · pendiente</div>
+      <div class="archive-icon">✦</div>
+      <strong>Reino de Astera</strong>
+      <span>Grabado marítimo / carta náutica</span>
+    </div>
+    <div class="era-copy">
+      <div class="era-date">Siglos XII–XIX</div>
+      <div class="eyebrow">I · Reino de Astera</div>
+      <h2>El mar, la técnica y una identidad común.</h2>
+      <p>Durante buena parte de la Edad Media y la Edad Moderna, Astera fue un reino marítimo de tamaño medio cuya riqueza dependía menos de grandes extensiones agrícolas que de sus puertos, rutas comerciales, talleres navales y metalurgia. Veyra creció mirando al Mar Occidental; Aster concentró corte, administración y saber; los valles del este aportaron madera, agua y mineral.</p>
+      <p>La estrella que hoy ocupa la simbología nacional no nació como emblema ideológico. Era un signo de orientación y navegación, utilizado en cartas, talleres y estandartes marítimos. Con el tiempo se convirtió en una imagen compartida por regiones que seguían conservando identidades locales fuertes.</p>
+      <p>En el siglo XIX la industrialización cambió la escala del país. Ferrocarril, siderurgia, mecanización portuaria y producción energética conectaron territorios antes mucho más separados. Orsen comenzó a transformarse en gran centro fabril, mientras Lira consolidó su prestigio académico.</p>
+      <div class="era-note"><strong>Legado:</strong> cultura marítima, prestigio de la ingeniería, administración central en Aster y una temprana asociación entre conocimiento técnico y progreso material.</div>
+    </div>
+  </div>
+</section>
+
+<section class="era-section alt" id="primera">
+  <div class="container era-grid">
+    <div class="era-copy">
+      <div class="era-date">1919–1938</div>
+      <div class="eyebrow">II · Primera República</div>
+      <h2>Libertad política, instituciones demasiado frágiles.</h2>
+      <p>La monarquía terminó en 1919 y dio paso a la Primera República. El nuevo régimen amplió libertades públicas, reforzó el parlamentarismo y abrió la administración a una sociedad urbana e industrial mucho más compleja que la del siglo anterior.</p>
+      <p>El problema no fue la ausencia de política, sino su exceso sin capacidad suficiente para convertir decisiones en administración estable. Gobiernos breves, clientelismo, nombramientos partidistas y una estructura pública débil fueron erosionando la confianza. Las instituciones podían debatir durante meses y, aun así, fracasar en ejecutar reformas básicas.</p>
+      <p>La crisis económica, la polarización y el desprestigio del Parlamento alimentaron la idea de que Asteria necesitaba menos discusión y más autoridad. Esa percepción abrió la puerta al régimen que surgiría en 1938.</p>
+      <div class="era-note"><strong>Lección que dejó:</strong> la legitimidad democrática por sí sola no garantiza que un Estado sea capaz de hacer aquello que promete.</div>
+    </div>
+    <div class="era-visual archive-placeholder republic">
+      <div class="archive-label">Archivo visual · pendiente</div>
+      <div class="archive-icon">1919</div>
+      <strong>Primera República</strong>
+      <span>Fotografía de calle / sesión parlamentaria</span>
+    </div>
+  </div>
+</section>
+
+<section class="era-section dark-era" id="directorio">
+  <div class="container era-grid">
+    <div class="era-visual archive-placeholder directorate">
+      <div class="archive-label">Archivo visual · pendiente</div>
+      <div class="archive-icon">1938</div>
+      <strong>Directorio Nacional</strong>
+      <span>Fotografía oficial / infraestructura monumental</span>
+    </div>
+    <div class="era-copy">
+      <div class="era-date">1938–1962</div>
+      <div class="eyebrow">III · Directorio Nacional</div>
+      <h2>Un Estado eficaz que aprendió a no tener límites.</h2>
+      <p>El Directorio Nacional llegó al poder prometiendo estabilidad, profesionalización y una administración capaz de actuar. Durante sus primeras décadas aceleró la construcción de carreteras, ferrocarril, industria pesada y capacidad energética. Muchos de los grandes proyectos del siglo XX nacieron en esos años.</p>
+      <p>Pero la concentración de poder fue eliminando los límites que debían contener esa eficacia. La prensa fue censurada, la oposición perseguida, los cuerpos de seguridad se politizaron y la lógica de “resultado” terminó justificando decisiones que ningún ciudadano podía impugnar de forma efectiva.</p>
+      <p>La corrupción del propio régimen aumentó conforme disminuía el escrutinio. A comienzos de los años sesenta, las mismas estructuras creadas para evitar la ineficiencia se habían convertido en una maquinaria rígida y autorreferencial.</p>
+      <div class="era-note"><strong>Lección que dejó:</strong> un Estado competente sin garantías puede convertirse en una amenaza más eficiente contra sus propios ciudadanos.</div>
+    </div>
+  </div>
+</section>
+
+<section class="era-section alt" id="segunda">
+  <div class="container era-grid">
+    <div class="era-copy">
+      <div class="era-date">1963–1989</div>
+      <div class="eyebrow">IV · Segunda República</div>
+      <h2>Recuperar la libertad no bastó para recuperar la capacidad.</h2>
+      <p>La Segunda República restauró en 1963 las libertades públicas, el pluralismo político, la independencia judicial y una prensa libre. También amplió el Estado social y reconstruyó la confianza en las instituciones después de dos décadas de autoritarismo.</p>
+      <p>Con el tiempo apareció el problema contrario al del Directorio. La administración acumuló procedimientos, competencias solapadas y nombramientos políticos. Las reformas complejas exigían coordinar demasiadas estructuras y nadie quería volver a concentrar poder después de la experiencia anterior.</p>
+      <p>La tensión estalló en 1986 durante la Crisis de los Tres Días. Una tormenta extrema, inundaciones, un fallo de red y un accidente industrial coincidieron en distintas zonas del país. Avisos técnicos previos habían sido ignorados, los organismos discutieron competencias y recursos de emergencia quedaron paralizados esperando autorizaciones. Murieron cientos de personas.</p>
+      <p>La comisión pública creada tras la crisis trabajó cerca de tres años. Juristas, técnicos, trabajadores, empresarios, académicos y representantes cívicos estudiaron tanto los abusos del Directorio como las incapacidades de la Segunda República.</p>
+      <div class="era-note"><strong>Conclusión de la reforma:</strong> Asteria necesitaba instituciones capaces de actuar con rapidez, pero diseñadas para que esa capacidad no pudiera transformarse otra vez en arbitrariedad.</div>
+    </div>
+    <div class="era-visual archive-placeholder crisis">
+      <div class="archive-label">Archivo visual · pendiente</div>
+      <div class="archive-icon">1986</div>
+      <strong>Crisis de los Tres Días</strong>
+      <span>Prensa de época / inundaciones / comisión de reforma</span>
+    </div>
+  </div>
+</section>
+
+<section class="era-section civic-era" id="civica">
+  <div class="container era-grid">
+    <div class="era-visual archive-placeholder civic">
+      <div class="archive-label">Archivo visual · pendiente</div>
+      <div class="archive-icon">1989</div>
+      <strong>República Cívica</strong>
+      <span>Firma constitucional / Plaza de la Constitución</span>
+    </div>
+    <div class="era-copy">
+      <div class="era-date">1989–actualidad</div>
+      <div class="eyebrow">V · República Cívica</div>
+      <h2>Capacidad, derechos y una tensión deliberadamente irresuelta.</h2>
+      <p>La Constitución de 1989 no intentó elegir entre democracia y competencia técnica. Construyó un sistema que obliga a convivir a ambas. La Cámara Cívica representa y controla; el Ejecutivo coordina; los altos cargos técnicos pasan filtros profesionales; los tribunales pueden frenar a todos.</p>
+      <p>Durante los años noventa se digitalizó gran parte de la administración, se modernizó el ferrocarril, se reformó el sistema energético y comenzó una nueva expansión nuclear. La eficiencia pública dejó de entenderse como una concesión a un Ejecutivo fuerte y pasó a considerarse una obligación institucional sometida a auditoría.</p>
+      <p>En los años 2000 se extendieron las políticas de reducción de daño y regulación de actividades antes tratadas principalmente desde el castigo. En 2007, la Ley de Espacios de Expresión Urbana convirtió los Muros Abiertos en uno de los símbolos culturales del país.</p>
+      <p>En 2011 un ciberataque paralizó durante horas bancos, hospitales y parte del transporte. No causó víctimas, pero mostró que la dependencia tecnológica también podía convertirse en vulnerabilidad. Desde entonces la resiliencia, la redundancia de servicios y la ciberdefensa forman parte de la doctrina básica del Estado.</p>
+      <div class="era-note"><strong>Pregunta aún abierta:</strong> ¿cómo puede un Estado ser extraordinariamente competente en lo común sin asumir que esa competencia le concede derecho a dirigir la vida privada?</div>
+    </div>
+  </div>
+</section>
+
+<section class="section turning-points">
+  <div class="container">
+    <div class="eyebrow">Tres rupturas que siguen presentes</div>
+    <h2>La historia todavía participa en la política diaria.</h2>
+    <div class="legacy-grid">
+      <article class="card"><span>1938–1962</span><h3>Desconfianza hacia el poder sin control</h3><p>El recuerdo del Directorio explica por qué Asteria acepta un Ejecutivo fuerte pero protege con especial dureza prensa, privacidad, tutela judicial y límites de emergencia.</p></article>
+      <article class="card"><span>1986</span><h3>Intolerancia hacia la incompetencia pública</h3><p>La Crisis de los Tres Días convirtió la falta de capacidad administrativa en un problema moral: si una institución tiene una responsabilidad, debe poder cumplirla.</p></article>
+      <article class="card"><span>1989</span><h3>El conflicto como parte del diseño</h3><p>La Constitución moderna no busca eliminar la fricción entre política, técnica y derechos. La usa como sistema de seguridad frente a los excesos de cualquiera de las tres.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section section-dark symbols-section">
+  <div class="container symbols-grid">
+    <div>
+      <div class="eyebrow">Símbolos a través del tiempo</div>
+      <h2>La estrella sobrevivió a todos los regímenes.</h2>
+      <p class="lead">Las futuras piezas del archivo mostrarán cómo cambió la representación del Estado sin perder el símbolo astral heredado de la navegación medieval.</p>
+      <p>Para la siguiente fase prepararemos tres conjuntos visuales: el estandarte del Reino de Astera, una bandera republicana histórica y la actual bandera de la República Cívica.</p>
+    </div>
+    <div class="symbol-slots">
+      <div class="symbol-slot"><span>Siglos XII–XIX</span><strong>Reino de Astera</strong><small>Diseño histórico pendiente</small></div>
+      <div class="symbol-slot"><span>1919–1989</span><strong>Tradición republicana</strong><small>Diseño histórico pendiente</small></div>
+      <div class="symbol-slot current"><span>Desde 1989</span><strong>República Cívica</strong><small>Bandera actual</small><img src="/images/bandera-asteria.png" alt="Bandera actual de Asteria"/></div>
+    </div>
+  </div>
+</section>
+
+<section class="section history-end">
+  <div class="narrow">
+    <div class="quote">Asteria no considera terminado el debate que dio origen a su Constitución. Considera peligroso que alguna generación crea haberlo resuelto para siempre.</div>
+    <div class="history-actions">
+      <a class="btn btn-primary" href="/instituciones/">Entender el sistema actual →</a>
+      <a class="btn btn-secondary" href="/docs/Constitucion_de_Asteria.pdf" target="_blank" rel="noopener">Leer la Constitución</a>
+    </div>
+  </div>
+</section>
+
 </BaseLayout>
+
+<style>
+.history-hero{padding-bottom:38px}.history-thesis{margin-top:1.8rem;padding:1.1rem 1.25rem;background:rgba(201,154,50,.08);border-left:4px solid var(--gold);border-radius:0 14px 14px 0}.history-thesis span,.history-thesis strong{display:block}.history-thesis span{font-size:.69rem;font-weight:900;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem}.history-thesis strong{font-family:Georgia,serif;color:var(--navy);font-size:1.08rem;font-weight:600}
+.era-nav{display:grid;grid-template-columns:auto repeat(5,1fr);gap:.25rem;align-items:stretch;padding:.45rem;overflow-x:auto}.era-nav>span{display:flex;align-items:center;padding:.65rem .8rem;font-size:.67rem;text-transform:uppercase;letter-spacing:.13em;font-weight:900;color:var(--gold);white-space:nowrap}.era-nav a{display:flex;flex-direction:column;justify-content:center;text-decoration:none;padding:.65rem .75rem;border-radius:12px;min-width:130px;color:var(--navy)}.era-nav a:hover{background:rgba(13,41,75,.06)}.era-nav a b{font-size:.65rem;color:var(--muted);font-family:inherit}.era-nav a{font-family:Georgia,serif;font-weight:700}
+.section-heading{display:flex;align-items:end;justify-content:space-between;gap:2rem;margin-bottom:1.5rem}.section-heading>p{max-width:430px;color:var(--muted);margin:0}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);overflow:hidden}.timeline article{padding:1.15rem;border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-height:135px}.timeline article:nth-child(4n){border-right:0}.timeline article:nth-last-child(-n+4){border-bottom:0}.timeline b{display:block;font-family:Georgia,serif;font-size:1.55rem;color:var(--navy);margin-bottom:.35rem}.timeline span{font-size:.84rem;color:#59636d}
+.era-section{padding:78px 0;border-top:1px solid rgba(13,41,75,.08)}.era-section.alt{background:rgba(255,253,248,.43)}.era-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:4rem;align-items:center}.era-date{font-family:Georgia,serif;color:var(--gold);font-size:1.05rem;font-weight:700;margin-bottom:.25rem}.era-copy h2{max-width:680px}.era-copy p{color:#56616c}.era-note{margin-top:1.2rem;padding:1rem 1.05rem;background:#eee9dc;border-radius:12px;border-left:3px solid var(--gold);color:#4f5963;font-size:.9rem}.era-note strong{color:var(--navy)}
+.era-visual{min-height:430px;border-radius:22px;overflow:hidden;position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:1.5rem;box-shadow:var(--shadow)}.archive-placeholder:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(105deg,transparent 0 34px,rgba(255,255,255,.04) 35px 36px),linear-gradient(180deg,rgba(3,16,29,.02),rgba(3,16,29,.72))}.archive-placeholder>*{position:relative;z-index:1}.archive-label{position:absolute;top:1.2rem;left:1.2rem;padding:.35rem .55rem;border:1px solid rgba(255,255,255,.25);border-radius:999px;color:#e5edf3;font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;font-weight:850}.archive-icon{font-family:Georgia,serif;color:rgba(255,255,255,.8);font-size:4.2rem;line-height:1;margin-bottom:auto}.archive-placeholder strong{color:white;font-family:Georgia,serif;font-size:2rem}.archive-placeholder span{color:#d4dde6;font-size:.84rem}.archive-placeholder.kingdom{background:linear-gradient(135deg,#626d72,#b09364 58%,#142c3d)}.archive-placeholder.republic{background:linear-gradient(135deg,#73706a,#9b8565 52%,#3b4b56)}.archive-placeholder.directorate{background:linear-gradient(135deg,#31363b,#5a4b43 60%,#171d24)}.archive-placeholder.crisis{background:linear-gradient(135deg,#4e626c,#77796e 55%,#24323b)}.archive-placeholder.civic{background:linear-gradient(135deg,#8695a2,#d7c79d 58%,#0d294b)}
+.dark-era{background:#0d294b;color:#e7eef5}.dark-era h2{color:white}.dark-era .era-copy p{color:#c8d4df}.dark-era .era-note{background:rgba(255,255,255,.07);color:#d6e0e8;border-left-color:var(--gold)}.dark-era .era-note strong{color:white}.dark-era .era-date{color:var(--goldsoft)}
+.civic-era{background:linear-gradient(135deg,#f0eadc,#f8f4e9)}
+.legacy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.3rem}.legacy-grid article{padding:1.35rem}.legacy-grid span{font-size:.68rem;text-transform:uppercase;letter-spacing:.13em;color:var(--gold);font-weight:900}.legacy-grid h3{margin-top:.4rem}.legacy-grid p{color:var(--muted);margin:0}
+.symbols-grid{display:grid;grid-template-columns:.75fr 1.25fr;gap:3rem;align-items:center}.symbol-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}.symbol-slot{min-height:210px;border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:1rem;background:rgba(255,255,255,.06);display:flex;flex-direction:column;justify-content:flex-end}.symbol-slot span{color:var(--goldsoft);font-size:.65rem;text-transform:uppercase;letter-spacing:.12em}.symbol-slot strong{font-family:Georgia,serif;font-size:1.08rem;color:white;margin-top:.25rem}.symbol-slot small{color:#aebdca}.symbol-slot.current{padding:0;overflow:hidden;background:white}.symbol-slot.current img{width:100%;aspect-ratio:5/3;object-fit:cover;order:-1}.symbol-slot.current span,.symbol-slot.current strong,.symbol-slot.current small{margin-left:1rem;margin-right:1rem}.symbol-slot.current span{margin-top:.8rem;color:var(--gold)}.symbol-slot.current strong{color:var(--navy)}.symbol-slot.current small{color:var(--muted);margin-bottom:1rem}
+.history-end{text-align:center}.history-end .quote{text-align:left}.history-actions{display:flex;justify-content:center;gap:.7rem;flex-wrap:wrap;margin-top:1.5rem}
+@media(max-width:980px){.era-nav{grid-template-columns:repeat(5,minmax(150px,1fr))}.era-nav>span{display:none}.timeline{grid-template-columns:repeat(2,1fr)}.timeline article:nth-child(4n){border-right:1px solid var(--line)}.timeline article:nth-child(2n){border-right:0}.timeline article:nth-last-child(-n+4){border-bottom:1px solid var(--line)}.timeline article:nth-last-child(-n+2){border-bottom:0}.era-grid,.symbols-grid{grid-template-columns:1fr}.era-section.alt .era-visual{order:-1}.symbol-slots{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:720px){.section-heading{align-items:flex-start;flex-direction:column}.timeline{grid-template-columns:1fr}.timeline article{border-right:0!important;border-bottom:1px solid var(--line)!important;min-height:0}.timeline article:last-child{border-bottom:0!important}.era-section{padding:58px 0}.era-grid{gap:1.5rem}.era-visual{min-height:340px}.symbol-slots{grid-template-columns:1fr}.legacy-grid{grid-template-columns:1fr}}
+</style>
