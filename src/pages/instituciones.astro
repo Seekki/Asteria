@@ -8,7 +8,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <div class="narrow">
     <div class="eyebrow">Sistema político</div>
     <h1>Instituciones</h1>
-    <p class="lead">Asteria combina legitimidad democrática, dirección técnica y control constitucional. La ciudadanía elige quién representa y fiscaliza; los profesionales dirigen áreas complejas; los tribunales pueden frenar a ambos.</p>
+    <p class="lead">Asteria combina legitimidad democrática, dirección técnica y control constitucional. La ciudadanía elige la Cámara Cívica; la Cámara y un Colegio Técnico Electoral eligen conjuntamente al Director Nacional; los profesionales dirigen áreas complejas y los tribunales pueden frenar a todos ellos.</p>
     <div class="hero-rule">
       <strong>La idea central</strong>
       <span>Un Estado muy capaz de actuar, pero que necesita una razón muy buena para actuar contra un individuo.</span>
@@ -62,11 +62,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
 
       <div class="bridge-row">
-        <div class="bridge-label">evaluación técnica + ratificación</div>
+        <div class="bridge-label">doble legitimidad · técnica + cívica</div>
         <div class="merit-box">
-          <span class="node-type">Filtro profesional</span>
-          <strong>Comisión Nacional de Mérito</strong>
-          <small>evalúa experiencia, integridad y conflictos de interés</small>
+          <span class="node-type">Elección del Ejecutivo</span>
+          <strong>Colegio Técnico Electoral + Cámara Cívica</strong>
+          <small>el Director Nacional necesita mayoría en ambos órganos; la Comisión Nacional de Mérito verifica candidaturas y composición técnica</small>
         </div>
         <div class="bridge-down">↓</div>
       </div>
@@ -114,7 +114,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="eyebrow">Los cinco pilares</div>
     <h2>Un sistema diseñado para que ninguna virtud se convierta en un monopolio.</h2>
     <div class="pillars">
-      <article><span>01</span><h3>Legitimidad democrática</h3><p>La ciudadanía elige la Cámara Cívica por sufragio universal proporcional. La Cámara fija prioridades, controla al poder e impulsa reformas legislativas, pero no puede alterar el marco jurídico por simple decisión unilateral.</p></article>
+      <article><span>01</span><h3>Legitimidad cívica y técnica</h3><p>La ciudadanía elige la Cámara Cívica por sufragio universal proporcional. El Director Nacional no se elige por sufragio popular directo: requiere una doble mayoría de la Cámara y de un Colegio Técnico Electoral constituido para cada elección.</p></article>
       <article><span>02</span><h3>Dirección profesional</h3><p>Los sectores complejos exigen experiencia verificable. Los altos responsables técnicos pasan procesos públicos de evaluación y no dependen únicamente de afinidad partidista.</p></article>
       <article><span>03</span><h3>Derechos por encima de eficiencia</h3><p>Una medida puede ser eficaz y seguir siendo ilegal. La conveniencia administrativa nunca basta para justificar censura, vigilancia individual o coacción desproporcionada.</p></article>
       <article><span>04</span><h3>Administración evaluable</h3><p>La estabilidad protege al funcionario de la política, no del rendimiento. Los puestos públicos se evalúan con criterios publicados, revisión y posibilidad de reasignación o cese.</p></article>
@@ -149,8 +149,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div>
           <span class="institution-type">Dirección del Estado</span>
           <h3>Director Nacional</h3>
-          <p>Coordina el Ejecutivo y responde por la acción conjunta del Estado. Su mandato es de ocho años y puede renovarse una sola vez.</p>
-          <ul><li>Define prioridades generales.</li><li>Coordina los directorios sectoriales.</li><li>Representa políticamente al Ejecutivo.</li><li>Está sometido a control parlamentario y judicial.</li></ul>
+          <p>Coordina el Ejecutivo y responde por la acción conjunta del Estado. Su mandato es de ocho años y puede renovarse una sola vez. Es elegido conjuntamente por la Cámara Cívica y por un Colegio Técnico Electoral de profesionales acreditados constituido para cada proceso.</p>
+          <ul><li>Necesita mayoría en la Cámara y en el Colegio Técnico Electoral.</li><li>Define prioridades generales y coordina los directorios sectoriales.</li><li>Representa políticamente al Ejecutivo.</li><li>Está sometido a control parlamentario, judicial y de integridad.</li></ul>
         </div>
       </article>
 
@@ -231,8 +231,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="table-head"><span>Institución</span><span>Control principal</span><span>Límite</span></div>
       <div><strong>Ciudadanía</strong><span>Elige la Cámara y ejerce presión cívica.</span><span>No administra directamente cada política.</span></div>
       <div><strong>Cámara Cívica</strong><span>Controla presupuesto y Ejecutivo; impulsa, debate y vota reformas legislativas.</span><span>No puede modificar el marco jurídico unilateralmente y está sometida a la Constitución.</span></div>
-      <div><strong>Director Nacional</strong><span>Coordina y exige resultados a la administración.</span><span>No puede legislar ni suspender derechos a voluntad.</span></div>
-      <div><strong>Comisión de Mérito</strong><span>Filtra la idoneidad profesional.</span><span>No define el programa político.</span></div>
+      <div><strong>Director Nacional</strong><span>Es elegido por doble mayoría técnica y cívica; coordina y exige resultados a la administración.</span><span>No puede legislar ni suspender derechos a voluntad.</span></div>
+      <div><strong>Colegio Técnico Electoral</strong><span>Participa, junto con la Cámara, en la elección del Director Nacional.</span><span>No legisla, no gobierna y se disuelve al terminar el proceso electoral.</span></div>
+      <div><strong>Comisión de Mérito</strong><span>Verifica candidaturas, integridad y procesos de selección profesional.</span><span>No define el programa político ni elige por sí sola al Ejecutivo.</span></div>
       <div><strong>Tribunal Constitucional</strong><span>Frena abusos de Cámara y Ejecutivo.</span><span>No gobierna ni fija prioridades presupuestarias.</span></div>
       <div><strong>Integridad / Civis</strong><span>Expone corrupción, opacidad y mala administración.</span><span>Investiga y publica; no sustituye a jueces ni representantes.</span></div>
     </div>
@@ -244,7 +245,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <article class="card balance-main">
       <div class="eyebrow">La pregunta inevitable</div>
       <h2>¿Es una democracia o una tecnocracia?</h2>
-      <p>Asteria se define como una república liberal y tecnocrática, no como una tecnocracia pura. La ciudadanía conserva la legitimidad política, la Cámara participa en el procedimiento legislativo y determina la asignación de recursos, y la selección técnica intenta profesionalizar la ejecución.</p>
+      <p>Asteria se define como una república liberal y tecnocrática, no como una tecnocracia pura. La ciudadanía conserva la legitimidad política al elegir la Cámara Cívica; el Director Nacional surge de una elección conjunta entre esa representación cívica y un Colegio Técnico Electoral. La selección técnica profesionaliza la ejecución sin sustituir el control constitucional ni la representación política.</p>
       <p>Sus defensores sostienen que la democracia funciona mejor cuando no convierte cada puesto especializado en una recompensa electoral. Sus críticos responden que un sistema basado en credenciales puede crear una élite difícil de renovar y demasiado segura de su propio criterio.</p>
       <p>La Constitución de 1989 no intenta eliminar esa tensión. Intenta hacerla visible y repartir el poder de forma que ninguna de las dos partes pueda imponerse sin fricción.</p>
     </article>
