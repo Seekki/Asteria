@@ -66,15 +66,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 <section class="section">
   <div class="container urban-grid">
-    <div class="map-placeholder card">
-      <span>Mapa urbano · pendiente</span>
-      <strong>Mapa de Aster</strong>
-      <p>Aquí construiremos el plano urbano con barrios, líneas de tranvía, estaciones y lugares principales.</p>
-      <div class="map-sketch" aria-hidden="true">
-        <i class="ring one"></i><i class="ring two"></i><i class="river"></i>
-        <b class="dot d1"></b><b class="dot d2"></b><b class="dot d3"></b><b class="dot d4"></b>
-      </div>
-    </div>
+    <figure class="map-image card">
+      <img src="/images/mapa-aster.png" alt="Mapa urbano ilustrado de Aster" loading="lazy"/>
+    </figure>
 
     <div class="urban-copy">
       <div class="eyebrow">Moverse por Aster</div>
@@ -111,11 +105,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 <section class="section daily-section">
   <div class="container daily-grid">
-    <div class="image-placeholder card">
-      <span>Archivo visual pendiente</span>
-      <strong>Un barrio normal de Aster</strong>
-      <p>La próxima imagen debería enseñar bloques, comercios, árboles, tranvía y gente viviendo; nada de palacios ni skyline.</p>
-    </div>
+    <figure class="city-photo card">
+      <img src="/images/paseo-aster.png" alt="Vida cotidiana en un barrio de Aster" loading="lazy"/>
+    </figure>
 
     <div>
       <div class="eyebrow">Vivir en Aster</div>
@@ -162,4 +154,5 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 .story-section{padding-top:20px}.story-card{overflow:hidden;display:grid;grid-template-columns:1fr 320px;align-items:stretch}.story-card>div{padding:2rem;align-self:center}.story-card p{color:var(--muted);max-width:650px}.story-card img{width:100%;height:100%;object-fit:cover;min-height:360px}.city-end{text-align:center;padding-top:26px}.city-end .quote{text-align:left}.end-actions{display:flex;justify-content:center;gap:.7rem;flex-wrap:wrap;margin-top:1.5rem}
 @media(max-width:980px){.city-facts{grid-template-columns:repeat(2,1fr)}.city-facts div{border-bottom:1px solid var(--line)}.intro-grid,.urban-grid,.daily-grid{grid-template-columns:1fr}.city-quote{position:static}.district-grid{grid-template-columns:repeat(2,1fr)}.places-grid{grid-template-columns:repeat(2,1fr)}.story-card{grid-template-columns:1fr 260px}}
 @media(max-width:720px){.hero-photo{min-height:430px}.hero-content{bottom:2rem}.city-facts{grid-template-columns:1fr}.city-facts div{border-right:0}.section-heading{align-items:flex-start;flex-direction:column}.district-grid,.places-grid{grid-template-columns:1fr}.map-placeholder{min-height:340px}.story-card{grid-template-columns:1fr}.story-card img{height:330px;min-height:0;order:-1}}
+.map-image,.city-photo{margin:0;overflow:hidden;position:relative}.map-image{aspect-ratio:4/3;background:#e8e5dc}.city-photo{aspect-ratio:4/3;background:#e8e5dc}.map-image img,.city-photo img{width:100%;height:100%;display:block;object-fit:cover}.map-image img{object-fit:contain;background:#efece3}.city-photo img{object-position:center}
 </style>
