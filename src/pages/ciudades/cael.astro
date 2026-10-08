@@ -91,25 +91,17 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <p>En Cael, una discusión sobre energía rara vez es completamente abstracta. Puede afectar a un valle visible desde la ventana, una carretera local o un empleo técnico de varias generaciones.</p>
     </div>
 
-    <div class="image-placeholder card">
-      <span>Archivo visual pendiente</span>
-      <strong>Centro de control energético de Cael</strong>
-      <p>Ingenieros y técnicos trabajando en una sala realista, sobria y actual. Pantallas normales, equipos de red y nada de estética futurista.</p>
-    </div>
+    <figure class="city-photo card">
+      <img src="/images/presa-cael.png" alt="Infraestructura hidroeléctrica en las montañas de Cael" loading="lazy"/>
+    </figure>
   </div>
 </section>
 
 <section class="section map-section">
   <div class="container urban-grid">
-    <div class="map-placeholder card">
-      <span>Mapa urbano · pendiente</span>
-      <strong>Mapa de Cael</strong>
-      <p>Aquí irá el plano del valle, barrios en ladera, estación, centros técnicos y accesos a la montaña.</p>
-      <div class="mountain-sketch" aria-hidden="true">
-        <i class="ridge r1"></i><i class="ridge r2"></i><i class="valley"></i><i class="route"></i>
-        <b class="dot d1"></b><b class="dot d2"></b><b class="dot d3"></b><b class="dot d4"></b>
-      </div>
-    </div>
+    <figure class="map-image card">
+      <img src="/images/mapa-cael.png" alt="Mapa urbano ilustrado de Cael" loading="lazy"/>
+    </figure>
 
     <div>
       <div class="eyebrow">Moverse por Cael</div>
@@ -154,11 +146,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <p>Quedarse o marcharse es una conversación recurrente entre jóvenes. La ciudad ofrece empleo técnico de calidad, pero menos variedad profesional y cultural que Aster, Veyra o Lira. Quien vuelve después de estudiar fuera suele hacerlo por una mezcla de trabajo, familia y apego al territorio difícil de explicar sin sonar sentimental.</p>
     </div>
 
-    <div class="image-placeholder card">
-      <span>Archivo visual pendiente</span>
-      <strong>Una mañana de invierno en Cael</strong>
-      <p>Calle normal con nieve apartada, autobús, gente entrando al trabajo, comercios y bloques de vivienda. Montañas al fondo, sin postal de estación de esquí.</p>
-    </div>
+    <figure class="city-photo card">
+      <img src="/images/calle-cael.png" alt="Mañana de invierno en una calle cotidiana de Cael" loading="lazy"/>
+    </figure>
   </div>
 </section>
 
@@ -203,4 +193,5 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 .daily-section{background:#efeee9}.daily-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:2.5rem;align-items:center}.daily-grid>div:first-child p{color:var(--muted)}.identity-section{padding-top:28px}.identity-card{padding:1.7rem 1.8rem;display:grid;grid-template-columns:1.25fr .75fr;gap:2rem;align-items:center}.identity-card p{color:var(--muted);margin-bottom:.7rem}.identity-card p:last-child{margin-bottom:0}.identity-tags{display:flex;flex-wrap:wrap;gap:.5rem;align-content:center}.identity-tags span{padding:.5rem .7rem;border-radius:999px;background:#e6ebeb;border:1px solid var(--line);font-size:.78rem;font-weight:800;color:#43535d}.city-end{text-align:center;padding-top:26px}.city-end .quote{text-align:left}.end-actions{display:flex;justify-content:center;gap:.7rem;flex-wrap:wrap;margin-top:1.5rem}
 @media(max-width:980px){.city-facts{grid-template-columns:repeat(2,1fr)}.city-facts div{border-bottom:1px solid var(--line)}.intro-grid,.mountain-grid,.energy-grid,.urban-grid,.daily-grid,.identity-card{grid-template-columns:1fr}.city-quote{position:static}.district-grid{grid-template-columns:repeat(2,1fr)}.places-grid{grid-template-columns:repeat(2,1fr)}.mountain-photo{min-height:390px}}
 @media(max-width:720px){.hero-photo{min-height:430px}.hero-content{bottom:2rem}.city-facts{grid-template-columns:1fr}.city-facts div{border-right:0}.section-heading{align-items:flex-start;flex-direction:column}.district-grid,.places-grid{grid-template-columns:1fr}.map-placeholder{min-height:340px}.mountain-photo{min-height:320px}.image-placeholder{min-height:320px}}
+.map-image,.city-photo{margin:0;overflow:hidden;position:relative}.map-image{aspect-ratio:4/3;background:#e8e5dc}.city-photo{aspect-ratio:4/3;background:#e8e5dc}.map-image img,.city-photo img{width:100%;height:100%;display:block;object-fit:cover}.map-image img{object-fit:contain;background:#efece3}.city-photo img{object-position:center}
 </style>
