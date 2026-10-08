@@ -2,11 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const cities = [
-  { id:'aster', name:'Aster', region:'Centralia', role:'Capital nacional', x:51.6, y:30.0, image:'/images/aster.png', population:'≈ 1,7 M', desc:'Centro político, judicial y científico. La ciudad monumental convive con barrios residenciales, universidades, tranvías y una fuerte concentración de instituciones públicas.', tags:['Gobierno','Ciencia','Servicios'], href:'/ciudades/aster/' },
-  { id:'veyra', name:'Veyra', region:'Costaverde', role:'Gran puerto occidental', x:20.5, y:34.5, image:'/images/veyra.png', population:'≈ 1,3 M', desc:'Puerto, astilleros, mercados, música y cultura urbana. Veyra es la ciudad más caótica y creativa del país, y la rival cultural tradicional de Aster.', tags:['Puerto','Cultura','Industria marítima'], href:'/ciudades/veyra/' },
-  { id:'lira', name:'Lira', region:'Vallelumen', role:'Ciudad universitaria', x:50.5, y:56.5, image:'/images/lira.png', population:'≈ 640.000', desc:'Una ciudad verde y académica, conocida por sus universidades, bibliotecas, laboratorios y por su peso en la lengua y la cultura asterianas.', tags:['Universidad','Investigación','Cultura'], href:'/ciudades/lira/' },
-  { id:'orsen', name:'Orsen', region:'Oriental', role:'Capital industrial', x:72.5, y:66.0, image:'/images/orsen.png', population:'≈ 780.000', desc:'El gran polo industrial y tecnológico: manufactura avanzada, materiales, automatización y robótica sobre una fuerte herencia fabril.', tags:['Industria','Robótica','Manufactura'], href:'/ciudades/orsen/' },
-  { id:'cael', name:'Cael', region:'Altoria', role:'Ciudad de montaña', x:79.3, y:21.5, image:'/images/cael.png', population:'≈ 210.000', desc:'Montaña, embalses, nieve e ingeniería energética. Su aislamiento histórico dejó una identidad regional especialmente marcada.', tags:['Montaña','Energía','Ingeniería'], href:'/ciudades/cael/' }
+  { id:'aster', name:'Aster', region:'Centralia', role:'Capital nacional', x:51.6, y:30.0, image:'/images/ciudades/aster/portada.png', population:'≈ 1,7 M', desc:'Centro político, judicial y científico. La ciudad monumental convive con barrios residenciales, universidades, tranvías y una fuerte concentración de instituciones públicas.', tags:['Gobierno','Ciencia','Servicios'], href:'/ciudades/aster/' },
+  { id:'veyra', name:'Veyra', region:'Costaverde', role:'Gran puerto occidental', x:20.5, y:34.5, image:'/images/ciudades/veyra/portada.png', population:'≈ 1,3 M', desc:'Puerto, astilleros, mercados, música y cultura urbana. Veyra es la ciudad más caótica y creativa del país, y la rival cultural tradicional de Aster.', tags:['Puerto','Cultura','Industria marítima'], href:'/ciudades/veyra/' },
+  { id:'lira', name:'Lira', region:'Vallelumen', role:'Ciudad universitaria', x:50.5, y:56.5, image:'/images/ciudades/lira/portada.png', population:'≈ 640.000', desc:'Una ciudad verde y académica, conocida por sus universidades, bibliotecas, laboratorios y por su peso en la lengua y la cultura asterianas.', tags:['Universidad','Investigación','Cultura'], href:'/ciudades/lira/' },
+  { id:'orsen', name:'Orsen', region:'Oriental', role:'Capital industrial', x:72.5, y:66.0, image:'/images/ciudades/orsen/portada.png', population:'≈ 780.000', desc:'El gran polo industrial y tecnológico: manufactura avanzada, materiales, automatización y robótica sobre una fuerte herencia fabril.', tags:['Industria','Robótica','Manufactura'], href:'/ciudades/orsen/' },
+  { id:'cael', name:'Cael', region:'Altoria', role:'Ciudad de montaña', x:79.3, y:21.5, image:'/images/ciudades/cael/portada.png', population:'≈ 210.000', desc:'Montaña, embalses, nieve e ingeniería energética. Su aislamiento histórico dejó una identidad regional especialmente marcada.', tags:['Montaña','Energía','Ingeniería'], href:'/ciudades/cael/' }
 ];
 ---
 <BaseLayout title="Mapa interactivo de Asteria" description="Atlas interactivo de la República Cívica de Asteria.">
@@ -34,7 +34,7 @@ const cities = [
       </div>
       <div class="map-viewport">
         <div class="map-canvas" data-map-canvas>
-          <img src="/images/mapa-asteria.png" alt="Mapa de Asteria" draggable="false"/>
+          <img src="/images/mapas/mapa-asteria.png" alt="Mapa de Asteria" draggable="false"/>
           {cities.map((city, i) => (
             <button type="button" class:list={['city-pin',{active:i===0,capital:city.id==='aster'}]} style={'left:'+city.x+'%;top:'+city.y+'%'} data-city={city.id} aria-label={'Ver información de '+city.name}>
               <span class="dot"></span><span class="pin-label">{city.name}</span>
@@ -46,7 +46,7 @@ const cities = [
     </div>
 
     <aside class="city-panel card" data-panel>
-      <div class="panel-image"><img data-city-image src="/images/aster.png" alt="Vista de Aster"/></div>
+      <div class="panel-image"><img data-city-image src="/images/ciudades/aster/portada.png" alt="Vista de Aster"/></div>
       <div class="panel-content">
       <div class="panel-kicker" data-region>Centralia</div>
       <h2 data-name>Aster</h2>
