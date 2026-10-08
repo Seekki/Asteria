@@ -91,25 +91,17 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <p>La vida cultural es menos masiva que en Veyra, pero muy constante: presentaciones, pequeñas salas, cine, teatro universitario, conferencias y festivales literarios ocupan buena parte del calendario.</p>
     </div>
 
-    <div class="image-placeholder card">
-      <span>Archivo visual pendiente</span>
-      <strong>Biblioteca o librería de Lira</strong>
-      <p>Un interior realista, algo antiguo pero vivo: estudiantes, libros, carteles en asterés y nada excesivamente solemne.</p>
-    </div>
+    <figure class="city-photo card">
+      <img src="/images/libreria-lira.png" alt="Librería y espacio de lectura de Lira" loading="lazy"/>
+    </figure>
   </div>
 </section>
 
 <section class="section map-section">
   <div class="container urban-grid">
-    <div class="map-placeholder card">
-      <span>Mapa urbano · pendiente</span>
-      <strong>Mapa de Lira</strong>
-      <p>Aquí irá el plano de la universidad, el río, los barrios, las estaciones y la red de tranvía y bicicleta.</p>
-      <div class="river-sketch" aria-hidden="true">
-        <i class="river"></i><i class="route r1"></i><i class="route r2"></i>
-        <b class="dot d1"></b><b class="dot d2"></b><b class="dot d3"></b><b class="dot d4"></b>
-      </div>
-    </div>
+    <figure class="map-image card">
+      <img src="/images/mapa-lira.png" alt="Mapa urbano ilustrado de Lira" loading="lazy"/>
+    </figure>
 
     <div class="urban-copy">
       <div class="eyebrow">Moverse por Lira</div>
@@ -146,11 +138,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 <section class="section daily-section">
   <div class="container daily-grid">
-    <div class="image-placeholder card">
-      <span>Archivo visual pendiente</span>
-      <strong>Una tarde corriente en Lira</strong>
-      <p>Estudiantes, bicicletas, café, lluvia ligera o cielo gris, ladrillo y árboles. Algo europeo, cotidiano y sin pose turística.</p>
-    </div>
+    <figure class="city-photo card">
+      <img src="/images/patio-lira.png" alt="Tarde cotidiana en Lira junto al campus" loading="lazy"/>
+    </figure>
 
     <div>
       <div class="eyebrow">Vivir en Lira</div>
@@ -202,4 +192,5 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 .daily-section{background:#edf1eb}.daily-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:2.5rem;align-items:center}.daily-grid>div:last-child p{color:var(--muted)}.tension-section{padding-top:28px}.tension-card{padding:1.7rem 1.8rem;display:grid;grid-template-columns:1.3fr .7fr;gap:2rem;align-items:center}.tension-card p{color:var(--muted);margin-bottom:0}.tension-points{display:flex;flex-wrap:wrap;gap:.5rem;align-content:center}.tension-points span{padding:.5rem .7rem;border-radius:999px;background:#e8eee8;border:1px solid var(--line);font-size:.78rem;font-weight:800;color:#40534b}.city-end{text-align:center;padding-top:26px}.city-end .quote{text-align:left}.end-actions{display:flex;justify-content:center;gap:.7rem;flex-wrap:wrap;margin-top:1.5rem}
 @media(max-width:980px){.city-facts{grid-template-columns:repeat(2,1fr)}.city-facts div{border-bottom:1px solid var(--line)}.intro-grid,.campus-grid,.language-grid,.urban-grid,.daily-grid,.tension-card{grid-template-columns:1fr}.city-quote{position:static}.district-grid{grid-template-columns:repeat(2,1fr)}.places-grid{grid-template-columns:repeat(2,1fr)}.campus-photo{min-height:390px}}
 @media(max-width:720px){.hero-photo{min-height:430px}.hero-content{bottom:2rem}.city-facts{grid-template-columns:1fr}.city-facts div{border-right:0}.section-heading{align-items:flex-start;flex-direction:column}.district-grid,.places-grid{grid-template-columns:1fr}.map-placeholder{min-height:340px}.campus-photo{min-height:320px}.image-placeholder{min-height:320px}}
+.map-image,.city-photo{margin:0;overflow:hidden;position:relative}.map-image{aspect-ratio:4/3;background:#e8e5dc}.city-photo{aspect-ratio:4/3;background:#e8e5dc}.map-image img,.city-photo img{width:100%;height:100%;display:block;object-fit:cover}.map-image img{object-fit:contain;background:#efece3}.city-photo img{object-position:center}
 </style>
