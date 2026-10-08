@@ -90,15 +90,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <div class="mobility-tags"><span>Tranvía</span><span>Cercanías</span><span>Ferris</span><span>Bicicleta</span><span>Puerto</span></div>
     </div>
 
-    <div class="map-placeholder card">
-      <span>Mapa urbano · pendiente</span>
-      <strong>Mapa de Veyra</strong>
-      <p>Aquí irá el plano de la bahía, los muelles, barrios, tranvías, estaciones y principales zonas culturales.</p>
-      <div class="bay-sketch" aria-hidden="true">
-        <i class="coast"></i><i class="route r1"></i><i class="route r2"></i>
-        <b class="dot d1"></b><b class="dot d2"></b><b class="dot d3"></b><b class="dot d4"></b>
-      </div>
-    </div>
+    <figure class="map-image card">
+      <img src="/images/mapa-veyra.png" alt="Mapa urbano ilustrado de Veyra" loading="lazy"/>
+    </figure>
   </div>
 </section>
 
@@ -135,11 +129,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <p>Su rivalidad con Aster es medio política y medio deportiva. Veyra acusa a la capital de querer reglamentar la vida; Aster acusa a Veyra de descubrir los procedimientos justo después de necesitarlos.</p>
     </div>
 
-    <div class="image-placeholder card">
-      <span>Archivo visual pendiente</span>
-      <strong>Una noche normal de Veyra</strong>
-      <p>Terrazas, tranvía, calles con carteles y grafiti, trabajadores saliendo de turno y gente empezando la noche. Sin neón futurista.</p>
-    </div>
+    <figure class="city-photo card">
+      <img src="/images/tranvia-veyra.png" alt="Noche cotidiana en Veyra con tranvía y vida de barrio" loading="lazy"/>
+    </figure>
   </div>
 </section>
 
@@ -179,4 +171,5 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 .story-section{padding-top:28px}.story-card{overflow:hidden;display:grid;grid-template-columns:320px 1fr;align-items:stretch}.story-card>div{padding:2rem;align-self:center}.story-card p{color:var(--muted);max-width:650px}.story-card img{width:100%;height:100%;object-fit:cover;min-height:360px}.city-end{text-align:center;padding-top:26px}.city-end .quote{text-align:left}.end-actions{display:flex;justify-content:center;gap:.7rem;flex-wrap:wrap;margin-top:1.5rem}
 @media(max-width:980px){.city-facts{grid-template-columns:repeat(2,1fr)}.city-facts div{border-bottom:1px solid var(--line)}.intro-grid,.wall-grid,.urban-grid,.daily-grid{grid-template-columns:1fr}.city-quote{position:static}.district-grid{grid-template-columns:repeat(2,1fr)}.places-grid{grid-template-columns:repeat(2,1fr)}.story-card{grid-template-columns:260px 1fr}.wall-photo{min-height:390px}}
 @media(max-width:720px){.hero-photo{min-height:430px}.hero-content{bottom:2rem}.city-facts{grid-template-columns:1fr}.city-facts div{border-right:0}.section-heading{align-items:flex-start;flex-direction:column}.district-grid,.places-grid{grid-template-columns:1fr}.map-placeholder{min-height:340px}.wall-photo{min-height:320px}.story-card{grid-template-columns:1fr}.story-card img{height:330px;min-height:0}.daily-grid{grid-template-columns:1fr}}
+.map-image,.city-photo{margin:0;overflow:hidden;position:relative}.map-image{aspect-ratio:4/3;background:#e8e5dc}.city-photo{aspect-ratio:4/3;background:#e8e5dc}.map-image img,.city-photo img{width:100%;height:100%;display:block;object-fit:cover}.map-image img{object-fit:contain;background:#efece3}.city-photo img{object-position:center}
 </style>
