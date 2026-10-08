@@ -83,11 +83,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 <section class="section work-section">
   <div class="container work-grid">
-    <div class="image-placeholder card">
-      <span>Archivo visual pendiente</span>
-      <strong>Interior de una planta de Orsen</strong>
-      <p>Manufactura moderna realista: operarios, robots industriales, piezas, señalización y orden. Nada futurista ni laboratorio de ciencia ficción.</p>
-    </div>
+    <figure class="city-photo card">
+      <img src="/images/insutria-orsen.png" alt="Interior de una planta industrial moderna en Orsen" loading="lazy"/>
+    </figure>
 
     <div>
       <div class="eyebrow">Trabajo y formación</div>
@@ -109,15 +107,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <div class="mobility-tags"><span>Tranvía</span><span>Cercanías</span><span>Ferrocarril industrial</span><span>Autobús laboral</span><span>Bicicleta</span></div>
     </div>
 
-    <div class="map-placeholder card">
-      <span>Mapa urbano · pendiente</span>
-      <strong>Mapa de Orsen</strong>
-      <p>Aquí irá el plano del río, barrios obreros, parques industriales, estaciones, tranvías y corredores logísticos.</p>
-      <div class="industrial-sketch" aria-hidden="true">
-        <i class="river"></i><i class="rail r1"></i><i class="rail r2"></i><i class="rail r3"></i>
-        <b class="dot d1"></b><b class="dot d2"></b><b class="dot d3"></b><b class="dot d4"></b>
-      </div>
-    </div>
+    <figure class="map-image card">
+      <img src="/images/mapa-orsen.png" alt="Mapa urbano ilustrado de Orsen" loading="lazy"/>
+    </figure>
   </div>
 </section>
 
@@ -154,11 +146,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <p>Su principal tensión es cómo modernizar una economía industrial sin expulsar a los trabajadores y barrios que construyeron esa misma capacidad productiva. La respuesta todavía está en disputa.</p>
     </div>
 
-    <div class="image-placeholder card">
-      <span>Archivo visual pendiente</span>
-      <strong>Cambio de turno en Orsen</strong>
-      <p>Trabajadores saliendo de una planta moderna, tranvía o autobús, bicis y coches. Vida normal, ropa real y arquitectura industrial contemporánea.</p>
-    </div>
+    <figure class="city-photo card">
+      <img src="/images/turno-orsen.png" alt="Cambio de turno a la salida de una planta de Orsen" loading="lazy"/>
+    </figure>
   </div>
 </section>
 
@@ -202,4 +192,5 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 .daily-section{background:#efeee9}.daily-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:2.5rem;align-items:center}.daily-grid>div:first-child p{color:var(--muted)}.tension-section{padding-top:28px}.tension-card{padding:1.7rem 1.8rem;display:grid;grid-template-columns:1.3fr .7fr;gap:2rem;align-items:center}.tension-card p{color:var(--muted);margin-bottom:0}.tension-points{display:flex;flex-wrap:wrap;gap:.5rem;align-content:center}.tension-points span{padding:.5rem .7rem;border-radius:999px;background:#e8e9e6;border:1px solid var(--line);font-size:.78rem;font-weight:800;color:#465057}.city-end{text-align:center;padding-top:26px}.city-end .quote{text-align:left}.end-actions{display:flex;justify-content:center;gap:.7rem;flex-wrap:wrap;margin-top:1.5rem}
 @media(max-width:980px){.city-facts{grid-template-columns:repeat(2,1fr)}.city-facts div{border-bottom:1px solid var(--line)}.intro-grid,.industry-grid,.work-grid,.urban-grid,.daily-grid,.tension-card{grid-template-columns:1fr}.city-quote{position:static}.district-grid{grid-template-columns:repeat(2,1fr)}.places-grid{grid-template-columns:repeat(2,1fr)}.industry-photo{min-height:390px}}
 @media(max-width:720px){.hero-photo{min-height:430px}.hero-content{bottom:2rem}.city-facts{grid-template-columns:1fr}.city-facts div{border-right:0}.section-heading{align-items:flex-start;flex-direction:column}.district-grid,.places-grid{grid-template-columns:1fr}.map-placeholder{min-height:340px}.industry-photo{min-height:320px}.image-placeholder{min-height:320px}}
+.map-image,.city-photo{margin:0;overflow:hidden;position:relative}.map-image{aspect-ratio:4/3;background:#e8e5dc}.city-photo{aspect-ratio:4/3;background:#e8e5dc}.map-image img,.city-photo img{width:100%;height:100%;display:block;object-fit:cover}.map-image img{object-fit:contain;background:#efece3}.city-photo img{object-position:center}
 </style>
