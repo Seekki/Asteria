@@ -4,7 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const cities = [
   { id:'aster', name:'Aster', region:'Centralia', role:'Capital nacional', x:51.6, y:30.0, image:'/images/aster.png', population:'≈ 1,7 M', desc:'Centro político, judicial y científico. La ciudad monumental convive con barrios residenciales, universidades, tranvías y una fuerte concentración de instituciones públicas.', tags:['Gobierno','Ciencia','Servicios'], href:'/ciudades/aster/' },
   { id:'veyra', name:'Veyra', region:'Costaverde', role:'Gran puerto occidental', x:20.5, y:34.5, image:'/images/veyra.png', population:'≈ 1,3 M', desc:'Puerto, astilleros, mercados, música y cultura urbana. Veyra es la ciudad más caótica y creativa del país, y la rival cultural tradicional de Aster.', tags:['Puerto','Cultura','Industria marítima'], href:'/ciudades/veyra/' },
-  { id:'lira', name:'Lira', region:'Vallelumen', role:'Ciudad universitaria', x:50.5, y:56.5, image:'/images/lira.png', population:'≈ 640.000', desc:'Una ciudad verde y académica, conocida por sus universidades, bibliotecas, laboratorios y por su peso en la lengua y la cultura asterianas.', tags:['Universidad','Investigación','Cultura'] },
+  { id:'lira', name:'Lira', region:'Vallelumen', role:'Ciudad universitaria', x:50.5, y:56.5, image:'/images/lira.png', population:'≈ 640.000', desc:'Una ciudad verde y académica, conocida por sus universidades, bibliotecas, laboratorios y por su peso en la lengua y la cultura asterianas.', tags:['Universidad','Investigación','Cultura'], href:'/ciudades/lira/' },
   { id:'orsen', name:'Orsen', region:'Oriental', role:'Capital industrial', x:72.5, y:66.0, image:'/images/orsen.png', population:'≈ 780.000', desc:'El gran polo industrial y tecnológico: manufactura avanzada, materiales, automatización y robótica sobre una fuerte herencia fabril.', tags:['Industria','Robótica','Manufactura'] },
   { id:'cael', name:'Cael', region:'Altoria', role:'Ciudad de montaña', x:79.3, y:21.5, image:'/images/cael.png', population:'≈ 210.000', desc:'Montaña, embalses, nieve e ingeniería energética. Su aislamiento histórico dejó una identidad regional especialmente marcada.', tags:['Montaña','Energía','Ingeniería'] }
 ];
@@ -55,7 +55,7 @@ const cities = [
       <p class="description" data-desc>Centro político, judicial y científico. La ciudad monumental convive con barrios residenciales, universidades, tranvías y una fuerte concentración de instituciones públicas.</p>
       <div class="tags" data-tags><span>Gobierno</span><span>Ciencia</span><span>Servicios</span></div>
       <a class="btn btn-primary" data-city-link href="/ciudades/#aster">Ver ficha de Aster →</a>
-      <div class="panel-note">Aster y Veyra ya disponen de ficha urbana completa; las demás ciudades se incorporarán progresivamente.</div>
+      <div class="panel-note">Aster, Veyra y Lira ya disponen de ficha urbana completa; Orsen y Cael se incorporarán progresivamente.</div>
       </div>
     </aside>
   </div>
