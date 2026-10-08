@@ -30,7 +30,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;color:var(--navy);line-heig
 <a class:list={[{active:path==='/historia/'}]} href="/historia/">Historia</a>
 <a class:list={[{active:path==='/instituciones/'}]} href="/instituciones/">Instituciones</a>
 <a class:list={[{active:path==='/mapa/'}]} href="/mapa/">Mapa</a>
-<a class:list={[{active:path==='/ciudades/'}]} href="/ciudades/">Ciudades</a>
+<a class:list={[{active:path.startsWith('/ciudades/') || path==='/ciudades'}]} href="/ciudades/">Ciudades</a>
 <a class:list={[{active:path==='/cultura/'}]} href="/cultura/">Cultura</a>
 <a class:list={[{active:path==='/relatos/'}]} href="/relatos/">Relatos</a>
 <a class:list={[{active:path==='/documentos/'}]} href="/documentos/">Documentos</a>
