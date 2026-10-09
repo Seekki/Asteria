@@ -59,6 +59,34 @@ const documents = [
     desc:'Estado consolidado de ingresos y gastos, marco macroeconómico y fiscal, inversión pública, deuda, sanidad, protección social, educación, ciencia, energía, transporte, defensa y resiliencia.'
   },
   {
+    id:'estrategia-resiliencia',
+    category:'estrategia',
+    type:'Estrategia nacional',
+    code:'SEG-AST · ENRC/2026-2032',
+    title:'Estrategia Nacional de Resiliencia y Ciberdefensa 2026–2032',
+    year:'2026',
+    issuer:'Directorio Nacional · Consejo Nacional de Resiliencia',
+    status:'Vigente · 2026–2032',
+    href:'/docs/Estrategia_Nacional_de_Resiliencia_y_Ciberdefensa_Asteria_2026_2032.pdf',
+    download:'Estrategia_Nacional_de_Resiliencia_y_Ciberdefensa_Asteria_2026_2032.pdf',
+    meta:'PDF · estrategia nacional',
+    desc:'Marco nacional de resiliencia, ciberdefensa, continuidad de servicios esenciales, seguridad de infraestructuras críticas, respuesta a incidentes y objetivos de capacidad hasta 2032.'
+  },
+  {
+    id:'crisis-tres-dias',
+    category:'historia',
+    type:'Comisión de investigación',
+    code:'AN-AST · INF/1988-CTD',
+    title:'Informe Final sobre la Crisis de los Tres Días',
+    year:'1988',
+    issuer:'Comisión Nacional de Investigación de la Crisis de 1986',
+    status:'Documento histórico',
+    href:'/docs/Informe_Final_Crisis_de_los_Tres_Dias_Asteria_1986.pdf',
+    download:'Informe_Final_Crisis_de_los_Tres_Dias_Asteria_1986.pdf',
+    meta:'PDF · informe final',
+    desc:'Investigación oficial sobre la crisis del 14 al 16 de noviembre de 1986: cronología, víctimas, fallos de coordinación, responsabilidades institucionales y recomendaciones que alimentaron la reforma constitucional.'
+  },
+  {
     id:'perfil',
     category:'referencia',
     type:'Dossier nacional',
@@ -124,7 +152,7 @@ const documents = [
         <small>Fondo público · edición digital</small>
       </div>
       <dl>
-        <div><dt>Documentos disponibles</dt><dd>7</dd></div>
+        <div><dt>Documentos disponibles</dt><dd>9</dd></div>
         <div><dt>Texto constitucional</dt><dd>1989</dd></div>
         <div><dt>Última edición de referencia</dt><dd>2026</dd></div>
         <div><dt>Acceso</dt><dd>Público</dd></div>
@@ -145,6 +173,8 @@ const documents = [
         <button type="button" data-filter="normativa">Normativa</button>
         <button type="button" data-filter="referencia">Referencia</button>
         <button type="button" data-filter="economia">Economía y presupuesto</button>
+        <button type="button" data-filter="estrategia">Estrategias</button>
+        <button type="button" data-filter="historia">Archivo histórico</button>
         <button type="button" data-filter="ficcion">Archivo cultural</button>
       </div>
       <div class="result-count"><strong data-result-count>{documents.length}</strong><span>registros visibles</span></div>
@@ -331,7 +361,7 @@ const documents = [
 .archive-id{overflow:hidden}.archive-id>div:nth-child(2){padding:1.15rem 1.2rem .8rem;text-align:center}.archive-id>div:nth-child(2) span,.archive-id>div:nth-child(2) strong,.archive-id>div:nth-child(2) small{display:block}.archive-id>div:nth-child(2) span{font-size:.64rem;letter-spacing:.15em;color:var(--gold);font-weight:900}.archive-id>div:nth-child(2) strong{font-family:Georgia,serif;color:var(--navy);font-size:1.5rem}.archive-id>div:nth-child(2) small{color:var(--muted)}.seal{height:145px;background:var(--navy);display:grid;place-items:center}.seal img{width:95px;height:95px;object-fit:contain}.archive-id dl{margin:0;padding:0 1.2rem 1rem}.archive-id dl div{display:flex;justify-content:space-between;gap:1rem;padding:.62rem 0;border-top:1px solid var(--line)}.archive-id dt{color:var(--muted);font-size:.78rem}.archive-id dd{margin:0;font-weight:850;color:var(--navy);text-align:right;font-size:.8rem}
 .archive-tools-section{padding-top:0}.archive-tools{padding:.95rem 1rem;display:grid;grid-template-columns:minmax(260px,1fr) auto auto;gap:1rem;align-items:end}.search-box span{display:block;font-size:.65rem;text-transform:uppercase;letter-spacing:.13em;color:var(--gold);font-weight:900;margin-bottom:.35rem}.search-box input{width:100%;border:1px solid var(--line);background:white;border-radius:11px;padding:.75rem .85rem;font:inherit;color:var(--ink);outline:none}.search-box input:focus{border-color:rgba(201,154,50,.8);box-shadow:0 0 0 3px rgba(201,154,50,.12)}.filters{display:flex;gap:.35rem;flex-wrap:wrap}.filters button{border:1px solid var(--line);background:white;color:#52606d;border-radius:999px;padding:.65rem .8rem;font-weight:800;font-size:.78rem;cursor:pointer}.filters button.active{background:var(--navy);color:white;border-color:var(--navy)}.result-count{text-align:right;min-width:80px}.result-count strong,.result-count span{display:block}.result-count strong{font-family:Georgia,serif;color:var(--navy);font-size:1.8rem;line-height:1}.result-count span{font-size:.66rem;color:var(--muted);margin-top:.15rem}
 .featured-section{padding-top:38px}.featured-grid{display:grid;grid-template-columns:.72fr 1.28fr;gap:3rem;align-items:center}.constitution-card{min-height:470px;background:#f7f3e8;overflow:hidden;position:relative;padding:2rem;display:flex;flex-direction:column;justify-content:space-between}.constitution-card:before{content:"";position:absolute;inset:0;border:12px solid rgba(13,41,75,.045);pointer-events:none}.doc-band{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:.8rem}.doc-band span,.doc-band strong{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-weight:900}.doc-band span{color:var(--gold)}.doc-band strong{color:var(--navy)}.doc-symbol{display:grid;place-items:center;flex:1}.doc-symbol img{width:135px;height:135px;object-fit:contain}.doc-cover-copy small{letter-spacing:.16em;color:var(--gold);font-weight:900}.doc-cover-copy h2{font-size:3rem;margin:.35rem 0}.doc-cover-copy p{color:var(--muted);margin:0}.featured-copy>p:not(.lead){color:var(--muted)}.featured-actions{display:flex;gap:.65rem;flex-wrap:wrap;margin-top:1.25rem}
-.catalog-section{background:#efeee9}.section-heading{display:flex;justify-content:space-between;align-items:end;gap:2rem;margin-bottom:1.4rem}.section-heading>p{max-width:470px;color:var(--muted);margin:0}.catalog{display:grid;gap:.8rem}.document-row{padding:1.15rem;display:grid;grid-template-columns:190px minmax(0,1fr) 128px;gap:1.2rem;align-items:center}.document-row[hidden]{display:none}.doc-index span,.doc-index strong{display:block}.doc-index span{font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:900}.doc-index strong{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.76rem;color:#52606d;margin-top:.35rem}.doc-title-row{display:flex;justify-content:space-between;gap:1rem;align-items:start}.doc-title-row h3{font-size:1.45rem;margin-bottom:.35rem}.doc-title-row p{color:var(--muted);margin:0;max-width:760px;font-size:.9rem}.status{white-space:nowrap;border-radius:999px;padding:.26rem .52rem;font-size:.66rem;font-weight:850;border:1px solid var(--line);background:#edf0ec;color:#52606d}.status.normativa{background:#e6edf5;color:#244568}.status.referencia{background:#f4ecd7;color:#725b25}.status.economia{background:#e4f0e7;color:#315d3e}.status.ficcion{background:#ece5ef;color:#62486c}.doc-facts{display:flex;gap:1.4rem;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:.7rem;margin-top:.8rem}.doc-facts span{display:flex;gap:.35rem;align-items:baseline}.doc-facts small{color:var(--muted)}.doc-facts b{color:var(--navy);font-size:.78rem}.doc-actions{display:flex;flex-direction:column;gap:.45rem;align-items:stretch}.doc-actions .btn{padding:.65rem .8rem;font-size:.78rem}.download-link{text-align:center;font-size:.72rem;font-weight:850;color:var(--navy);text-underline-offset:3px}.empty-state{padding:1.4rem;text-align:center;margin-top:.8rem}.empty-state strong,.empty-state span{display:block}.empty-state span{color:var(--muted);font-size:.85rem;margin-top:.2rem}
+.catalog-section{background:#efeee9}.section-heading{display:flex;justify-content:space-between;align-items:end;gap:2rem;margin-bottom:1.4rem}.section-heading>p{max-width:470px;color:var(--muted);margin:0}.catalog{display:grid;gap:.8rem}.document-row{padding:1.15rem;display:grid;grid-template-columns:190px minmax(0,1fr) 128px;gap:1.2rem;align-items:center}.document-row[hidden]{display:none}.doc-index span,.doc-index strong{display:block}.doc-index span{font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:900}.doc-index strong{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.76rem;color:#52606d;margin-top:.35rem}.doc-title-row{display:flex;justify-content:space-between;gap:1rem;align-items:start}.doc-title-row h3{font-size:1.45rem;margin-bottom:.35rem}.doc-title-row p{color:var(--muted);margin:0;max-width:760px;font-size:.9rem}.status{white-space:nowrap;border-radius:999px;padding:.26rem .52rem;font-size:.66rem;font-weight:850;border:1px solid var(--line);background:#edf0ec;color:#52606d}.status.normativa{background:#e6edf5;color:#244568}.status.referencia{background:#f4ecd7;color:#725b25}.status.economia{background:#e4f0e7;color:#315d3e}.status.estrategia{background:#e5edf1;color:#2f5969}.status.historia{background:#eee7df;color:#70523d}.status.ficcion{background:#ece5ef;color:#62486c}.doc-facts{display:flex;gap:1.4rem;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:.7rem;margin-top:.8rem}.doc-facts span{display:flex;gap:.35rem;align-items:baseline}.doc-facts small{color:var(--muted)}.doc-facts b{color:var(--navy);font-size:.78rem}.doc-actions{display:flex;flex-direction:column;gap:.45rem;align-items:stretch}.doc-actions .btn{padding:.65rem .8rem;font-size:.78rem}.download-link{text-align:center;font-size:.72rem;font-weight:850;color:var(--navy);text-underline-offset:3px}.empty-state{padding:1.4rem;text-align:center;margin-top:.8rem}.empty-state strong,.empty-state span{display:block}.empty-state span{color:var(--muted);font-size:.85rem;margin-top:.2rem}
 .dark-heading>p{color:#cad6e1}.collection-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}.collection{padding:1.25rem;border:1px solid rgba(255,255,255,.14);border-radius:16px;background:rgba(255,255,255,.045);text-decoration:none;transition:.18s}.collection:hover{transform:translateY(-3px);background:rgba(255,255,255,.075)}.collection>span{color:var(--gold);font-weight:900}.collection h3{color:white;margin:.45rem 0}.collection p{color:#cdd8e2;font-size:.88rem}.collection strong{color:white;font-size:.76rem}
 .symbol-section{background:#f4f1e8}.symbol-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:3rem;align-items:center}.symbol-grid>div:first-child p:not(.lead){color:var(--muted)}.flag{overflow:hidden;background:white}.flag img{width:100%}
 @media(max-width:980px){.hero-grid,.featured-grid,.symbol-grid{grid-template-columns:1fr}.archive-tools{grid-template-columns:1fr}.result-count{text-align:left}.collection-grid{grid-template-columns:repeat(2,1fr)}.document-row{grid-template-columns:150px minmax(0,1fr)}.doc-actions{grid-column:2;flex-direction:row;align-items:center}.doc-actions .btn{min-width:95px}}
