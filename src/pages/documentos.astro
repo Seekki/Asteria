@@ -144,14 +144,14 @@ const documents = [
   }
 ];
 ---
-<BaseLayout title="Archivo Nacional de Asteria" description="Archivo público de la República Cívica de Asteria: Constitución, dossier nacional y fondos culturales.">
+<BaseLayout title="Archivo Nacional y Gaceta Cívica de Asteria" description="Consulta pública de normas, presupuestos, estrategias, documentos históricos y fondos culturales de la República Cívica de Asteria.">
 
 <section class="page-hero archive-hero">
   <div class="container hero-grid">
     <div>
-      <div class="eyebrow">Archivo Nacional · Consulta pública</div>
-      <h1>El Estado también se explica por lo que deja escrito.</h1>
-      <p class="lead">Textos fundamentales, documentación de referencia y archivo cultural reunidos en un único catálogo público.</p>
+      <div class="eyebrow">Archivo Nacional · Gaceta Cívica · Consulta pública</div>
+      <h1>Las decisiones públicas dejan rastro.</h1>
+      <p class="lead">Normas vigentes, presupuestos, estrategias, informes históricos y archivo cultural reunidos en un único sistema público de consulta.</p>
       <div class="archive-note">
         <span>Principio de archivo</span>
         <strong>Un documento público debe poder encontrarse, identificarse y leerse sin conocer de antemano qué oficina lo produjo.</strong>
@@ -162,7 +162,7 @@ const documents = [
       <div class="seal"><img src="/images/branding/emblema.png" alt="Emblema de Asteria"/></div>
       <div>
         <span>ARCHIVO NACIONAL DE ASTERIA</span>
-        <strong>Consulta documental</strong>
+        <strong>Archivo + Gaceta Cívica</strong>
         <small>Fondo público · edición digital</small>
       </div>
       <dl>
@@ -192,6 +192,42 @@ const documents = [
         <button type="button" data-filter="ficcion">Archivo cultural</button>
       </div>
       <div class="result-count"><strong data-result-count>{documents.length}</strong><span>registros visibles</span></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section gazette-section" id="gaceta">
+  <div class="container">
+    <div class="section-heading">
+      <div>
+        <div class="eyebrow">Gaceta Cívica</div>
+        <h2>Publicaciones oficiales recientes.</h2>
+      </div>
+      <p>La Gaceta reúne normas, presupuestos, estrategias y documentos que producen efectos públicos o fijan la actuación del Estado. El Archivo conserva además su contexto y sus versiones históricas.</p>
+    </div>
+
+    <div class="gazette-grid">
+      <a class="gazette-card card" href="/docs/Presupuestos_Generales_de_Asteria_2026.pdf" target="_blank" rel="noopener">
+        <div class="gazette-top"><span>HAC-AST · PGE/2026</span><time>2026</time></div>
+        <strong>Presupuestos Generales de Asteria 2026</strong>
+        <p>Ingresos, gasto público, inversión, deuda y asignación nacional de recursos.</p>
+        <em>Dirección Nacional de Hacienda →</em>
+      </a>
+
+      <a class="gazette-card card" href="/docs/Estrategia_Nacional_de_Resiliencia_y_Ciberdefensa_Asteria_2026_2032.pdf" target="_blank" rel="noopener">
+        <div class="gazette-top"><span>SEG-AST · ENRC/2026-2032</span><time>2026</time></div>
+        <strong>Estrategia Nacional de Resiliencia y Ciberdefensa 2026–2032</strong>
+        <p>Continuidad de servicios esenciales, infraestructuras críticas y capacidad nacional de respuesta.</p>
+        <em>Consejo Nacional de Resiliencia →</em>
+      </a>
+
+      <a class="gazette-card card" href="/docs/Constitucion_de_Asteria_Texto_Consolidado_2026.pdf" target="_blank" rel="noopener">
+        <div class="gazette-top"><span>RC-AST · CONST/1989</span><time>Consolidado 2026</time></div>
+        <strong>Constitución de Asteria</strong>
+        <p>Texto constitucional consolidado con la redacción vigente para consulta pública.</p>
+        <em>Texto fundamental →</em>
+      </a>
     </div>
   </div>
 </section>
@@ -286,26 +322,32 @@ const documents = [
     </div>
 
     <div class="collection-grid">
-      <a class="collection" href="/instituciones/">
+      <a class="collection" href="#gaceta">
         <span>01</span>
+        <h3>Gaceta Cívica</h3>
+        <p>Normas, presupuestos, estrategias y publicaciones oficiales con efectos públicos.</p>
+        <strong>Ver publicaciones recientes →</strong>
+      </a>
+      <a class="collection" href="/instituciones/">
+        <span>02</span>
         <h3>Normativa e instituciones</h3>
         <p>Constitución, poderes del Estado y funcionamiento del sistema político actual.</p>
         <strong>Explorar instituciones →</strong>
       </a>
       <a class="collection" href="/historia/">
-        <span>02</span>
+        <span>03</span>
         <h3>Archivo histórico</h3>
         <p>Monarquía, repúblicas, Directorio, Crisis de los Tres Días y refundación constitucional.</p>
         <strong>Recorrer el archivo histórico →</strong>
       </a>
       <a class="collection" href="/cultura/">
-        <span>03</span>
+        <span>04</span>
         <h3>Archivo cultural</h3>
         <p>Lengua, vida cotidiana, Muros Abiertos, costumbres y cultura cívica.</p>
         <strong>Entrar en Cultura →</strong>
       </a>
       <a class="collection" href="/relatos/">
-        <span>04</span>
+        <span>05</span>
         <h3>Fondo narrativo</h3>
         <p>Relatos que documentan Asteria desde la experiencia de personas corrientes.</p>
         <strong>Leer relatos →</strong>
@@ -374,10 +416,11 @@ const documents = [
 .archive-hero{padding-bottom:52px;background:linear-gradient(180deg,rgba(255,253,248,.32),rgba(228,226,216,.45))}.hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:4rem;align-items:center}.archive-note{margin-top:1.6rem;border-left:4px solid var(--gold);padding:1rem 1.2rem;background:rgba(201,154,50,.08);border-radius:0 14px 14px 0}.archive-note span,.archive-note strong{display:block}.archive-note span{font-size:.67rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:900}.archive-note strong{font-family:Georgia,serif;color:var(--navy);font-size:1.05rem;margin-top:.25rem;line-height:1.35}
 .archive-id{overflow:hidden}.archive-id>div:nth-child(2){padding:1.15rem 1.2rem .8rem;text-align:center}.archive-id>div:nth-child(2) span,.archive-id>div:nth-child(2) strong,.archive-id>div:nth-child(2) small{display:block}.archive-id>div:nth-child(2) span{font-size:.64rem;letter-spacing:.15em;color:var(--gold);font-weight:900}.archive-id>div:nth-child(2) strong{font-family:Georgia,serif;color:var(--navy);font-size:1.5rem}.archive-id>div:nth-child(2) small{color:var(--muted)}.seal{height:145px;background:var(--navy);display:grid;place-items:center}.seal img{width:95px;height:95px;object-fit:contain}.archive-id dl{margin:0;padding:0 1.2rem 1rem}.archive-id dl div{display:flex;justify-content:space-between;gap:1rem;padding:.62rem 0;border-top:1px solid var(--line)}.archive-id dt{color:var(--muted);font-size:.78rem}.archive-id dd{margin:0;font-weight:850;color:var(--navy);text-align:right;font-size:.8rem}
 .archive-tools-section{padding-top:0}.archive-tools{padding:.95rem 1rem;display:grid;grid-template-columns:minmax(260px,1fr) auto auto;gap:1rem;align-items:end}.search-box span{display:block;font-size:.65rem;text-transform:uppercase;letter-spacing:.13em;color:var(--gold);font-weight:900;margin-bottom:.35rem}.search-box input{width:100%;border:1px solid var(--line);background:white;border-radius:11px;padding:.75rem .85rem;font:inherit;color:var(--ink);outline:none}.search-box input:focus{border-color:rgba(201,154,50,.8);box-shadow:0 0 0 3px rgba(201,154,50,.12)}.filters{display:flex;gap:.35rem;flex-wrap:wrap}.filters button{border:1px solid var(--line);background:white;color:#52606d;border-radius:999px;padding:.65rem .8rem;font-weight:800;font-size:.78rem;cursor:pointer}.filters button.active{background:var(--navy);color:white;border-color:var(--navy)}.result-count{text-align:right;min-width:80px}.result-count strong,.result-count span{display:block}.result-count strong{font-family:Georgia,serif;color:var(--navy);font-size:1.8rem;line-height:1}.result-count span{font-size:.66rem;color:var(--muted);margin-top:.15rem}
+.gazette-section{padding-top:38px}.gazette-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.gazette-card{padding:1.25rem;text-decoration:none;transition:.18s;display:flex;flex-direction:column;min-height:250px}.gazette-card:hover{transform:translateY(-3px);border-color:rgba(201,154,50,.55);box-shadow:0 18px 38px rgba(16,30,45,.1)}.gazette-top{display:flex;justify-content:space-between;gap:1rem;padding-bottom:.75rem;border-bottom:1px solid var(--line);margin-bottom:1rem}.gazette-top span,.gazette-top time{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.66rem;color:var(--muted)}.gazette-card>strong{font-family:Georgia,serif;color:var(--navy);font-size:1.35rem;line-height:1.15}.gazette-card p{color:var(--muted);font-size:.88rem;margin:.65rem 0 1rem}.gazette-card em{margin-top:auto;color:var(--navy);font-style:normal;font-size:.75rem;font-weight:850}
 .featured-section{padding-top:38px}.featured-grid{display:grid;grid-template-columns:.72fr 1.28fr;gap:3rem;align-items:center}.constitution-card{min-height:470px;background:#f7f3e8;overflow:hidden;position:relative;padding:2rem;display:flex;flex-direction:column;justify-content:space-between}.constitution-card:before{content:"";position:absolute;inset:0;border:12px solid rgba(13,41,75,.045);pointer-events:none}.doc-band{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:.8rem}.doc-band span,.doc-band strong{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-weight:900}.doc-band span{color:var(--gold)}.doc-band strong{color:var(--navy)}.doc-symbol{display:grid;place-items:center;flex:1}.doc-symbol img{width:135px;height:135px;object-fit:contain}.doc-cover-copy small{letter-spacing:.16em;color:var(--gold);font-weight:900}.doc-cover-copy h2{font-size:3rem;margin:.35rem 0}.doc-cover-copy p{color:var(--muted);margin:0}.featured-copy>p:not(.lead){color:var(--muted)}.featured-actions{display:flex;gap:.65rem;flex-wrap:wrap;margin-top:1.25rem}
 .catalog-section{background:#efeee9}.section-heading{display:flex;justify-content:space-between;align-items:end;gap:2rem;margin-bottom:1.4rem}.section-heading>p{max-width:470px;color:var(--muted);margin:0}.catalog{display:grid;gap:.8rem}.document-row{padding:1.15rem;display:grid;grid-template-columns:190px minmax(0,1fr) 128px;gap:1.2rem;align-items:center}.document-row[hidden]{display:none}.doc-index span,.doc-index strong{display:block}.doc-index span{font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:900}.doc-index strong{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.76rem;color:#52606d;margin-top:.35rem}.doc-title-row{display:flex;justify-content:space-between;gap:1rem;align-items:start}.doc-title-row h3{font-size:1.45rem;margin-bottom:.35rem}.doc-title-row p{color:var(--muted);margin:0;max-width:760px;font-size:.9rem}.status{white-space:nowrap;border-radius:999px;padding:.26rem .52rem;font-size:.66rem;font-weight:850;border:1px solid var(--line);background:#edf0ec;color:#52606d}.status.normativa{background:#e6edf5;color:#244568}.status.referencia{background:#f4ecd7;color:#725b25}.status.economia{background:#e4f0e7;color:#315d3e}.status.estrategia{background:#e5edf1;color:#2f5969}.status.historia{background:#eee7df;color:#70523d}.status.ficcion{background:#ece5ef;color:#62486c}.doc-facts{display:flex;gap:1.4rem;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:.7rem;margin-top:.8rem}.doc-facts span{display:flex;gap:.35rem;align-items:baseline}.doc-facts small{color:var(--muted)}.doc-facts b{color:var(--navy);font-size:.78rem}.doc-actions{display:flex;flex-direction:column;gap:.45rem;align-items:stretch}.doc-actions .btn{padding:.65rem .8rem;font-size:.78rem}.download-link{text-align:center;font-size:.72rem;font-weight:850;color:var(--navy);text-underline-offset:3px}.empty-state{padding:1.4rem;text-align:center;margin-top:.8rem}.empty-state strong,.empty-state span{display:block}.empty-state span{color:var(--muted);font-size:.85rem;margin-top:.2rem}
-.dark-heading>p{color:#cad6e1}.collection-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}.collection{padding:1.25rem;border:1px solid rgba(255,255,255,.14);border-radius:16px;background:rgba(255,255,255,.045);text-decoration:none;transition:.18s}.collection:hover{transform:translateY(-3px);background:rgba(255,255,255,.075)}.collection>span{color:var(--gold);font-weight:900}.collection h3{color:white;margin:.45rem 0}.collection p{color:#cdd8e2;font-size:.88rem}.collection strong{color:white;font-size:.76rem}
+.dark-heading>p{color:#cad6e1}.collection-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1rem}.collection{padding:1.25rem;border:1px solid rgba(255,255,255,.14);border-radius:16px;background:rgba(255,255,255,.045);text-decoration:none;transition:.18s}.collection:hover{transform:translateY(-3px);background:rgba(255,255,255,.075)}.collection>span{color:var(--gold);font-weight:900}.collection h3{color:white;margin:.45rem 0}.collection p{color:#cdd8e2;font-size:.88rem}.collection strong{color:white;font-size:.76rem}
 .symbol-section{background:#f4f1e8}.symbol-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:3rem;align-items:center}.symbol-grid>div:first-child p:not(.lead){color:var(--muted)}.flag{overflow:hidden;background:white}.flag img{width:100%}
-@media(max-width:980px){.hero-grid,.featured-grid,.symbol-grid{grid-template-columns:1fr}.archive-tools{grid-template-columns:1fr}.result-count{text-align:left}.collection-grid{grid-template-columns:repeat(2,1fr)}.document-row{grid-template-columns:150px minmax(0,1fr)}.doc-actions{grid-column:2;flex-direction:row;align-items:center}.doc-actions .btn{min-width:95px}}
+@media(max-width:980px){.hero-grid,.featured-grid,.symbol-grid{grid-template-columns:1fr}.gazette-grid{grid-template-columns:1fr}.archive-tools{grid-template-columns:1fr}.result-count{text-align:left}.collection-grid{grid-template-columns:repeat(2,1fr)}.document-row{grid-template-columns:150px minmax(0,1fr)}.doc-actions{grid-column:2;flex-direction:row;align-items:center}.doc-actions .btn{min-width:95px}}
 @media(max-width:720px){.section-heading{align-items:flex-start;flex-direction:column}.collection-grid{grid-template-columns:1fr}.document-row{grid-template-columns:1fr}.doc-actions{grid-column:auto}.doc-title-row{flex-direction:column}.doc-facts{gap:.75rem}.filters{display:grid;grid-template-columns:1fr 1fr}.filters button{text-align:center}.constitution-card{min-height:390px}.doc-symbol img{width:110px;height:110px}}
 </style>
