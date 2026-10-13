@@ -34,7 +34,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;color:var(--navy);line-heig
 <a class:list={[{active:path==='/cultura/'}]} href="/cultura/">Cultura</a>
 <a class:list={[{active:path==='/relatos/'}]} href="/relatos/">Relatos</a>
 <a class:list={[{active:path==='/documentos/'}]} href="/documentos/">Documentos</a>
-<a class="civis-link" href="/civis/">Civis</a>
+<a class:list={["civis-link",{active:path==='/civis/'}]} href="/civis/">Civis</a>
 </nav></div></header>
 <main><slot/></main>
 <footer><div class="container footer-grid"><div><div class="footer-brand">ASTERIA</div><p>Scientia · Libertas · Progressus</p></div><div><strong>Explorar</strong><a href="/historia/">Historia</a><a href="/instituciones/">Instituciones</a><a href="/ciudades/">Ciudades</a><a href="/documentos/">Documentos</a></div><div><strong>Proyecto</strong><p>Universo ficticio y proyecto de worldbuilding. No representa un Estado real.</p></div></div><div class="container footer-bottom">© 2026 Proyecto Asteria</div></footer>
