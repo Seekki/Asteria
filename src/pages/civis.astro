@@ -165,11 +165,29 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="participation-editor card" data-participation-panel hidden>
       <div class="participation-head">
         <div>
-          <span>Aportación ciudadana</span>
+          <span>Expediente de consulta pública</span>
           <h3 data-participation-title>Consulta pública</h3>
+          <small data-consultation-authority></small>
         </div>
         <button type="button" data-participation-close aria-label="Cerrar">×</button>
       </div>
+
+      <div class="consultation-briefing">
+        <div class="briefing-block">
+          <span>CONTEXTO</span>
+          <p data-consultation-context></p>
+        </div>
+        <div class="briefing-data" data-consultation-data></div>
+        <div class="briefing-block">
+          <span>ALTERNATIVAS EN ESTUDIO</span>
+          <div class="alternative-grid" data-consultation-alternatives></div>
+        </div>
+        <div class="consultation-question">
+          <span>PREGUNTA DE LA CONSULTA</span>
+          <strong data-consultation-question></strong>
+        </div>
+      </div>
+
       <div class="submitted-response" data-participation-existing hidden>
         <div class="submitted-badge">APORTACIÓN REGISTRADA</div>
         <p data-participation-response></p>
@@ -337,6 +355,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   const participationResponse = document.querySelector('[data-participation-response]');
   const participationDate = document.querySelector('[data-participation-date]');
   const participationTitle = document.querySelector('[data-participation-title]');
+  const consultationAuthority = document.querySelector('[data-consultation-authority]');
+  const consultationContext = document.querySelector('[data-consultation-context]');
+  const consultationData = document.querySelector('[data-consultation-data]');
+  const consultationAlternatives = document.querySelector('[data-consultation-alternatives]');
+  const consultationQuestion = document.querySelector('[data-consultation-question]');
   const participationState = document.querySelector('[data-participation-state]');
   const responseCount = document.querySelector('[data-response-count]');
   const responseField = participationForm?.querySelector('textarea[name="response"]');
@@ -417,6 +440,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     selectedConsultationId = item.id;
     if (participationTitle) participationTitle.textContent = item.title;
+    if (consultationAuthority) {
+      const published = item.published_at ? formatDate(item.published_at + 'T12:00:00') : '—';
+      consultationAuthority.textContent = (item.authority || 'Administración de Asteria') + ' · Publicada ' + published;
+    }
+    if (consultationContext) consultationContext.textContent = item.context || item.summary || '';
+    if (consultationQuestion) consultationQuestion.textContent = item.question || '¿Qué observaciones deseas trasladar a la administración?';
+
+    if (consultationData) {
+      const metrics = Array.isArray(item.key_data) ? item.key_data : [];
+      consultationData.innerHTML = metrics.map(metric =>
+        '<div><span>' + escapeHtml(metric.label) + '</span><strong>' + escapeHtml(metric.value) + '</strong></div>'
+      ).join('');
+    }
+
+    if (consultationAlternatives) {
+      const alternatives = Array.isArray(item.alternatives) ? item.alternatives : [];
+      consultationAlternatives.innerHTML = alternatives.map(option =>
+        '<article><span>' + escapeHtml(option.name) + '</span><p>' + escapeHtml(option.summary) + '</p><strong>' + escapeHtml(option.impact) + '</strong></article>'
+      ).join('');
+    }
 
     const existing = responseMap.get(item.id);
     if (existing) showExistingResponse(existing);
@@ -448,7 +491,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     container.innerHTML = consultationCache.map(item => {
       const closes = new Intl.DateTimeFormat('es-ES',{day:'numeric',month:'short'}).format(new Date(item.closes_at));
       const answered = responseMap.has(item.id);
-      const buttonLabel = answered ? 'Ver mi aportación →' : 'Participar →';
+      const buttonLabel = answered ? 'Ver consulta y aportación →' : 'Ver consulta →';
       const stateLabel = answered ? '<span class="consult-state">Respondida</span>' : '<span>Consulta pública</span>';
 
       return '<article class="consult">' +
@@ -473,7 +516,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     const { data, error } = await supabase
       .from('consultations')
-      .select('id,slug,category,title,summary,closes_at,status')
+      .select('id,slug,category,title,summary,closes_at,status,authority,context,question,key_data,alternatives,published_at')
       .eq('status','open')
       .order('closes_at',{ascending:true});
 
@@ -755,10 +798,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 .notifications-section{background:#efeee9}.split-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:1.2rem;align-items:start}.inbox{padding:1.15rem}.notice{display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:.85rem;padding:1rem .2rem;border-top:1px solid var(--line);align-items:start}.notice-icon{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#edf0ec;color:var(--navy);font-weight:900}.notice div:nth-child(2)>span,.notice div:nth-child(2)>strong{display:block}.notice div:nth-child(2)>span{font-size:.68rem;color:var(--muted)}.notice div:nth-child(2)>strong{color:var(--navy);margin:.14rem 0}.notice p{font-size:.8rem;color:var(--muted);margin:0}.notice-read{font-size:.65rem;color:#65717b;background:#edf0ec;border-radius:999px;padding:.35rem .65rem}.notice-action{appearance:none;border:1px solid rgba(201,154,50,.45);background:#fff8e8;color:#70551b;border-radius:999px;padding:.48rem .72rem;font:inherit;font-size:.68rem;font-weight:850;cursor:pointer;transition:.18s}.notice-action:hover{background:#f5e7c2;border-color:var(--gold);transform:translateY(-1px)}.empty-box{padding:1rem 0;color:var(--muted)}.civic-card{padding:1.4rem;background:linear-gradient(145deg,#0d294b,#133b66 72%,#a97a1d 180%);color:white;overflow:hidden;position:relative}.civic-card>img{width:60px;margin-bottom:2.2rem}.civic-type{font-size:.64rem;letter-spacing:.14em;color:#f0c768;font-weight:900}.civic-card h3{color:white;font-size:1.8rem;margin:.35rem 0}.civic-id{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#f0c768;font-weight:900}.civic-card dl{margin:1.6rem 0}.civic-card dl div{display:flex;justify-content:space-between;gap:1rem;padding:.6rem 0;border-top:1px solid rgba(255,255,255,.15)}.civic-card dt{color:#aebed0}.civic-card dd{margin:0;font-weight:850}.civic-card>small{color:#cdd8e2;letter-spacing:.08em}
 
-.section-heading{display:flex;justify-content:space-between;gap:2rem;align-items:end;margin-bottom:1.4rem}.section-heading>p{max-width:500px;margin:0}.dark-heading>p{color:#cad6e1}.consult-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.consult{border:1px solid rgba(255,255,255,.14);border-radius:17px;background:rgba(255,255,255,.05);padding:1.25rem;display:flex;flex-direction:column;min-height:300px}.consult-meta{display:flex;align-items:center;justify-content:space-between;gap:.75rem;font-size:.68rem;flex-wrap:wrap}.consult-meta span,.consult-meta time{display:inline-flex;align-items:center;border-radius:999px;padding:.34rem .58rem;line-height:1.1}.consult-meta span{color:#f0c768;font-weight:900;text-transform:uppercase;letter-spacing:.1em;background:rgba(240,199,104,.1);border:1px solid rgba(240,199,104,.16)}.consult-meta time{color:#d2dde8;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)}.consult h3{color:white;margin-top:1.2rem}.consult p{color:#cad6e1;font-size:.88rem}.consult-foot{margin-top:auto;border-top:1px solid rgba(255,255,255,.12);padding-top:.85rem;display:flex;justify-content:space-between;gap:.7rem;align-items:center}.consult-foot>span{font-size:.7rem;color:#aebed0}.consult-state{color:#f0c768!important;font-weight:850}.consult-action{appearance:none;border:1px solid rgba(240,199,104,.38);background:rgba(240,199,104,.1);color:#fff;border-radius:999px;padding:.5rem .8rem;font:inherit;font-size:.72rem;font-weight:850;cursor:pointer;transition:.18s}.consult-action:hover{background:#f0c768;color:#0d294b;border-color:#f0c768;transform:translateY(-1px)}.loading-consult{min-height:160px}.participation-editor{margin-top:1rem;padding:1.25rem;background:#fffdf8;color:var(--ink)}.participation-editor[hidden]{display:none!important}.participation-head{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start}.participation-head span{display:block;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:900}.participation-head h3{margin:.25rem 0 1rem}.participation-head button{border:1px solid var(--line);background:white;width:34px;height:34px;border-radius:50%;font-size:1.25rem;cursor:pointer;color:var(--navy)}.participation-editor textarea{width:100%;min-height:170px;resize:vertical;border:1px solid var(--line);border-radius:12px;padding:1rem;font:inherit;color:var(--ink);background:white}.participation-actions{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-top:.75rem}.participation-actions small{color:var(--muted)}.submitted-response{border:1px solid var(--line);background:#f8f5ed;border-radius:14px;padding:1rem 1.1rem}.submitted-response[hidden],.participation-editor form[hidden]{display:none!important}.submitted-badge{display:inline-flex;border-radius:999px;background:rgba(201,154,50,.14);color:#7a5a16;padding:.32rem .56rem;font-size:.64rem;font-weight:900;letter-spacing:.1em}.submitted-response p{white-space:pre-wrap;margin:.9rem 0;color:#283542}.submitted-response small{color:var(--muted)}
+.section-heading{display:flex;justify-content:space-between;gap:2rem;align-items:end;margin-bottom:1.4rem}.section-heading>p{max-width:500px;margin:0}.dark-heading>p{color:#cad6e1}.consult-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.consult{border:1px solid rgba(255,255,255,.14);border-radius:17px;background:rgba(255,255,255,.05);padding:1.25rem;display:flex;flex-direction:column;min-height:300px}.consult-meta{display:flex;align-items:center;justify-content:space-between;gap:.75rem;font-size:.68rem;flex-wrap:wrap}.consult-meta span,.consult-meta time{display:inline-flex;align-items:center;border-radius:999px;padding:.34rem .58rem;line-height:1.1}.consult-meta span{color:#f0c768;font-weight:900;text-transform:uppercase;letter-spacing:.1em;background:rgba(240,199,104,.1);border:1px solid rgba(240,199,104,.16)}.consult-meta time{color:#d2dde8;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)}.consult h3{color:white;margin-top:1.2rem}.consult p{color:#cad6e1;font-size:.88rem}.consult-foot{margin-top:auto;border-top:1px solid rgba(255,255,255,.12);padding-top:.85rem;display:flex;justify-content:space-between;gap:.7rem;align-items:center}.consult-foot>span{font-size:.7rem;color:#aebed0}.consult-state{color:#f0c768!important;font-weight:850}.consult-action{appearance:none;border:1px solid rgba(240,199,104,.38);background:rgba(240,199,104,.1);color:#fff;border-radius:999px;padding:.5rem .8rem;font:inherit;font-size:.72rem;font-weight:850;cursor:pointer;transition:.18s}.consult-action:hover{background:#f0c768;color:#0d294b;border-color:#f0c768;transform:translateY(-1px)}.loading-consult{min-height:160px}.participation-editor{margin-top:1rem;padding:1.25rem;background:#fffdf8;color:var(--ink)}.participation-editor[hidden]{display:none!important}.participation-head{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start}.participation-head span{display:block;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:900}.participation-head h3{margin:.25rem 0 .2rem}.participation-head small{display:block;color:var(--muted);font-size:.72rem}.participation-head button{border:1px solid var(--line);background:white;width:34px;height:34px;border-radius:50%;font-size:1.25rem;cursor:pointer;color:var(--navy)}.consultation-briefing{display:grid;gap:1rem;margin:1rem 0 1.2rem}.briefing-block{border-top:1px solid var(--line);padding-top:1rem}.briefing-block>span,.consultation-question>span{display:block;font-size:.64rem;letter-spacing:.13em;color:var(--gold);font-weight:900;margin-bottom:.45rem}.briefing-block>p{margin:0;color:#3e4b56;line-height:1.58}.briefing-data{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem}.briefing-data>div{border:1px solid var(--line);border-radius:12px;padding:.8rem;background:#f8f5ed}.briefing-data span,.briefing-data strong{display:block}.briefing-data span{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}.briefing-data strong{color:var(--navy);margin-top:.28rem}.alternative-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}.alternative-grid article{border:1px solid var(--line);border-radius:12px;padding:.9rem;background:#fff}.alternative-grid article>span{display:block;color:var(--navy);font-weight:900;font-size:.82rem}.alternative-grid article p{color:var(--muted);font-size:.78rem;line-height:1.45;margin:.5rem 0}.alternative-grid article strong{display:block;color:#7a5a16;font-size:.72rem}.consultation-question{border-left:3px solid var(--gold);padding:.85rem 1rem;background:#f7f2e4}.consultation-question strong{display:block;color:var(--navy);font-family:Georgia,serif;font-size:1.08rem;line-height:1.4}.participation-editor textarea{width:100%;min-height:170px;resize:vertical;border:1px solid var(--line);border-radius:12px;padding:1rem;font:inherit;color:var(--ink);background:white}.participation-actions{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-top:.75rem}.participation-actions small{color:var(--muted)}.submitted-response{border:1px solid var(--line);background:#f8f5ed;border-radius:14px;padding:1rem 1.1rem}.submitted-response[hidden],.participation-editor form[hidden]{display:none!important}.submitted-badge{display:inline-flex;border-radius:999px;background:rgba(201,154,50,.14);color:#7a5a16;padding:.32rem .56rem;font-size:.64rem;font-weight:900;letter-spacing:.1em}.submitted-response p{white-space:pre-wrap;margin:.9rem 0;color:#283542}.submitted-response small{color:var(--muted)}
 
 .transparency-section{background:#f5f1e7}.transparency-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:3rem;align-items:center}.transparency-card{padding:1.3rem}.trans-head{padding-bottom:1rem;border-bottom:1px solid var(--line)}.trans-head span,.trans-head strong{display:block}.trans-head span{font-size:.65rem;color:var(--gold);font-weight:900;letter-spacing:.12em;text-transform:uppercase}.trans-head strong{font-family:Georgia,serif;color:var(--navy);font-size:1.25rem;margin-top:.22rem}.metric{display:flex;justify-content:space-between;gap:1rem;padding:.78rem 0;border-bottom:1px solid var(--line)}.metric span{color:var(--muted);font-size:.82rem}.metric strong{color:var(--navy)}.trace{font-size:.68rem;color:var(--muted);padding-top:.8rem}.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);z-index:100;background:#081b31;color:white;border:1px solid rgba(255,255,255,.15);border-radius:999px;padding:.75rem 1.05rem;box-shadow:0 14px 34px rgba(0,0,0,.22);font-size:.8rem;font-weight:750;opacity:0;pointer-events:none;transition:.18s;max-width:min(90vw,620px);text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}
 
-@media(max-width:980px){.hero-grid,.auth-shell,.dashboard-shell,.split-grid,.transparency-grid{grid-template-columns:1fr}.profile{position:static}.status-grid,.consult-grid{grid-template-columns:1fr}.dashboard-top{align-items:flex-start}.date-chip{text-align:left}.service-grid{grid-template-columns:1fr}.service-grid button,.service-grid a,.service-grid button:nth-child(odd),.service-grid a:nth-child(odd){border-right:0;border-bottom:1px solid var(--line)}.service-grid button:last-child,.service-grid a:last-child{border-bottom:0}}
-@media(max-width:720px){.section-heading,.dashboard-top,.participation-actions{flex-direction:column;align-items:flex-start}.hero-grid{gap:2rem}.access-card{max-width:520px}.notice{grid-template-columns:32px minmax(0,1fr)}.notice>b,.notice>button{grid-column:2;justify-self:start}.hero-actions .btn{width:100%}}
+@media(max-width:980px){.hero-grid,.auth-shell,.dashboard-shell,.split-grid,.transparency-grid{grid-template-columns:1fr}.briefing-data{grid-template-columns:repeat(2,1fr)}.alternative-grid{grid-template-columns:1fr}.profile{position:static}.status-grid,.consult-grid{grid-template-columns:1fr}.dashboard-top{align-items:flex-start}.date-chip{text-align:left}.service-grid{grid-template-columns:1fr}.service-grid button,.service-grid a,.service-grid button:nth-child(odd),.service-grid a:nth-child(odd){border-right:0;border-bottom:1px solid var(--line)}.service-grid button:last-child,.service-grid a:last-child{border-bottom:0}}
+@media(max-width:720px){.section-heading,.dashboard-top,.participation-actions{flex-direction:column;align-items:flex-start}.briefing-data{grid-template-columns:1fr}.hero-grid{gap:2rem}.access-card{max-width:520px}.notice{grid-template-columns:32px minmax(0,1fr)}.notice>b,.notice>button{grid-column:2;justify-self:start}.hero-actions .btn{width:100%}}
 </style>
