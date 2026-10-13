@@ -114,14 +114,66 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
 
       <div class="services card">
-        <div class="block-head"><div><span>Servicios</span><h3>Accesos rápidos</h3></div><small>Primera versión</small></div>
+        <div class="block-head"><div><span>Servicios</span><h3>Accesos rápidos</h3></div><small>Servicios activos</small></div>
         <div class="service-grid">
-          <button type="button" data-demo-message="La creación de trámites llegará en la siguiente fase."><b>01</b><span><strong>Iniciar un trámite</strong><small>Solicitudes, licencias y ayudas</small></span><i>→</i></button>
-          <button type="button" data-demo-message="El detalle de expedientes llegará en la siguiente fase."><b>02</b><span><strong>Mis expedientes</strong><small>Estado, documentos y plazos</small></span><i>→</i></button>
+          <a href="#tramites"><b>01</b><span><strong>Iniciar un trámite</strong><small>Solicitudes y comunicaciones</small></span><i>→</i></a>
+          <a href="#tramites"><b>02</b><span><strong>Mis expedientes</strong><small>Estado y seguimiento</small></span><i>→</i></a>
           <a href="#buzon"><b>03</b><span><strong>Notificaciones</strong><small>Comunicaciones oficiales</small></span><i>→</i></a>
           <a href="#consultas"><b>04</b><span><strong>Participación pública</strong><small>Consultas abiertas</small></span><i>→</i></a>
           <a href="/documentos/"><b>05</b><span><strong>Archivo y Gaceta</strong><small>Normativa y publicaciones</small></span><i>→</i></a>
           <a href="/instituciones/"><b>06</b><span><strong>Instituciones</strong><small>Competencias y responsables</small></span><i>→</i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section case-section" id="tramites" data-auth-view="signed-in" hidden>
+  <div class="container">
+    <div class="section-heading">
+      <div>
+        <div class="eyebrow">Trámites y expedientes</div>
+        <h2>Registrar una solicitud y seguir su estado.</h2>
+      </div>
+      <p>Civis asigna un número de expediente, identifica el organismo responsable y deja constancia de la fecha de registro. Esta primera versión permite tres trámites de demostración persistentes.</p>
+    </div>
+
+    <div class="case-grid">
+      <form class="card case-form" data-case-form>
+        <div class="block-head">
+          <div><span>Nuevo trámite</span><h3>Iniciar expediente</h3></div>
+          <small>Registro real en Civis</small>
+        </div>
+
+        <label>Tipo de trámite
+          <select name="case_type" required>
+            <option value="certificate">Certificado de datos cívicos</option>
+            <option value="energy">Bonificación de eficiencia energética</option>
+            <option value="municipal">Comunicación municipal de actuación menor</option>
+          </select>
+        </label>
+
+        <div class="case-explainer" data-case-explainer>
+          <strong>Certificado de datos cívicos</strong>
+          <p>Solicita una constancia emitida por Civis con los datos básicos de tu identidad cívica.</p>
+        </div>
+
+        <label>Observaciones
+          <textarea name="description" maxlength="1200" placeholder="Añade información útil para tramitar la solicitud."></textarea>
+        </label>
+
+        <button class="btn btn-primary" type="submit">Registrar solicitud</button>
+        <p class="form-state" data-case-state aria-live="polite"></p>
+      </form>
+
+      <div class="card case-list-card">
+        <div class="block-head">
+          <div><span>Mis expedientes</span><h3>Seguimiento</h3></div>
+          <small data-case-label>0 expedientes</small>
+        </div>
+        <div class="case-list" data-case-list>
+          <div class="empty-box">Todavía no tienes expedientes.</div>
         </div>
       </div>
     </div>
@@ -277,6 +329,72 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   document.querySelectorAll('[data-demo-message]').forEach(button => {
     button.addEventListener('click', () => notify(button.dataset.demoMessage || 'Función todavía no disponible.'));
+  });
+
+  const caseForm = document.querySelector('[data-case-form]');
+  const caseState = document.querySelector('[data-case-state]');
+  const caseExplainer = document.querySelector('[data-case-explainer]');
+  const caseTypeField = caseForm?.querySelector('select[name="case_type"]');
+
+  const caseInfo = {
+    certificate: {
+      title: 'Certificado de datos cívicos',
+      text: 'Solicita una constancia emitida por Civis con los datos básicos de tu identidad cívica.'
+    },
+    energy: {
+      title: 'Bonificación de eficiencia energética',
+      text: 'Registra una solicitud para medidas de ahorro y mejora energética. La Dirección Nacional de Energía revisará el expediente.'
+    },
+    municipal: {
+      title: 'Comunicación municipal de actuación menor',
+      text: 'Comunica una actuación menor sujeta a registro administrativo local y seguimiento desde Civis.'
+    }
+  };
+
+  caseTypeField?.addEventListener('change', () => {
+    const info = caseInfo[caseTypeField.value] || caseInfo.certificate;
+    if (caseExplainer) {
+      caseExplainer.innerHTML = '<strong>' + escapeHtml(info.title) + '</strong><p>' + escapeHtml(info.text) + '</p>';
+    }
+  });
+
+  caseForm?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    if (!currentUser) {
+      notify('Necesitas iniciar sesión para registrar un trámite.');
+      return;
+    }
+
+    const data = new FormData(caseForm);
+    const caseType = String(data.get('case_type') || 'certificate');
+    const description = String(data.get('description') || '').trim();
+
+    if (caseState) caseState.textContent = 'Registrando expediente…';
+
+    const { data: created, error } = await supabase
+      .from('cases')
+      .insert({
+        user_id: currentUser.id,
+        case_type: caseType,
+        description
+      })
+      .select('id,case_number,title,status,department,description,created_at,updated_at,case_type')
+      .single();
+
+    if (error) {
+      if (caseState) caseState.textContent = error.message;
+      return;
+    }
+
+    caseForm.reset();
+    if (caseState) caseState.textContent = 'Expediente ' + created.case_number + ' registrado correctamente.';
+    if (caseExplainer) {
+      caseExplainer.innerHTML = '<strong>' + escapeHtml(caseInfo.certificate.title) + '</strong><p>' + escapeHtml(caseInfo.certificate.text) + '</p>';
+    }
+
+    await loadAccount(currentUser);
+    notify('Solicitud registrada como ' + created.case_number + '.');
   });
 
   const loginForm = document.querySelector('[data-auth-form="login"]');
@@ -531,11 +649,41 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     return consultationCache;
   }
 
+  function renderCases(cases) {
+    const list = document.querySelector('[data-case-list]');
+    const label = document.querySelector('[data-case-label]');
+    if (label) label.textContent = String(cases.length) + (cases.length === 1 ? ' expediente' : ' expedientes');
+    if (!list) return;
+
+    if (!cases.length) {
+      list.innerHTML = '<div class="empty-box">Todavía no tienes expedientes.</div>';
+      return;
+    }
+
+    const statusLabels = {
+      registered: 'Registrado',
+      review: 'En revisión',
+      waiting: 'Pendiente de información',
+      resolved: 'Resuelto',
+      closed: 'Cerrado'
+    };
+
+    list.innerHTML = cases.map(item => {
+      const status = statusLabels[item.status] || item.status;
+      return '<article class="case-row">' +
+        '<div class="case-row-top"><span class="case-number">' + escapeHtml(item.case_number) + '</span><span class="case-status case-status-' + escapeHtml(item.status) + '">' + escapeHtml(status) + '</span></div>' +
+        '<strong>' + escapeHtml(item.title) + '</strong>' +
+        '<p>' + escapeHtml(item.department || 'Administración de Asteria') + '</p>' +
+        '<div class="case-row-foot"><span>Registrado ' + escapeHtml(formatDate(item.created_at)) + '</span><span>Última actualización ' + escapeHtml(formatDate(item.updated_at)) + '</span></div>' +
+      '</article>';
+    }).join('');
+  }
+
   async function loadAccount(user) {
     const [{ data: profile, error: profileError }, { data: notifications }, { data: cases }] = await Promise.all([
       supabase.from('profiles').select('*').eq('id',user.id).single(),
       supabase.from('notifications').select('*').order('created_at',{ascending:false}),
-      supabase.from('cases').select('id,status')
+      supabase.from('cases').select('id,case_number,title,status,department,description,created_at,updated_at,case_type').order('created_at',{ascending:false})
     ]);
 
     if (profileError || !profile) {
@@ -554,7 +702,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     document.querySelectorAll('[data-card-city]').forEach(el => el.textContent = profile.city);
     document.querySelectorAll('[data-card-date]').forEach(el => el.textContent = formatDate(profile.created_at));
     document.querySelectorAll('[data-notification-count]').forEach(el => el.textContent = String(notifications?.filter(item => !item.read_at).length || 0));
-    document.querySelectorAll('[data-case-count]').forEach(el => el.textContent = String(cases?.filter(item => item.status !== 'closed').length || 0));
+    document.querySelectorAll('[data-case-count]').forEach(el => el.textContent = String(cases?.filter(item => !['resolved','closed'].includes(item.status)).length || 0));
+    renderCases(cases || []);
     document.querySelectorAll('[data-session-time]').forEach(el => el.textContent = new Intl.DateTimeFormat('es-ES',{hour:'2-digit',minute:'2-digit'}).format(new Date()));
 
     const list = document.querySelector('[data-notification-list]');
@@ -689,6 +838,66 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     white-space:nowrap;
   }
 
+  [data-consultation-data]{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:.75rem;
+  }
+  [data-consultation-data]>div{
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:.9rem;
+    background:#f8f5ed;
+  }
+  [data-consultation-data]>div>span,
+  [data-consultation-data]>div>strong{
+    display:block;
+  }
+  [data-consultation-data]>div>span{
+    color:var(--muted);
+    font-size:.64rem;
+    line-height:1.25;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    margin-bottom:.34rem;
+  }
+  [data-consultation-data]>div>strong{
+    color:var(--navy);
+    font-size:.94rem;
+    line-height:1.25;
+  }
+  [data-consultation-alternatives]{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:.75rem;
+  }
+  [data-consultation-alternatives]>article{
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:.9rem;
+    background:#fff;
+  }
+  [data-consultation-alternatives]>article>span,
+  [data-consultation-alternatives]>article>strong{
+    display:block;
+  }
+  [data-consultation-alternatives]>article>span{
+    color:var(--navy);
+    font-size:.82rem;
+    font-weight:900;
+    margin-bottom:.48rem;
+  }
+  [data-consultation-alternatives]>article>p{
+    color:var(--muted);
+    font-size:.78rem;
+    line-height:1.48;
+    margin:0 0 .6rem;
+  }
+  [data-consultation-alternatives]>article>strong{
+    color:#7a5a16;
+    font-size:.72rem;
+  }
+
   [data-consultations] .consult{
     border:1px solid rgba(255,255,255,.14);
     border-radius:17px;
@@ -784,6 +993,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     [data-notification-list] .notice-action,
     [data-notification-list] .notice-read{grid-column:2;justify-self:start}
     [data-consultations] .consult-foot{align-items:flex-start;flex-direction:column}
+    [data-consultation-data]{grid-template-columns:1fr 1fr}
+    [data-consultation-alternatives]{grid-template-columns:1fr}
   }
 </style>
 
@@ -796,12 +1007,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 .dashboard-shell{display:grid;grid-template-columns:300px minmax(0,1fr);gap:1.2rem;align-items:start}.profile{overflow:hidden;position:sticky;top:96px}.profile-head{padding:1.35rem;display:flex;gap:.9rem;align-items:center;background:linear-gradient(145deg,#0d294b,#173f69);color:white}.avatar{width:50px;height:50px;border-radius:50%;background:#f1dfaa;color:var(--navy);display:grid;place-items:center;font-family:Georgia,serif;font-weight:900;font-size:1.15rem;flex:0 0 50px}.profile-head span,.profile-head h2,.profile-head small{display:block}.profile-head span{font-size:.62rem;letter-spacing:.11em;text-transform:uppercase;color:#c0ccda}.profile-head h2{color:white;font-size:1.55rem;margin:.18rem 0}.profile-head small{color:#d7e0e9}.profile-state{padding:.55rem 1.2rem}.profile-state div{display:flex;justify-content:space-between;gap:1rem;padding:.75rem 0;border-bottom:1px solid var(--line)}.profile-state span{color:var(--muted);font-size:.78rem}.profile-state strong{color:var(--navy);font-size:.78rem;text-align:right;overflow-wrap:anywhere}.profile-button{width:100%;border:0;border-top:1px solid var(--line);background:rgba(13,41,75,.035);padding:.9rem 1.2rem;display:flex;justify-content:space-between;color:var(--navy);font-weight:850;cursor:pointer}.dashboard-main{min-width:0}.dashboard-top{display:flex;justify-content:space-between;gap:2rem;align-items:end;margin-bottom:1rem}.dashboard-top h2{margin:.15rem 0}.dashboard-top p{color:var(--muted);margin:0}.date-chip{text-align:right}.date-chip span,.date-chip strong{display:block}.date-chip span{font-size:.65rem;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);font-weight:900}.date-chip strong{color:var(--navy);font-size:.82rem}.status-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-bottom:1rem}.status-card{border:1px solid var(--line);border-radius:16px;background:rgba(255,253,248,.72);padding:1rem;display:flex;gap:.85rem}.status-number{font-family:Georgia,serif;font-size:2rem;color:var(--navy);line-height:1}.status-card small,.status-card strong{display:block}.status-card small{font-size:.6rem;color:var(--gold);letter-spacing:.12em;font-weight:900}.status-card strong{color:var(--navy);font-size:.86rem;margin:.22rem 0}.status-card p{color:var(--muted);font-size:.75rem;margin:0}.services{padding:1.15rem}.block-head{display:flex;justify-content:space-between;align-items:end;gap:1rem;margin-bottom:.8rem}.block-head span{display:block;font-size:.64rem;text-transform:uppercase;letter-spacing:.13em;color:var(--gold);font-weight:900}.block-head h3{margin:.2rem 0 0}.block-head small{font-size:.72rem;color:var(--muted)}.service-grid{display:grid;grid-template-columns:repeat(2,1fr);border:1px solid var(--line);border-radius:14px;overflow:hidden}.service-grid button,.service-grid a{appearance:none;border:0;border-bottom:1px solid var(--line);background:white;padding:1rem;text-align:left;text-decoration:none;display:grid;grid-template-columns:30px 1fr auto;gap:.7rem;align-items:center;color:inherit;cursor:pointer}.service-grid button:nth-child(odd),.service-grid a:nth-child(odd){border-right:1px solid var(--line)}.service-grid button:nth-last-child(-n+2),.service-grid a:nth-last-child(-n+2){border-bottom:0}.service-grid b{color:var(--gold);font-size:.68rem}.service-grid span strong,.service-grid span small{display:block}.service-grid span strong{color:var(--navy)}.service-grid span small{color:var(--muted);font-size:.72rem;margin-top:.12rem}.service-grid i{font-style:normal;color:var(--gold);font-weight:900}.service-grid button:hover,.service-grid a:hover{background:#f8f5ec}
 
+.case-section{background:#f5f1e7}.case-grid{display:grid;grid-template-columns:.78fr 1.22fr;gap:1.2rem;align-items:start}.case-form,.case-list-card{padding:1.2rem}.case-form label{display:block;font-weight:800;color:var(--navy);margin:.9rem 0}.case-form select,.case-form textarea{display:block;width:100%;margin-top:.38rem;border:1px solid var(--line);border-radius:11px;background:#fff;padding:.85rem;font:inherit;color:var(--ink)}.case-form textarea{min-height:130px;resize:vertical}.case-explainer{border-left:3px solid var(--gold);background:#f8f5ed;padding:.8rem .95rem;margin:.8rem 0}.case-explainer strong{display:block;color:var(--navy);font-size:.86rem}.case-explainer p{margin:.28rem 0 0;color:var(--muted);font-size:.78rem;line-height:1.45}.case-list{display:grid;gap:.7rem}.case-row{border:1px solid var(--line);border-radius:13px;padding:1rem;background:#fff}.case-row-top{display:flex;justify-content:space-between;gap:.8rem;align-items:center;margin-bottom:.6rem}.case-number{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--gold);font-size:.7rem;font-weight:900}.case-status{border-radius:999px;padding:.3rem .55rem;font-size:.64rem;font-weight:900;background:#edf0ec;color:#52606d}.case-status-registered{background:#f4ecd7;color:#745818}.case-status-review{background:#e8eef5;color:#294f78}.case-status-waiting{background:#f6e6d8;color:#875328}.case-status-resolved{background:#e3efe6;color:#346047}.case-row>strong{display:block;color:var(--navy);font-size:.94rem}.case-row>p{margin:.2rem 0 .8rem;color:var(--muted);font-size:.78rem}.case-row-foot{display:flex;justify-content:space-between;gap:.8rem;border-top:1px solid var(--line);padding-top:.65rem;color:var(--muted);font-size:.66rem}
 .notifications-section{background:#efeee9}.split-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:1.2rem;align-items:start}.inbox{padding:1.15rem}.notice{display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:.85rem;padding:1rem .2rem;border-top:1px solid var(--line);align-items:start}.notice-icon{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#edf0ec;color:var(--navy);font-weight:900}.notice div:nth-child(2)>span,.notice div:nth-child(2)>strong{display:block}.notice div:nth-child(2)>span{font-size:.68rem;color:var(--muted)}.notice div:nth-child(2)>strong{color:var(--navy);margin:.14rem 0}.notice p{font-size:.8rem;color:var(--muted);margin:0}.notice-read{font-size:.65rem;color:#65717b;background:#edf0ec;border-radius:999px;padding:.35rem .65rem}.notice-action{appearance:none;border:1px solid rgba(201,154,50,.45);background:#fff8e8;color:#70551b;border-radius:999px;padding:.48rem .72rem;font:inherit;font-size:.68rem;font-weight:850;cursor:pointer;transition:.18s}.notice-action:hover{background:#f5e7c2;border-color:var(--gold);transform:translateY(-1px)}.empty-box{padding:1rem 0;color:var(--muted)}.civic-card{padding:1.4rem;background:linear-gradient(145deg,#0d294b,#133b66 72%,#a97a1d 180%);color:white;overflow:hidden;position:relative}.civic-card>img{width:60px;margin-bottom:2.2rem}.civic-type{font-size:.64rem;letter-spacing:.14em;color:#f0c768;font-weight:900}.civic-card h3{color:white;font-size:1.8rem;margin:.35rem 0}.civic-id{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#f0c768;font-weight:900}.civic-card dl{margin:1.6rem 0}.civic-card dl div{display:flex;justify-content:space-between;gap:1rem;padding:.6rem 0;border-top:1px solid rgba(255,255,255,.15)}.civic-card dt{color:#aebed0}.civic-card dd{margin:0;font-weight:850}.civic-card>small{color:#cdd8e2;letter-spacing:.08em}
 
 .section-heading{display:flex;justify-content:space-between;gap:2rem;align-items:end;margin-bottom:1.4rem}.section-heading>p{max-width:500px;margin:0}.dark-heading>p{color:#cad6e1}.consult-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.consult{border:1px solid rgba(255,255,255,.14);border-radius:17px;background:rgba(255,255,255,.05);padding:1.25rem;display:flex;flex-direction:column;min-height:300px}.consult-meta{display:flex;align-items:center;justify-content:space-between;gap:.75rem;font-size:.68rem;flex-wrap:wrap}.consult-meta span,.consult-meta time{display:inline-flex;align-items:center;border-radius:999px;padding:.34rem .58rem;line-height:1.1}.consult-meta span{color:#f0c768;font-weight:900;text-transform:uppercase;letter-spacing:.1em;background:rgba(240,199,104,.1);border:1px solid rgba(240,199,104,.16)}.consult-meta time{color:#d2dde8;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)}.consult h3{color:white;margin-top:1.2rem}.consult p{color:#cad6e1;font-size:.88rem}.consult-foot{margin-top:auto;border-top:1px solid rgba(255,255,255,.12);padding-top:.85rem;display:flex;justify-content:space-between;gap:.7rem;align-items:center}.consult-foot>span{font-size:.7rem;color:#aebed0}.consult-state{color:#f0c768!important;font-weight:850}.consult-action{appearance:none;border:1px solid rgba(240,199,104,.38);background:rgba(240,199,104,.1);color:#fff;border-radius:999px;padding:.5rem .8rem;font:inherit;font-size:.72rem;font-weight:850;cursor:pointer;transition:.18s}.consult-action:hover{background:#f0c768;color:#0d294b;border-color:#f0c768;transform:translateY(-1px)}.loading-consult{min-height:160px}.participation-editor{margin-top:1rem;padding:1.25rem;background:#fffdf8;color:var(--ink)}.participation-editor[hidden]{display:none!important}.participation-head{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start}.participation-head span{display:block;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:900}.participation-head h3{margin:.25rem 0 .2rem}.participation-head small{display:block;color:var(--muted);font-size:.72rem}.participation-head button{border:1px solid var(--line);background:white;width:34px;height:34px;border-radius:50%;font-size:1.25rem;cursor:pointer;color:var(--navy)}.consultation-briefing{display:grid;gap:1rem;margin:1rem 0 1.2rem}.briefing-block{border-top:1px solid var(--line);padding-top:1rem}.briefing-block>span,.consultation-question>span{display:block;font-size:.64rem;letter-spacing:.13em;color:var(--gold);font-weight:900;margin-bottom:.45rem}.briefing-block>p{margin:0;color:#3e4b56;line-height:1.58}.briefing-data{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem}.briefing-data>div{border:1px solid var(--line);border-radius:12px;padding:.8rem;background:#f8f5ed}.briefing-data span,.briefing-data strong{display:block}.briefing-data span{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}.briefing-data strong{color:var(--navy);margin-top:.28rem}.alternative-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}.alternative-grid article{border:1px solid var(--line);border-radius:12px;padding:.9rem;background:#fff}.alternative-grid article>span{display:block;color:var(--navy);font-weight:900;font-size:.82rem}.alternative-grid article p{color:var(--muted);font-size:.78rem;line-height:1.45;margin:.5rem 0}.alternative-grid article strong{display:block;color:#7a5a16;font-size:.72rem}.consultation-question{border-left:3px solid var(--gold);padding:.85rem 1rem;background:#f7f2e4}.consultation-question strong{display:block;color:var(--navy);font-family:Georgia,serif;font-size:1.08rem;line-height:1.4}.participation-editor textarea{width:100%;min-height:170px;resize:vertical;border:1px solid var(--line);border-radius:12px;padding:1rem;font:inherit;color:var(--ink);background:white}.participation-actions{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-top:.75rem}.participation-actions small{color:var(--muted)}.submitted-response{border:1px solid var(--line);background:#f8f5ed;border-radius:14px;padding:1rem 1.1rem}.submitted-response[hidden],.participation-editor form[hidden]{display:none!important}.submitted-badge{display:inline-flex;border-radius:999px;background:rgba(201,154,50,.14);color:#7a5a16;padding:.32rem .56rem;font-size:.64rem;font-weight:900;letter-spacing:.1em}.submitted-response p{white-space:pre-wrap;margin:.9rem 0;color:#283542}.submitted-response small{color:var(--muted)}
 
 .transparency-section{background:#f5f1e7}.transparency-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:3rem;align-items:center}.transparency-card{padding:1.3rem}.trans-head{padding-bottom:1rem;border-bottom:1px solid var(--line)}.trans-head span,.trans-head strong{display:block}.trans-head span{font-size:.65rem;color:var(--gold);font-weight:900;letter-spacing:.12em;text-transform:uppercase}.trans-head strong{font-family:Georgia,serif;color:var(--navy);font-size:1.25rem;margin-top:.22rem}.metric{display:flex;justify-content:space-between;gap:1rem;padding:.78rem 0;border-bottom:1px solid var(--line)}.metric span{color:var(--muted);font-size:.82rem}.metric strong{color:var(--navy)}.trace{font-size:.68rem;color:var(--muted);padding-top:.8rem}.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);z-index:100;background:#081b31;color:white;border:1px solid rgba(255,255,255,.15);border-radius:999px;padding:.75rem 1.05rem;box-shadow:0 14px 34px rgba(0,0,0,.22);font-size:.8rem;font-weight:750;opacity:0;pointer-events:none;transition:.18s;max-width:min(90vw,620px);text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}
 
-@media(max-width:980px){.hero-grid,.auth-shell,.dashboard-shell,.split-grid,.transparency-grid{grid-template-columns:1fr}.briefing-data{grid-template-columns:repeat(2,1fr)}.alternative-grid{grid-template-columns:1fr}.profile{position:static}.status-grid,.consult-grid{grid-template-columns:1fr}.dashboard-top{align-items:flex-start}.date-chip{text-align:left}.service-grid{grid-template-columns:1fr}.service-grid button,.service-grid a,.service-grid button:nth-child(odd),.service-grid a:nth-child(odd){border-right:0;border-bottom:1px solid var(--line)}.service-grid button:last-child,.service-grid a:last-child{border-bottom:0}}
-@media(max-width:720px){.section-heading,.dashboard-top,.participation-actions{flex-direction:column;align-items:flex-start}.briefing-data{grid-template-columns:1fr}.hero-grid{gap:2rem}.access-card{max-width:520px}.notice{grid-template-columns:32px minmax(0,1fr)}.notice>b,.notice>button{grid-column:2;justify-self:start}.hero-actions .btn{width:100%}}
+@media(max-width:980px){.hero-grid,.auth-shell,.dashboard-shell,.split-grid,.transparency-grid,.case-grid{grid-template-columns:1fr}.briefing-data{grid-template-columns:repeat(2,1fr)}.alternative-grid{grid-template-columns:1fr}.profile{position:static}.status-grid,.consult-grid{grid-template-columns:1fr}.dashboard-top{align-items:flex-start}.date-chip{text-align:left}.service-grid{grid-template-columns:1fr}.service-grid button,.service-grid a,.service-grid button:nth-child(odd),.service-grid a:nth-child(odd){border-right:0;border-bottom:1px solid var(--line)}.service-grid button:last-child,.service-grid a:last-child{border-bottom:0}}
+@media(max-width:720px){.section-heading,.dashboard-top,.participation-actions,.case-row-foot{flex-direction:column;align-items:flex-start}.briefing-data{grid-template-columns:1fr}.hero-grid{gap:2rem}.access-card{max-width:520px}.notice{grid-template-columns:32px minmax(0,1fr)}.notice>b,.notice>button{grid-column:2;justify-self:start}.hero-actions .btn{width:100%}}
 </style>
