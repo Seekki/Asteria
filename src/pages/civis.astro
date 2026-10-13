@@ -155,7 +155,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <div class="container">
     <div class="section-heading dark-heading">
       <div><div class="eyebrow">Participación pública</div><h2>Consultas abiertas.</h2></div>
-      <p>Las consultas pueden leerse sin cuenta. Los ciudadanos autenticados ya pueden enviar una aportación y volver a editarla mientras el proceso siga abierto.</p>
+      <p>Las consultas pueden leerse sin cuenta. Cada ciudadano autenticado puede enviar una única aportación por consulta; después queda registrada y disponible para consulta.</p>
     </div>
 
     <div class="consult-grid" data-consultations>
@@ -170,11 +170,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
         <button type="button" data-participation-close aria-label="Cerrar">×</button>
       </div>
+      <div class="submitted-response" data-participation-existing hidden>
+        <div class="submitted-badge">APORTACIÓN REGISTRADA</div>
+        <p data-participation-response></p>
+        <small data-participation-date></small>
+      </div>
       <form data-participation-form>
         <textarea name="response" maxlength="5000" required placeholder="Escribe tu aportación. Explica qué cambiarías, qué problema ves o qué alternativa propones."></textarea>
         <div class="participation-actions">
-          <small><span data-response-count>0</span>/5000 caracteres · la respuesta queda asociada a tu identidad cívica</small>
-          <button class="btn btn-primary" type="submit">Guardar aportación</button>
+          <small><span data-response-count>0</span>/5000 caracteres · una vez enviada, la aportación queda cerrada</small>
+          <button class="btn btn-primary" type="submit">Enviar aportación</button>
         </div>
         <p class="form-state" data-participation-state aria-live="polite"></p>
       </form>
@@ -212,6 +217,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   let currentUser = null;
   let selectedConsultationId = null;
+  let consultationCache = [];
+  let responseMap = new Map();
 
   const views = {
     loading: [...document.querySelectorAll('[data-auth-view="loading"]')],
@@ -312,7 +319,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   document.querySelector('[data-sign-out]')?.addEventListener('click', async () => {
     await supabase.auth.signOut();
     currentUser = null;
+    responseMap = new Map();
     showView('signedOut');
+    await loadConsultations();
     notify('Sesión cerrada.');
   });
 
@@ -324,6 +333,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   const participationPanel = document.querySelector('[data-participation-panel]');
   const participationForm = document.querySelector('[data-participation-form]');
+  const participationExisting = document.querySelector('[data-participation-existing]');
+  const participationResponse = document.querySelector('[data-participation-response]');
+  const participationDate = document.querySelector('[data-participation-date]');
   const participationTitle = document.querySelector('[data-participation-title]');
   const participationState = document.querySelector('[data-participation-state]');
   const responseCount = document.querySelector('[data-response-count]');
@@ -338,6 +350,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     selectedConsultationId = null;
   });
 
+  const showExistingResponse = (record) => {
+    if (participationForm) participationForm.hidden = true;
+    if (participationExisting) participationExisting.hidden = false;
+    if (participationResponse) participationResponse.textContent = record.response;
+    if (participationDate) participationDate.textContent = 'Registrada el ' + formatDate(record.created_at) + ' · esta aportación ya no puede modificarse.';
+  };
+
+  const showNewResponseForm = () => {
+    if (participationExisting) participationExisting.hidden = true;
+    if (participationForm) participationForm.hidden = false;
+    if (responseField) responseField.value = '';
+    if (responseCount) responseCount.textContent = '0';
+    if (participationState) participationState.textContent = '';
+  };
+
   participationForm?.addEventListener('submit', async (event) => {
     event.preventDefault();
 
@@ -346,26 +373,39 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       return;
     }
 
-    const response = responseField.value.trim();
-    if (!response) return;
-
-    participationState.textContent = 'Guardando aportación…';
-
-    const { error } = await supabase
-      .from('consultation_responses')
-      .upsert({
-        consultation_id: selectedConsultationId,
-        user_id: currentUser.id,
-        response
-      }, { onConflict: 'consultation_id,user_id' });
-
-    if (error) {
-      participationState.textContent = error.message;
+    if (responseMap.has(selectedConsultationId)) {
+      notify('Ya has enviado una aportación a esta consulta.');
+      showExistingResponse(responseMap.get(selectedConsultationId));
       return;
     }
 
-    participationState.textContent = 'Aportación guardada correctamente. Puedes volver a editarla mientras la consulta siga abierta.';
-    notify('Tu aportación ha quedado registrada en Civis.');
+    const response = responseField.value.trim();
+    if (!response) return;
+
+    participationState.textContent = 'Registrando aportación…';
+
+    const { data, error } = await supabase
+      .from('consultation_responses')
+      .insert({
+        consultation_id: selectedConsultationId,
+        user_id: currentUser.id,
+        response
+      })
+      .select('consultation_id,response,created_at')
+      .single();
+
+    if (error) {
+      participationState.textContent = error.code === '23505'
+        ? 'Ya existe una aportación tuya para esta consulta.'
+        : error.message;
+      return;
+    }
+
+    responseMap.set(selectedConsultationId, data);
+    participationState.textContent = '';
+    showExistingResponse(data);
+    await renderConsultations();
+    notify('Aportación registrada. Ya puedes consultarla, pero no modificarla.');
   });
 
   async function openConsultation(item) {
@@ -377,26 +417,54 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     selectedConsultationId = item.id;
     if (participationTitle) participationTitle.textContent = item.title;
-    if (participationState) participationState.textContent = '';
-    if (responseField) responseField.value = '';
-    if (responseCount) responseCount.textContent = '0';
 
-    const { data, error } = await supabase
-      .from('consultation_responses')
-      .select('response')
-      .eq('consultation_id', item.id)
-      .eq('user_id', currentUser.id)
-      .maybeSingle();
-
-    if (!error && data?.response && responseField) {
-      responseField.value = data.response;
-      if (responseCount) responseCount.textContent = String(data.response.length);
-    }
+    const existing = responseMap.get(item.id);
+    if (existing) showExistingResponse(existing);
+    else showNewResponseForm();
 
     if (participationPanel) {
       participationPanel.hidden = false;
       participationPanel.scrollIntoView({behavior:'smooth', block:'center'});
     }
+  }
+
+  async function loadOwnResponses() {
+    responseMap = new Map();
+    if (!currentUser) return;
+
+    const { data, error } = await supabase
+      .from('consultation_responses')
+      .select('consultation_id,response,created_at')
+      .eq('user_id', currentUser.id);
+
+    if (error || !data) return;
+    data.forEach(record => responseMap.set(record.consultation_id, record));
+  }
+
+  async function renderConsultations() {
+    const container = document.querySelector('[data-consultations]');
+    if (!container) return;
+
+    container.innerHTML = consultationCache.map(item => {
+      const closes = new Intl.DateTimeFormat('es-ES',{day:'numeric',month:'short'}).format(new Date(item.closes_at));
+      const answered = responseMap.has(item.id);
+      const buttonLabel = answered ? 'Ver mi aportación →' : 'Participar →';
+      const stateLabel = answered ? '<span class="consult-state">Respondida</span>' : '<span>Consulta pública</span>';
+
+      return '<article class="consult">' +
+        '<div class="consult-meta"><span>' + escapeHtml(item.category) + '</span><time>Hasta ' + escapeHtml(closes) + '</time></div>' +
+        '<h3>' + escapeHtml(item.title) + '</h3>' +
+        '<p>' + escapeHtml(item.summary) + '</p>' +
+        '<div class="consult-foot">' + stateLabel + '<button class="consult-action" type="button" data-consultation-id="' + escapeHtml(item.id) + '">' + buttonLabel + '</button></div>' +
+      '</article>';
+    }).join('');
+
+    container.querySelectorAll('[data-consultation-id]').forEach(button => {
+      const item = consultationCache.find(entry => entry.id === button.dataset.consultationId);
+      if (item) button.addEventListener('click', () => openConsultation(item));
+    });
+
+    document.querySelectorAll('[data-consultation-count]').forEach(el => el.textContent = String(consultationCache.length));
   }
 
   async function loadConsultations() {
@@ -414,23 +482,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       return [];
     }
 
-    container.innerHTML = data.map(item => {
-      const closes = new Intl.DateTimeFormat('es-ES',{day:'numeric',month:'short'}).format(new Date(item.closes_at));
-      return '<article class="consult">' +
-        '<div class="consult-meta"><span>' + escapeHtml(item.category) + '</span><time>Hasta ' + escapeHtml(closes) + '</time></div>' +
-        '<h3>' + escapeHtml(item.title) + '</h3>' +
-        '<p>' + escapeHtml(item.summary) + '</p>' +
-        '<div class="consult-foot"><span>Consulta pública</span><button type="button" data-consultation-id="' + escapeHtml(item.id) + '">Participar →</button></div>' +
-      '</article>';
-    }).join('');
-
-    container.querySelectorAll('[data-consultation-id]').forEach(button => {
-      const item = data.find(entry => entry.id === button.dataset.consultationId);
-      if (item) button.addEventListener('click', () => openConsultation(item));
-    });
-
-    document.querySelectorAll('[data-consultation-count]').forEach(el => el.textContent = String(data.length));
-    return data;
+    consultationCache = data || [];
+    await loadOwnResponses();
+    await renderConsultations();
+    return consultationCache;
   }
 
   async function loadAccount(user) {
@@ -455,7 +510,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     document.querySelectorAll('[data-card-id]').forEach(el => el.textContent = profile.civic_id);
     document.querySelectorAll('[data-card-city]').forEach(el => el.textContent = profile.city);
     document.querySelectorAll('[data-card-date]').forEach(el => el.textContent = formatDate(profile.created_at));
-    document.querySelectorAll('[data-notification-count]').forEach(el => el.textContent = String(notifications?.length || 0));
+    document.querySelectorAll('[data-notification-count]').forEach(el => el.textContent = String(notifications?.filter(item => !item.read_at).length || 0));
     document.querySelectorAll('[data-case-count]').forEach(el => el.textContent = String(cases?.filter(item => item.status !== 'closed').length || 0));
     document.querySelectorAll('[data-session-time]').forEach(el => el.textContent = new Intl.DateTimeFormat('es-ES',{hour:'2-digit',minute:'2-digit'}).format(new Date()));
 
@@ -468,7 +523,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         list.innerHTML = '<div class="empty-box">Todavía no tienes notificaciones.</div>';
       } else {
         list.innerHTML = notifications.map(item => {
-          const status = item.read_at ? '<b>Leída</b>' : '<button type="button" data-read-notification="' + item.id + '">Marcar leída</button>';
+          const status = item.read_at
+            ? '<b class="notice-read">Leída</b>'
+            : '<button class="notice-action" type="button" data-read-notification="' + item.id + '">Marcar como leída</button>';
+
           return '<article class="notice ' + (item.read_at ? '' : 'unread') + '">' +
             '<div class="notice-icon">' + (item.read_at ? '✓' : '!') + '</div>' +
             '<div><span>' + escapeHtml(item.issuer) + ' · ' + escapeHtml(formatDate(item.created_at)) + '</span><strong>' + escapeHtml(item.title) + '</strong><p>' + escapeHtml(item.body) + '</p></div>' +
@@ -502,22 +560,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     if (!session?.user) {
       currentUser = null;
+      responseMap = new Map();
       showView('signedOut');
+      await loadConsultations();
       return;
     }
 
     currentUser = session.user;
-    await loadAccount(session.user);
+    await Promise.all([loadAccount(session.user), loadConsultations()]);
     showView('signedIn');
   }
 
   supabase.auth.onAuthStateChange((_event, session) => {
     currentUser = session?.user || null;
-    if (!session?.user) return;
-    loadAccount(session.user);
   });
 
-  await loadConsultations();
   await refreshSession();
 </script>
 
@@ -530,12 +587,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 .dashboard-shell{display:grid;grid-template-columns:300px minmax(0,1fr);gap:1.2rem;align-items:start}.profile{overflow:hidden;position:sticky;top:96px}.profile-head{padding:1.35rem;display:flex;gap:.9rem;align-items:center;background:linear-gradient(145deg,#0d294b,#173f69);color:white}.avatar{width:50px;height:50px;border-radius:50%;background:#f1dfaa;color:var(--navy);display:grid;place-items:center;font-family:Georgia,serif;font-weight:900;font-size:1.15rem;flex:0 0 50px}.profile-head span,.profile-head h2,.profile-head small{display:block}.profile-head span{font-size:.62rem;letter-spacing:.11em;text-transform:uppercase;color:#c0ccda}.profile-head h2{color:white;font-size:1.55rem;margin:.18rem 0}.profile-head small{color:#d7e0e9}.profile-state{padding:.55rem 1.2rem}.profile-state div{display:flex;justify-content:space-between;gap:1rem;padding:.75rem 0;border-bottom:1px solid var(--line)}.profile-state span{color:var(--muted);font-size:.78rem}.profile-state strong{color:var(--navy);font-size:.78rem;text-align:right;overflow-wrap:anywhere}.profile-button{width:100%;border:0;border-top:1px solid var(--line);background:rgba(13,41,75,.035);padding:.9rem 1.2rem;display:flex;justify-content:space-between;color:var(--navy);font-weight:850;cursor:pointer}.dashboard-main{min-width:0}.dashboard-top{display:flex;justify-content:space-between;gap:2rem;align-items:end;margin-bottom:1rem}.dashboard-top h2{margin:.15rem 0}.dashboard-top p{color:var(--muted);margin:0}.date-chip{text-align:right}.date-chip span,.date-chip strong{display:block}.date-chip span{font-size:.65rem;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);font-weight:900}.date-chip strong{color:var(--navy);font-size:.82rem}.status-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-bottom:1rem}.status-card{border:1px solid var(--line);border-radius:16px;background:rgba(255,253,248,.72);padding:1rem;display:flex;gap:.85rem}.status-number{font-family:Georgia,serif;font-size:2rem;color:var(--navy);line-height:1}.status-card small,.status-card strong{display:block}.status-card small{font-size:.6rem;color:var(--gold);letter-spacing:.12em;font-weight:900}.status-card strong{color:var(--navy);font-size:.86rem;margin:.22rem 0}.status-card p{color:var(--muted);font-size:.75rem;margin:0}.services{padding:1.15rem}.block-head{display:flex;justify-content:space-between;align-items:end;gap:1rem;margin-bottom:.8rem}.block-head span{display:block;font-size:.64rem;text-transform:uppercase;letter-spacing:.13em;color:var(--gold);font-weight:900}.block-head h3{margin:.2rem 0 0}.block-head small{font-size:.72rem;color:var(--muted)}.service-grid{display:grid;grid-template-columns:repeat(2,1fr);border:1px solid var(--line);border-radius:14px;overflow:hidden}.service-grid button,.service-grid a{appearance:none;border:0;border-bottom:1px solid var(--line);background:white;padding:1rem;text-align:left;text-decoration:none;display:grid;grid-template-columns:30px 1fr auto;gap:.7rem;align-items:center;color:inherit;cursor:pointer}.service-grid button:nth-child(odd),.service-grid a:nth-child(odd){border-right:1px solid var(--line)}.service-grid button:nth-last-child(-n+2),.service-grid a:nth-last-child(-n+2){border-bottom:0}.service-grid b{color:var(--gold);font-size:.68rem}.service-grid span strong,.service-grid span small{display:block}.service-grid span strong{color:var(--navy)}.service-grid span small{color:var(--muted);font-size:.72rem;margin-top:.12rem}.service-grid i{font-style:normal;color:var(--gold);font-weight:900}.service-grid button:hover,.service-grid a:hover{background:#f8f5ec}
 
-.notifications-section{background:#efeee9}.split-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:1.2rem;align-items:start}.inbox{padding:1.15rem}.notice{display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:.85rem;padding:1rem .2rem;border-top:1px solid var(--line);align-items:start}.notice-icon{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#edf0ec;color:var(--navy);font-weight:900}.notice div:nth-child(2)>span,.notice div:nth-child(2)>strong{display:block}.notice div:nth-child(2)>span{font-size:.68rem;color:var(--muted)}.notice div:nth-child(2)>strong{color:var(--navy);margin:.14rem 0}.notice p{font-size:.8rem;color:var(--muted);margin:0}.notice>b,.notice>button{font-size:.65rem;color:var(--muted);background:#edf0ec;border-radius:999px;padding:.22rem .5rem;border:0}.notice.unread>b{color:#725b25;background:#f4ecd7}.notice>button{cursor:pointer;color:#725b25;background:#f4ecd7;font-weight:850}.empty-box{padding:1rem 0;color:var(--muted)}.civic-card{padding:1.4rem;background:linear-gradient(145deg,#0d294b,#133b66 72%,#a97a1d 180%);color:white;overflow:hidden;position:relative}.civic-card>img{width:60px;margin-bottom:2.2rem}.civic-type{font-size:.64rem;letter-spacing:.14em;color:#f0c768;font-weight:900}.civic-card h3{color:white;font-size:1.8rem;margin:.35rem 0}.civic-id{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#f0c768;font-weight:900}.civic-card dl{margin:1.6rem 0}.civic-card dl div{display:flex;justify-content:space-between;gap:1rem;padding:.6rem 0;border-top:1px solid rgba(255,255,255,.15)}.civic-card dt{color:#aebed0}.civic-card dd{margin:0;font-weight:850}.civic-card>small{color:#cdd8e2;letter-spacing:.08em}
+.notifications-section{background:#efeee9}.split-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:1.2rem;align-items:start}.inbox{padding:1.15rem}.notice{display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:.85rem;padding:1rem .2rem;border-top:1px solid var(--line);align-items:start}.notice-icon{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#edf0ec;color:var(--navy);font-weight:900}.notice div:nth-child(2)>span,.notice div:nth-child(2)>strong{display:block}.notice div:nth-child(2)>span{font-size:.68rem;color:var(--muted)}.notice div:nth-child(2)>strong{color:var(--navy);margin:.14rem 0}.notice p{font-size:.8rem;color:var(--muted);margin:0}.notice-read{font-size:.65rem;color:#65717b;background:#edf0ec;border-radius:999px;padding:.35rem .65rem}.notice-action{appearance:none;border:1px solid rgba(201,154,50,.45);background:#fff8e8;color:#70551b;border-radius:999px;padding:.48rem .72rem;font:inherit;font-size:.68rem;font-weight:850;cursor:pointer;transition:.18s}.notice-action:hover{background:#f5e7c2;border-color:var(--gold);transform:translateY(-1px)}.empty-box{padding:1rem 0;color:var(--muted)}.civic-card{padding:1.4rem;background:linear-gradient(145deg,#0d294b,#133b66 72%,#a97a1d 180%);color:white;overflow:hidden;position:relative}.civic-card>img{width:60px;margin-bottom:2.2rem}.civic-type{font-size:.64rem;letter-spacing:.14em;color:#f0c768;font-weight:900}.civic-card h3{color:white;font-size:1.8rem;margin:.35rem 0}.civic-id{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#f0c768;font-weight:900}.civic-card dl{margin:1.6rem 0}.civic-card dl div{display:flex;justify-content:space-between;gap:1rem;padding:.6rem 0;border-top:1px solid rgba(255,255,255,.15)}.civic-card dt{color:#aebed0}.civic-card dd{margin:0;font-weight:850}.civic-card>small{color:#cdd8e2;letter-spacing:.08em}
 
-.section-heading{display:flex;justify-content:space-between;gap:2rem;align-items:end;margin-bottom:1.4rem}.section-heading>p{max-width:500px;margin:0}.dark-heading>p{color:#cad6e1}.consult-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.consult{border:1px solid rgba(255,255,255,.14);border-radius:17px;background:rgba(255,255,255,.05);padding:1.25rem;display:flex;flex-direction:column;min-height:300px}.consult-meta{display:flex;justify-content:space-between;gap:1rem;font-size:.68rem}.consult-meta span{color:#f0c768;font-weight:900;text-transform:uppercase;letter-spacing:.1em}.consult-meta time{color:#aebed0}.consult h3{color:white;margin-top:1.2rem}.consult p{color:#cad6e1;font-size:.88rem}.consult-foot{margin-top:auto;border-top:1px solid rgba(255,255,255,.12);padding-top:.85rem;display:flex;justify-content:space-between;gap:.7rem;align-items:center}.consult-foot span{font-size:.7rem;color:#aebed0}.consult-foot button{border:0;background:none;color:white;font-weight:850;cursor:pointer;padding:0}.loading-consult{min-height:160px}.participation-editor{margin-top:1rem;padding:1.25rem;background:#fffdf8;color:var(--ink)}.participation-editor[hidden]{display:none!important}.participation-head{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start}.participation-head span{display:block;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:900}.participation-head h3{margin:.25rem 0 1rem}.participation-head button{border:1px solid var(--line);background:white;width:34px;height:34px;border-radius:50%;font-size:1.25rem;cursor:pointer;color:var(--navy)}.participation-editor textarea{width:100%;min-height:170px;resize:vertical;border:1px solid var(--line);border-radius:12px;padding:1rem;font:inherit;color:var(--ink);background:white}.participation-actions{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-top:.75rem}.participation-actions small{color:var(--muted)}
+.section-heading{display:flex;justify-content:space-between;gap:2rem;align-items:end;margin-bottom:1.4rem}.section-heading>p{max-width:500px;margin:0}.dark-heading>p{color:#cad6e1}.consult-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.consult{border:1px solid rgba(255,255,255,.14);border-radius:17px;background:rgba(255,255,255,.05);padding:1.25rem;display:flex;flex-direction:column;min-height:300px}.consult-meta{display:flex;align-items:center;justify-content:space-between;gap:.75rem;font-size:.68rem;flex-wrap:wrap}.consult-meta span,.consult-meta time{display:inline-flex;align-items:center;border-radius:999px;padding:.34rem .58rem;line-height:1.1}.consult-meta span{color:#f0c768;font-weight:900;text-transform:uppercase;letter-spacing:.1em;background:rgba(240,199,104,.1);border:1px solid rgba(240,199,104,.16)}.consult-meta time{color:#d2dde8;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)}.consult h3{color:white;margin-top:1.2rem}.consult p{color:#cad6e1;font-size:.88rem}.consult-foot{margin-top:auto;border-top:1px solid rgba(255,255,255,.12);padding-top:.85rem;display:flex;justify-content:space-between;gap:.7rem;align-items:center}.consult-foot>span{font-size:.7rem;color:#aebed0}.consult-state{color:#f0c768!important;font-weight:850}.consult-action{appearance:none;border:1px solid rgba(240,199,104,.38);background:rgba(240,199,104,.1);color:#fff;border-radius:999px;padding:.5rem .8rem;font:inherit;font-size:.72rem;font-weight:850;cursor:pointer;transition:.18s}.consult-action:hover{background:#f0c768;color:#0d294b;border-color:#f0c768;transform:translateY(-1px)}.loading-consult{min-height:160px}.participation-editor{margin-top:1rem;padding:1.25rem;background:#fffdf8;color:var(--ink)}.participation-editor[hidden]{display:none!important}.participation-head{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start}.participation-head span{display:block;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:900}.participation-head h3{margin:.25rem 0 1rem}.participation-head button{border:1px solid var(--line);background:white;width:34px;height:34px;border-radius:50%;font-size:1.25rem;cursor:pointer;color:var(--navy)}.participation-editor textarea{width:100%;min-height:170px;resize:vertical;border:1px solid var(--line);border-radius:12px;padding:1rem;font:inherit;color:var(--ink);background:white}.participation-actions{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-top:.75rem}.participation-actions small{color:var(--muted)}.submitted-response{border:1px solid var(--line);background:#f8f5ed;border-radius:14px;padding:1rem 1.1rem}.submitted-response[hidden],.participation-editor form[hidden]{display:none!important}.submitted-badge{display:inline-flex;border-radius:999px;background:rgba(201,154,50,.14);color:#7a5a16;padding:.32rem .56rem;font-size:.64rem;font-weight:900;letter-spacing:.1em}.submitted-response p{white-space:pre-wrap;margin:.9rem 0;color:#283542}.submitted-response small{color:var(--muted)}
 
 .transparency-section{background:#f5f1e7}.transparency-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:3rem;align-items:center}.transparency-card{padding:1.3rem}.trans-head{padding-bottom:1rem;border-bottom:1px solid var(--line)}.trans-head span,.trans-head strong{display:block}.trans-head span{font-size:.65rem;color:var(--gold);font-weight:900;letter-spacing:.12em;text-transform:uppercase}.trans-head strong{font-family:Georgia,serif;color:var(--navy);font-size:1.25rem;margin-top:.22rem}.metric{display:flex;justify-content:space-between;gap:1rem;padding:.78rem 0;border-bottom:1px solid var(--line)}.metric span{color:var(--muted);font-size:.82rem}.metric strong{color:var(--navy)}.trace{font-size:.68rem;color:var(--muted);padding-top:.8rem}.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);z-index:100;background:#081b31;color:white;border:1px solid rgba(255,255,255,.15);border-radius:999px;padding:.75rem 1.05rem;box-shadow:0 14px 34px rgba(0,0,0,.22);font-size:.8rem;font-weight:750;opacity:0;pointer-events:none;transition:.18s;max-width:min(90vw,620px);text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}
 
 @media(max-width:980px){.hero-grid,.auth-shell,.dashboard-shell,.split-grid,.transparency-grid{grid-template-columns:1fr}.profile{position:static}.status-grid,.consult-grid{grid-template-columns:1fr}.dashboard-top{align-items:flex-start}.date-chip{text-align:left}.service-grid{grid-template-columns:1fr}.service-grid button,.service-grid a,.service-grid button:nth-child(odd),.service-grid a:nth-child(odd){border-right:0;border-bottom:1px solid var(--line)}.service-grid button:last-child,.service-grid a:last-child{border-bottom:0}}
-@media(max-width:720px){.section-heading,.dashboard-top,.participation-actions{flex-direction:column;align-items:flex-start}.hero-grid{gap:2rem}.access-card{max-width:520px}.notice{grid-template-columns:32px minmax(0,1fr)}.notice>b{grid-column:2;justify-self:start}.hero-actions .btn{width:100%}}
+@media(max-width:720px){.section-heading,.dashboard-top,.participation-actions{flex-direction:column;align-items:flex-start}.hero-grid{gap:2rem}.access-card{max-width:520px}.notice{grid-template-columns:32px minmax(0,1fr)}.notice>b,.notice>button{grid-column:2;justify-self:start}.hero-actions .btn{width:100%}}
 </style>
