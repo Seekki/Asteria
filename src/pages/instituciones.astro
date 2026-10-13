@@ -19,10 +19,50 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <section class="section-tight">
   <div class="container jumpbar card">
     <span>Entender el sistema</span>
+    <a href="#principio">Principio de decisión</a>
     <a href="#esquema">Esquema general</a>
     <a href="#instituciones">Instituciones</a>
     <a href="#decision">Cómo se decide</a>
     <a href="#controles">Contrapesos</a>
+  </div>
+</section>
+
+
+<section class="section decision-principle" id="principio">
+  <div class="container">
+    <div class="principle-shell card">
+      <div class="principle-intro">
+        <div class="eyebrow">Principio de decisión pública</div>
+        <h2>Tres preguntas antes de ejercer poder.</h2>
+        <p class="lead">Asteria separa deliberadamente legitimidad, conocimiento y límites jurídicos. Ninguno de los tres puede sustituir a los otros dos.</p>
+      </div>
+
+      <div class="principle-statement">
+        <span>Doctrina constitucional</span>
+        <blockquote>La voluntad popular determina qué fines son legítimos; el conocimiento determina qué medios son eficaces; la Constitución determina qué medios están permitidos.</blockquote>
+      </div>
+
+      <div class="principle-grid">
+        <article>
+          <b>01</b>
+          <span>FINES</span>
+          <h3>Qué queremos conseguir</h3>
+          <p>La ciudadanía y sus órganos representativos fijan prioridades, valores públicos y recursos. Una preferencia política no se convierte en una cuestión técnica por resultar incómoda.</p>
+        </article>
+        <article>
+          <b>02</b>
+          <span>MEDIOS</span>
+          <h3>Cómo puede conseguirse</h3>
+          <p>Los profesionales y la evidencia comparan alternativas, costes, riesgos y resultados. Tener legitimidad electoral no convierte a nadie en especialista.</p>
+        </article>
+        <article>
+          <b>03</b>
+          <span>LÍMITES</span>
+          <h3>Qué no puede hacerse</h3>
+          <p>La Constitución y los tribunales fijan fronteras al poder. Ni una mayoría amplia ni una solución técnicamente eficaz bastan para vulnerar derechos fundamentales.</p>
+        </article>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -103,7 +143,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
 
       <div class="map-foot">
-        <strong>Regla práctica:</strong> la política decide <em>qué objetivo se persigue</em>; la administración técnica determina <em>cómo ejecutarlo</em>; los tribunales determinan <em>qué no puede hacerse</em>.
+        <strong>Regla práctica:</strong> la voluntad popular fija los fines; el conocimiento selecciona los medios eficaces; la Constitución marca los límites que ninguno de los dos puede cruzar.
       </div>
     </div>
   </div>
@@ -278,7 +318,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <style>
 .institutions-hero{padding-bottom:38px}.hero-rule{margin-top:1.8rem;padding:1.05rem 1.2rem;border-left:4px solid var(--gold);background:rgba(201,154,50,.08);border-radius:0 14px 14px 0}.hero-rule strong,.hero-rule span{display:block}.hero-rule strong{font-size:.72rem;text-transform:uppercase;letter-spacing:.16em;color:var(--gold);margin-bottom:.25rem}.hero-rule span{font-family:Georgia,serif;color:var(--navy);font-size:1.08rem}
-.jumpbar{display:flex;align-items:center;justify-content:center;gap:.35rem;padding:.55rem;max-width:820px;margin:auto;flex-wrap:wrap}.jumpbar span{font-size:.72rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);padding:.45rem .65rem}.jumpbar a{text-decoration:none;color:var(--navy);font-weight:800;font-size:.84rem;padding:.55rem .75rem;border-radius:999px}.jumpbar a:hover{background:rgba(13,41,75,.07)}
+.jumpbar{display:flex;align-items:center;justify-content:center;gap:.35rem;padding:.55rem;max-width:980px;margin:auto;flex-wrap:wrap}.jumpbar span{font-size:.72rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);padding:.45rem .65rem}.jumpbar a{text-decoration:none;color:var(--navy);font-weight:800;font-size:.84rem;padding:.55rem .75rem;border-radius:999px}.jumpbar a:hover{background:rgba(13,41,75,.07)}
+.decision-principle{padding-top:34px}.principle-shell{overflow:hidden;background:linear-gradient(135deg,rgba(255,253,248,.96),rgba(235,230,214,.94))}.principle-intro{padding:2rem 2rem 1.3rem}.principle-intro .lead{margin-bottom:0}.principle-statement{background:var(--navy);color:white;padding:1.7rem 2rem}.principle-statement span{display:block;color:#f0c768;font-size:.68rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase;margin-bottom:.55rem}.principle-statement blockquote{margin:0;font-family:Georgia,serif;font-size:clamp(1.35rem,2.4vw,2rem);line-height:1.28;max-width:980px}.principle-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}.principle-grid article{padding:1.35rem 1.5rem;border-right:1px solid var(--line)}.principle-grid article:last-child{border-right:0}.principle-grid b{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:rgba(201,154,50,.15);color:var(--gold);font-size:.72rem;margin-bottom:.8rem}.principle-grid span{display:block;font-size:.64rem;letter-spacing:.14em;font-weight:900;color:var(--gold)}.principle-grid h3{margin-top:.35rem}.principle-grid p{color:var(--muted);margin-bottom:0;font-size:.9rem}
 .section-heading{display:flex;justify-content:space-between;gap:2rem;align-items:end;margin-bottom:1.6rem}.section-heading>p{max-width:430px;color:var(--muted);margin:0}.dark-heading>p{color:#c9d5e0}
 
 .system-map{padding:1.5rem;background:linear-gradient(180deg,rgba(255,253,248,.96),rgba(239,235,224,.92));overflow:hidden}.map-row{display:grid;gap:1rem;justify-content:center}.map-row.top,.map-row.center{grid-template-columns:minmax(280px,460px)}.map-row.two{grid-template-columns:repeat(2,minmax(260px,1fr));max-width:880px;margin:auto}.node{padding:1.2rem;border:1px solid var(--line);border-radius:16px;background:white;box-shadow:0 10px 26px rgba(16,30,45,.05)}.node h3{margin:.2rem 0 .4rem}.node p{color:#56616c;margin:0;font-size:.9rem}.node-type{font-size:.65rem;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);font-weight:900}.citizen{border-top:4px solid var(--gold)}.chamber{border-top:4px solid #355d86}.civic{border-top:4px solid #73856c}.executive{border:2px solid var(--navy);box-shadow:0 14px 34px rgba(13,41,75,.12)}.connector{height:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;font-weight:800}.connector i{font-style:normal;color:var(--gold);font-size:1.35rem;line-height:1.1}.connector.split{display:grid;grid-template-columns:1fr 28px 1fr;text-align:center;max-width:760px;margin:auto}.connector.split i{align-self:center}.bridge-row{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:.35rem;margin:1.1rem auto 0;max-width:800px}.bridge-label{font-size:.68rem;text-transform:uppercase;letter-spacing:.11em;font-weight:900;color:var(--gold)}.merit-box{padding:.9rem 1rem;border-radius:14px;background:#ece7db;border:1px dashed rgba(13,41,75,.28);display:flex;flex-direction:column;min-width:320px;text-align:center}.merit-box strong{color:var(--navy)}.merit-box small{color:var(--muted)}.bridge-down{color:var(--gold);font-size:1.25rem;line-height:1}.directorates{grid-template-columns:repeat(5,1fr);max-width:1000px;margin:auto}.mini-node{padding:.85rem .8rem;background:#0d294b;color:white;border-radius:12px;text-align:center}.mini-node strong,.mini-node span{display:block}.mini-node strong{font-family:Georgia,serif}.mini-node span{font-size:.67rem;color:#c8d3df;margin-top:.2rem}.oversight{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.4rem auto 0;max-width:960px;padding-top:1.4rem;border-top:1px solid var(--line)}.oversight article{padding:1rem 1.1rem;background:rgba(13,41,75,.045);border-radius:14px}.oversight h3{font-size:1.15rem;margin:.25rem 0}.oversight p{font-size:.84rem;color:var(--muted);margin:0}.map-foot{margin:1.4rem auto 0;max-width:850px;text-align:center;padding:1rem;border-radius:12px;background:#fff7df;color:#3f4850;font-size:.9rem}.map-foot strong{color:var(--navy)}.map-foot em{font-family:Georgia,serif;color:var(--navy)}
@@ -299,6 +340,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .decision-grid,.balance-grid{grid-template-columns:1fr}
   .decision-copy{position:static}
 }
+@media(max-width:860px){.principle-grid{grid-template-columns:1fr}.principle-grid article{border-right:0;border-bottom:1px solid var(--line)}.principle-grid article:last-child{border-bottom:0}}
 @media(max-width:760px){
   .bridge-row{margin-top:1rem}.merit-box{min-width:0;width:min(100%,360px)}
   .section-heading{align-items:flex-start;flex-direction:column}
