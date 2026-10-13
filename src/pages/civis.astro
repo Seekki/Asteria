@@ -1,15 +1,253 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-<BaseLayout title="Civis — Portal ciudadano de Asteria">
-<section class="civis-hero"><div class="container head"><div><div class="eyebrow">CIVIS · demostración pública</div><h1>Ciudadanía simbólica</h1><p class="lead">Una primera maqueta del futuro portal ciudadano. Los datos introducidos aquí no salen de tu navegador ni se almacenan.</p></div><img src="/images/branding/emblema.png" alt="Emblema de Asteria"/></div></section>
-<section class="section-tight"><div class="container demo">
-<form class="card form" id="citizen-form"><div class="eyebrow">Solicitud simbólica</div><h2>Alta de ciudadano</h2><label>Nombre público<input required name="name" maxlength="70" placeholder="Tu nombre"/></label><label>Ciudad de afinidad<select name="city"><option>Aster</option><option>Veyra</option><option>Lira</option><option>Orsen</option><option>Cael</option></select></label><label class="check"><input required type="checkbox"/><span>Acepto el compromiso cívico: respetar la libertad de los demás como deseo que sea respetada la mía y contribuir, según mis capacidades, a la sociedad.</span></label><button class="btn btn-primary" type="submit">Emitir vista previa</button><p class="privacy">Demo local: no hay cuenta, base de datos ni registro persistente.</p></form>
-<div class="citizen-card" id="citizen-card"><div class="cc-top"><span>REPÚBLICA CÍVICA DE ASTERIA</span><img src="/images/branding/emblema.png" alt=""/></div><div class="cc-main"><small>CIUDADANÍA SIMBÓLICA · CIVIS</small><h2 id="card-name">Ciudadano/a de Asteria</h2><div class="cc-data"><div><span>ID CÍVICO</span><strong id="card-id">AST-DEMO-0000</strong></div><div><span>CIUDAD</span><strong id="card-city">Aster</strong></div><div><span>ALTA</span><strong id="card-date">—</strong></div></div></div><div class="cc-bottom"><span>Scientia · Libertas · Progressus</span><b>DEMOSTRACIÓN</b></div></div>
-</div></section>
-<section class="section"><div class="narrow prose"><div class="eyebrow">Hoja de ruta</div><h2>Qué será Civis</h2><p>La versión definitiva permitirá conservar un número de ciudadanía, descargar un certificado, participar en consultas ficticias y mantener un perfil cívico. La información necesaria será mínima y todo estará identificado claramente como ficción.</p><div class="quote">«Bienvenido a casa.» · «Benvingut a casa.»</div></div></section>
+
+<BaseLayout title="Civis — Portal ciudadano de Asteria" description="Civis es la sede digital ciudadana de la República Cívica de Asteria: trámites, expedientes, consultas, transparencia y participación pública.">
+
+<section class="civis-hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">CIVIS · Portal ciudadano</div>
+      <h1>Tu relación con el Estado, en un solo sitio.</h1>
+      <p class="lead">Trámites, expedientes, notificaciones, consultas públicas y acceso a información del Estado. Civis está diseñado para que una persona pueda entender qué está ocurriendo sin conocer la estructura interna de la administración.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#panel">Entrar en la demostración</a>
+        <a class="btn btn-secondary" href="#participacion">Ver participación pública</a>
+      </div>
+      <div class="privacy-note"><span>Privacidad por diseño</span><strong>La demostración funciona localmente y no almacena datos personales.</strong></div>
+    </div>
+
+    <aside class="access-card card">
+      <div class="access-head">
+        <img src="/images/branding/emblema.png" alt="Emblema de Asteria"/>
+        <div><span>REPÚBLICA CÍVICA DE ASTERIA</span><strong>Civis</strong></div>
+      </div>
+      <div class="access-copy">
+        <small>ACCESO CIUDADANO</small>
+        <h2>Identidad cívica</h2>
+        <p>En el sistema real, el acceso se realizaría mediante identidad digital nacional o credencial física vinculada.</p>
+      </div>
+      <div class="access-status"><i></i><span>Entorno de demostración</span></div>
+    </aside>
+  </div>
+</section>
+
+<section class="section-tight" id="panel">
+  <div class="container dashboard-shell">
+    <aside class="profile card">
+      <div class="profile-head">
+        <div class="avatar">IV</div>
+        <div><span>Sesión de demostración</span><h2>Iria Varel</h2><small>AST-2048-7719 · Aster</small></div>
+      </div>
+      <div class="profile-state">
+        <div><span>Identidad</span><strong>Verificada</strong></div>
+        <div><span>Domicilio cívico</span><strong>Aster · Centralia</strong></div>
+        <div><span>Buzón público</span><strong>Activo</strong></div>
+      </div>
+      <button class="profile-button" type="button" data-demo-message="La gestión de identidad está desactivada en esta maqueta.">Gestionar identidad <span>→</span></button>
+      <div class="demo-message" data-demo-output aria-live="polite"></div>
+    </aside>
+
+    <div class="dashboard-main">
+      <div class="dashboard-top">
+        <div><div class="eyebrow">Panel ciudadano</div><h2>Buenas tardes, Iria.</h2><p>Esto es lo que requiere tu atención hoy.</p></div>
+        <div class="date-chip"><span>Último acceso</span><strong>13 oct 2026 · 15:41</strong></div>
+      </div>
+
+      <div class="status-grid">
+        <article class="status-card urgent">
+          <span class="status-number">2</span>
+          <div><small>NOTIFICACIONES</small><strong>Dos comunicaciones nuevas</strong><p>Una requiere lectura antes del 20 de octubre.</p></div>
+        </article>
+        <article class="status-card">
+          <span class="status-number">1</span>
+          <div><small>EXPEDIENTES</small><strong>Un trámite en curso</strong><p>Solicitud de bonificación energética · en revisión.</p></div>
+        </article>
+        <article class="status-card">
+          <span class="status-number">3</span>
+          <div><small>CONSULTAS</small><strong>Tres procesos abiertos</strong><p>Puedes participar hasta final de mes.</p></div>
+        </article>
+      </div>
+
+      <div class="services card">
+        <div class="block-head"><div><span>Servicios frecuentes</span><h3>¿Qué necesitas hacer?</h3></div><small>Accesos simulados</small></div>
+        <div class="service-grid">
+          <button type="button" data-demo-message="El registro de trámites está desactivado en esta maqueta."><b>01</b><span><strong>Iniciar un trámite</strong><small>Solicitudes, licencias y ayudas</small></span><i>→</i></button>
+          <button type="button" data-demo-message="La consulta de expedientes está desactivada en esta maqueta."><b>02</b><span><strong>Mis expedientes</strong><small>Estado, documentos y plazos</small></span><i>→</i></button>
+          <button type="button" data-demo-message="El buzón ciudadano está desactivado en esta maqueta."><b>03</b><span><strong>Notificaciones</strong><small>Comunicaciones oficiales</small></span><i>→</i></button>
+          <a href="#participacion"><b>04</b><span><strong>Participación pública</strong><small>Consultas y propuestas</small></span><i>→</i></a>
+          <a href="/documentos/"><b>05</b><span><strong>Archivo y Gaceta</strong><small>Normativa y publicaciones</small></span><i>→</i></a>
+          <a href="/instituciones/"><b>06</b><span><strong>Instituciones</strong><small>Competencias y responsables</small></span><i>→</i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section notifications-section">
+  <div class="container split-grid">
+    <div class="card inbox">
+      <div class="block-head"><div><span>Buzón ciudadano</span><h3>Notificaciones recientes</h3></div><a href="#panel">Ver panel</a></div>
+      <article class="notice unread">
+        <div class="notice-icon">!</div>
+        <div><span>Dirección Nacional de Energía · 12 oct</span><strong>Documentación adicional para expediente EN-26-10491</strong><p>Se solicita una acreditación complementaria. Plazo de respuesta: 20 de octubre de 2026.</p></div>
+        <b>Nueva</b>
+      </article>
+      <article class="notice unread">
+        <div class="notice-icon">i</div>
+        <div><span>Ayuntamiento de Aster · 11 oct</span><strong>Obras nocturnas en la línea T3</strong><p>Afectación prevista entre Estación Central y La Ribera durante cuatro noches.</p></div>
+        <b>Nueva</b>
+      </article>
+      <article class="notice">
+        <div class="notice-icon">✓</div>
+        <div><span>Hacienda · 4 oct</span><strong>Declaración anual archivada</strong><p>El expediente fiscal 2025 se ha cerrado sin actuaciones pendientes.</p></div>
+        <b>Leída</b>
+      </article>
+    </div>
+
+    <aside class="card process-card">
+      <span class="process-type">EXPEDIENTE ACTIVO</span>
+      <h3>Bonificación de eficiencia energética</h3>
+      <p class="process-id">EN-26-10491</p>
+      <div class="progress"><i></i></div>
+      <div class="steps">
+        <div class="done"><b>1</b><span><strong>Solicitud registrada</strong><small>28 sep 2026</small></span></div>
+        <div class="done"><b>2</b><span><strong>Validación documental</strong><small>Completada</small></span></div>
+        <div class="current"><b>3</b><span><strong>Revisión técnica</strong><small>En curso</small></span></div>
+        <div><b>4</b><span><strong>Resolución</strong><small>Pendiente</small></span></div>
+      </div>
+      <button class="btn btn-secondary" type="button" data-demo-message="El detalle completo del expediente no está disponible en la demostración.">Ver expediente</button>
+    </aside>
+  </div>
+</section>
+
+<section class="section section-dark participation-section" id="participacion">
+  <div class="container">
+    <div class="section-heading dark-heading">
+      <div><div class="eyebrow">Participación pública</div><h2>Opinar antes de que la decisión esté tomada.</h2></div>
+      <p>Civis publica consultas, documentos técnicos, alternativas y respuestas de la administración. Participar no convierte una cuestión técnica en una votación vinculante, pero obliga al Estado a escuchar y responder.</p>
+    </div>
+
+    <div class="consult-grid">
+      <article class="consult">
+        <div class="consult-meta"><span>Educación</span><time>Hasta 28 oct</time></div>
+        <h3>Revisión del currículo común de secundaria 2027–2034</h3>
+        <p>Consulta sobre prioridades formativas, carga lectiva y equilibrio entre materias comunes, optativas y formación aplicada.</p>
+        <div class="consult-foot"><span>18.426 aportaciones</span><button type="button" data-demo-message="La participación está desactivada en esta maqueta.">Participar →</button></div>
+      </article>
+      <article class="consult">
+        <div class="consult-meta"><span>Movilidad</span><time>Hasta 31 oct</time></div>
+        <h3>Nuevo corredor ferroviario Aster–Lira</h3>
+        <p>Comparativa pública de tres alternativas de trazado, costes, demanda prevista e impacto territorial.</p>
+        <div class="consult-foot"><span>9.817 aportaciones</span><button type="button" data-demo-message="La participación está desactivada en esta maqueta.">Participar →</button></div>
+      </article>
+      <article class="consult">
+        <div class="consult-meta"><span>Salud pública</span><time>Hasta 6 nov</time></div>
+        <h3>Plan nacional de atención primaria 2027</h3>
+        <p>Observaciones sobre horarios, cobertura rural, telemedicina y criterios para ampliar plantillas.</p>
+        <div class="consult-foot"><span>6.204 aportaciones</span><button type="button" data-demo-message="La participación está desactivada en esta maqueta.">Participar →</button></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section transparency-section">
+  <div class="container transparency-grid">
+    <div>
+      <div class="eyebrow">Transparencia por defecto</div>
+      <h2>La administración debe poder explicar qué decidió y por qué.</h2>
+      <p class="lead">Civis no solo sirve para pedir cosas al Estado. También permite seguir presupuestos, contratos, responsables, indicadores y el recorrido de una decisión pública.</p>
+      <a class="btn btn-primary" href="/documentos/">Abrir Archivo y Gaceta →</a>
+    </div>
+    <div class="transparency-card card">
+      <div class="trans-head"><span>Panel público · ejemplo</span><strong>Dirección Nacional de Infraestructuras</strong></div>
+      <div class="metric"><span>Ejecución presupuestaria 2026</span><strong>71,4 %</strong></div>
+      <div class="metric"><span>Contratos publicados</span><strong>1.284</strong></div>
+      <div class="metric"><span>Indicadores con datos abiertos</span><strong>94 %</strong></div>
+      <div class="metric"><span>Tiempo medio de respuesta</span><strong>6,2 días</strong></div>
+      <div class="trace">Última actualización pública · 13 oct 2026 · 14:00</div>
+    </div>
+  </div>
+</section>
+
+<section class="section identity-demo" id="identidad">
+  <div class="container demo-grid">
+    <form class="card form" id="citizen-form">
+      <div class="eyebrow">Identidad simbólica</div>
+      <h2>Genera una credencial de demostración.</h2>
+      <p>Esta función conserva la pequeña demo original de Civis. No crea una cuenta real ni envía información a ningún servidor.</p>
+      <label>Nombre público<input required name="name" maxlength="70" placeholder="Tu nombre"/></label>
+      <label>Ciudad de afinidad<select name="city"><option>Aster</option><option>Veyra</option><option>Lira</option><option>Orsen</option><option>Cael</option></select></label>
+      <label class="check"><input required type="checkbox"/><span>Acepto el compromiso cívico: respetar la libertad de los demás como deseo que sea respetada la mía y contribuir, según mis capacidades, a la sociedad.</span></label>
+      <button class="btn btn-primary" type="submit">Emitir vista previa</button>
+      <p class="privacy">Demo local: no hay cuenta, base de datos ni registro persistente.</p>
+    </form>
+
+    <div class="citizen-card" id="citizen-card">
+      <div class="cc-top"><span>REPÚBLICA CÍVICA DE ASTERIA</span><img src="/images/branding/emblema.png" alt=""/></div>
+      <div class="cc-main"><small>IDENTIDAD SIMBÓLICA · CIVIS</small><h2 id="card-name">Ciudadano/a de Asteria</h2><div class="cc-data"><div><span>ID CÍVICO</span><strong id="card-id">AST-DEMO-0000</strong></div><div><span>CIUDAD</span><strong id="card-city">Aster</strong></div><div><span>ALTA</span><strong id="card-date">—</strong></div></div></div>
+      <div class="cc-bottom"><span>Scientia · Libertas · Progressus</span><b>DEMOSTRACIÓN</b></div>
+    </div>
+  </div>
+  <div class="narrow welcome-quote">«Bienvenido a casa.» · «Benvingut a casa.»</div>
+</section>
+
+<div class="toast" data-toast role="status" aria-live="polite"></div>
+
 <script is:inline>
-const f=document.getElementById('citizen-form');f?.addEventListener('submit',e=>{e.preventDefault();const d=new FormData(f);const n=(d.get('name')||'Ciudadano/a').toString().trim();const c=(d.get('city')||'Aster').toString();const code=Math.floor(1000+Math.random()*9000);const now=new Intl.DateTimeFormat('es-ES',{day:'2-digit',month:'short',year:'numeric'}).format(new Date());document.getElementById('card-name').textContent=n;document.getElementById('card-city').textContent=c;document.getElementById('card-id').textContent=`AST-DEMO-${code}`;document.getElementById('card-date').textContent=now;document.getElementById('citizen-card').classList.add('issued')});
+  const form = document.getElementById('citizen-form');
+  form?.addEventListener('submit', event => {
+    event.preventDefault();
+    const data = new FormData(form);
+    const name = (data.get('name') || 'Ciudadano/a').toString().trim();
+    const city = (data.get('city') || 'Aster').toString();
+    const code = Math.floor(1000 + Math.random() * 9000);
+    const now = new Intl.DateTimeFormat('es-ES',{day:'2-digit',month:'short',year:'numeric'}).format(new Date());
+    document.getElementById('card-name').textContent = name;
+    document.getElementById('card-city').textContent = city;
+    document.getElementById('card-id').textContent = 'AST-DEMO-' + code;
+    document.getElementById('card-date').textContent = now;
+    document.getElementById('citizen-card').classList.add('issued');
+  });
+
+  const toast = document.querySelector('[data-toast]');
+  let toastTimer;
+  document.querySelectorAll('[data-demo-message]').forEach(element => {
+    element.addEventListener('click', () => {
+      const message = element.dataset.demoMessage || 'Función no disponible en la demostración.';
+      const localOutput = element.closest('.profile')?.querySelector('[data-demo-output]');
+      if(localOutput){
+        localOutput.textContent = message;
+        window.setTimeout(() => localOutput.textContent = '', 3500);
+        return;
+      }
+      if(!toast) return;
+      toast.textContent = message;
+      toast.classList.add('show');
+      window.clearTimeout(toastTimer);
+      toastTimer = window.setTimeout(() => toast.classList.remove('show'), 3200);
+    });
+  });
 </script>
+
 </BaseLayout>
-<style>.civis-hero{padding:78px 0 46px;background:linear-gradient(120deg,#f5f1e7,#e5ddca)}.head{display:flex;justify-content:space-between;gap:2rem;align-items:center}.head img{width:130px}.demo{display:grid;grid-template-columns:.8fr 1.2fr;gap:1.5rem;align-items:center}.form{padding:1.5rem}.form label:not(.check){display:block;font-weight:800;color:var(--navy);margin:1rem 0}.form input,.form select{display:block;width:100%;margin-top:.38rem;border:1px solid var(--line);border-radius:11px;background:white;padding:.85rem;font:inherit;color:var(--ink)}.check{display:flex;gap:.7rem;align-items:flex-start;margin:1rem 0 1.3rem;color:#53606d}.check input{margin-top:.34rem}.privacy{font-size:.78rem;color:var(--muted);margin-top:.85rem}.citizen-card{min-height:370px;border-radius:28px;padding:1.6rem;background:linear-gradient(145deg,#0d294b,#133b66 72%,#a97a1d 180%);color:white;box-shadow:0 28px 70px rgba(13,41,75,.26);display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;transform:rotate(.3deg);transition:.25s}.citizen-card:before{content:"✦";position:absolute;right:-30px;bottom:-82px;font-size:240px;color:rgba(255,255,255,.035)}.issued{transform:rotate(0) scale(1.01)}.cc-top,.cc-bottom{display:flex;justify-content:space-between;align-items:center;gap:1rem;position:relative;z-index:1}.cc-top{font-size:.74rem;letter-spacing:.13em;font-weight:900}.cc-top img{width:44px}.cc-main{position:relative;z-index:1}.cc-main small{color:var(--goldsoft);letter-spacing:.12em;font-weight:900}.cc-main h2{color:white;font-size:clamp(2rem,4vw,3rem);margin:.45rem 0 1.8rem}.cc-data{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.cc-data span{display:block;color:#aebed0;font-size:.66rem;letter-spacing:.1em}.cc-data strong{display:block;margin-top:.25rem}.cc-bottom{border-top:1px solid rgba(255,255,255,.17);padding-top:.9rem;font-size:.72rem;color:#d3dee9}.cc-bottom b{color:var(--goldsoft);letter-spacing:.12em}@media(max-width:850px){.demo{grid-template-columns:1fr}.head img{width:90px}.cc-data{grid-template-columns:1fr 1fr}}@media(max-width:540px){.head img{display:none}.cc-data{grid-template-columns:1fr}.citizen-card{min-height:420px}}</style>
+
+<style>
+.civis-hero{padding:82px 0 62px;background:radial-gradient(circle at 82% 18%,rgba(201,154,50,.18),transparent 28%),linear-gradient(135deg,#f8f4e9,#e7dfcc)}.hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:4rem;align-items:center}.hero-actions{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1.5rem}.privacy-note{margin-top:1.5rem;border-left:3px solid var(--gold);padding:.7rem 1rem}.privacy-note span,.privacy-note strong{display:block}.privacy-note span{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:900}.privacy-note strong{color:var(--navy);font-size:.88rem;margin-top:.15rem}.access-card{overflow:hidden}.access-head{background:var(--navy);color:white;padding:1rem 1.15rem;display:flex;align-items:center;gap:.8rem}.access-head img{width:48px;height:48px;object-fit:contain}.access-head span,.access-head strong{display:block}.access-head span{font-size:.62rem;letter-spacing:.12em;color:#bfccda;font-weight:850}.access-head strong{font-family:Georgia,serif;font-size:1.45rem}.access-copy{padding:1.4rem}.access-copy small{color:var(--gold);font-weight:900;letter-spacing:.14em}.access-copy h2{font-size:2.1rem;margin-top:.3rem}.access-copy p{color:var(--muted);margin:0}.access-status{border-top:1px solid var(--line);padding:.8rem 1.4rem;display:flex;align-items:center;gap:.55rem;color:#47604f;font-weight:800;font-size:.78rem}.access-status i{width:9px;height:9px;border-radius:50%;background:#4b8c60;box-shadow:0 0 0 4px rgba(75,140,96,.12)}
+
+.dashboard-shell{display:grid;grid-template-columns:300px minmax(0,1fr);gap:1.2rem;align-items:start}.profile{overflow:hidden;position:sticky;top:96px}.profile-head{padding:1.35rem;display:flex;gap:.9rem;align-items:center;background:linear-gradient(145deg,#0d294b,#173f69);color:white}.avatar{width:50px;height:50px;border-radius:50%;background:#f1dfaa;color:var(--navy);display:grid;place-items:center;font-family:Georgia,serif;font-weight:900;font-size:1.15rem;flex:0 0 50px}.profile-head span,.profile-head h2,.profile-head small{display:block}.profile-head span{font-size:.62rem;letter-spacing:.11em;text-transform:uppercase;color:#c0ccda}.profile-head h2{color:white;font-size:1.55rem;margin:.18rem 0}.profile-head small{color:#d7e0e9}.profile-state{padding:.55rem 1.2rem}.profile-state div{display:flex;justify-content:space-between;gap:1rem;padding:.75rem 0;border-bottom:1px solid var(--line)}.profile-state span{color:var(--muted);font-size:.78rem}.profile-state strong{color:var(--navy);font-size:.78rem;text-align:right}.profile-button{width:100%;border:0;border-top:1px solid var(--line);background:rgba(13,41,75,.035);padding:.9rem 1.2rem;display:flex;justify-content:space-between;color:var(--navy);font-weight:850;cursor:pointer}.demo-message{padding:0 1.2rem;color:var(--muted);font-size:.75rem;min-height:0}.demo-message:not(:empty){padding-top:.65rem;padding-bottom:.65rem}.dashboard-main{min-width:0}.dashboard-top{display:flex;justify-content:space-between;gap:2rem;align-items:end;margin-bottom:1rem}.dashboard-top h2{margin:.15rem 0}.dashboard-top p{color:var(--muted);margin:0}.date-chip{text-align:right}.date-chip span,.date-chip strong{display:block}.date-chip span{font-size:.65rem;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);font-weight:900}.date-chip strong{color:var(--navy);font-size:.82rem}.status-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-bottom:1rem}.status-card{border:1px solid var(--line);border-radius:16px;background:rgba(255,253,248,.72);padding:1rem;display:flex;gap:.85rem}.status-number{font-family:Georgia,serif;font-size:2rem;color:var(--navy);line-height:1}.status-card small,.status-card strong{display:block}.status-card small{font-size:.6rem;color:var(--gold);letter-spacing:.12em;font-weight:900}.status-card strong{color:var(--navy);font-size:.86rem;margin:.22rem 0}.status-card p{color:var(--muted);font-size:.75rem;margin:0}.status-card.urgent{border-color:rgba(201,154,50,.55);background:#fffaf0}.services{padding:1.15rem}.block-head{display:flex;justify-content:space-between;align-items:end;gap:1rem;margin-bottom:.8rem}.block-head span{display:block;font-size:.64rem;text-transform:uppercase;letter-spacing:.13em;color:var(--gold);font-weight:900}.block-head h3{margin:.2rem 0 0}.block-head small,.block-head>a{font-size:.72rem;color:var(--muted)}.service-grid{display:grid;grid-template-columns:repeat(2,1fr);border:1px solid var(--line);border-radius:14px;overflow:hidden}.service-grid button,.service-grid a{appearance:none;border:0;border-bottom:1px solid var(--line);background:white;padding:1rem;text-align:left;text-decoration:none;display:grid;grid-template-columns:30px 1fr auto;gap:.7rem;align-items:center;color:inherit;cursor:pointer}.service-grid button:nth-child(odd),.service-grid a:nth-child(odd){border-right:1px solid var(--line)}.service-grid button:nth-last-child(-n+2),.service-grid a:nth-last-child(-n+2){border-bottom:0}.service-grid b{color:var(--gold);font-size:.68rem}.service-grid span strong,.service-grid span small{display:block}.service-grid span strong{color:var(--navy)}.service-grid span small{color:var(--muted);font-size:.72rem;margin-top:.12rem}.service-grid i{font-style:normal;color:var(--gold);font-weight:900}.service-grid button:hover,.service-grid a:hover{background:#f8f5ec}
+
+.notifications-section{background:#efeee9}.split-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:1.2rem;align-items:start}.inbox{padding:1.15rem}.notice{display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:.85rem;padding:1rem .2rem;border-top:1px solid var(--line);align-items:start}.notice-icon{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#edf0ec;color:var(--navy);font-weight:900}.notice div:nth-child(2)>span,.notice div:nth-child(2)>strong{display:block}.notice div:nth-child(2)>span{font-size:.68rem;color:var(--muted)}.notice div:nth-child(2)>strong{color:var(--navy);margin:.14rem 0}.notice p{font-size:.8rem;color:var(--muted);margin:0}.notice>b{font-size:.65rem;color:var(--muted);background:#edf0ec;border-radius:999px;padding:.22rem .5rem}.notice.unread>b{color:#725b25;background:#f4ecd7}.process-card{padding:1.3rem}.process-type{font-size:.64rem;letter-spacing:.14em;color:var(--gold);font-weight:900}.process-card h3{margin:.35rem 0}.process-id{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted);font-size:.75rem}.progress{height:5px;border-radius:999px;background:#dde2e3;margin:1.2rem 0}.progress i{display:block;width:67%;height:100%;border-radius:inherit;background:var(--gold)}.steps>div{display:flex;gap:.7rem;margin:.85rem 0;color:#8a9299}.steps b{width:25px;height:25px;border-radius:50%;border:1px solid #b8c0c5;display:grid;place-items:center;font-size:.68rem;flex:0 0 25px}.steps span strong,.steps span small{display:block}.steps span strong{font-size:.82rem}.steps span small{font-size:.7rem}.steps .done,.steps .current{color:var(--navy)}.steps .done b{background:var(--navy);color:white;border-color:var(--navy)}.steps .current b{background:var(--gold);color:white;border-color:var(--gold)}.process-card .btn{margin-top:.8rem;width:100%}
+
+.section-heading{display:flex;justify-content:space-between;gap:2rem;align-items:end;margin-bottom:1.4rem}.section-heading>p{max-width:500px;margin:0}.dark-heading>p{color:#cad6e1}.consult-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.consult{border:1px solid rgba(255,255,255,.14);border-radius:17px;background:rgba(255,255,255,.05);padding:1.25rem;display:flex;flex-direction:column;min-height:315px}.consult-meta{display:flex;justify-content:space-between;gap:1rem;font-size:.68rem}.consult-meta span{color:#f0c768;font-weight:900;text-transform:uppercase;letter-spacing:.1em}.consult-meta time{color:#aebed0}.consult h3{color:white;margin-top:1.2rem}.consult p{color:#cad6e1;font-size:.88rem}.consult-foot{margin-top:auto;border-top:1px solid rgba(255,255,255,.12);padding-top:.85rem;display:flex;justify-content:space-between;gap:.7rem;align-items:center}.consult-foot span{font-size:.7rem;color:#aebed0}.consult-foot button{border:0;background:none;color:white;font-weight:850;cursor:pointer;padding:0}
+
+.transparency-section{background:#f5f1e7}.transparency-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:3rem;align-items:center}.transparency-card{padding:1.3rem}.trans-head{padding-bottom:1rem;border-bottom:1px solid var(--line)}.trans-head span,.trans-head strong{display:block}.trans-head span{font-size:.65rem;color:var(--gold);font-weight:900;letter-spacing:.12em;text-transform:uppercase}.trans-head strong{font-family:Georgia,serif;color:var(--navy);font-size:1.25rem;margin-top:.22rem}.metric{display:flex;justify-content:space-between;gap:1rem;padding:.78rem 0;border-bottom:1px solid var(--line)}.metric span{color:var(--muted);font-size:.82rem}.metric strong{color:var(--navy)}.trace{font-size:.68rem;color:var(--muted);padding-top:.8rem}
+
+.identity-demo{background:#ece8dc}.demo-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:1.5rem;align-items:center}.form{padding:1.5rem}.form>p{color:var(--muted)}.form label:not(.check){display:block;font-weight:800;color:var(--navy);margin:1rem 0}.form input,.form select{display:block;width:100%;margin-top:.38rem;border:1px solid var(--line);border-radius:11px;background:white;padding:.85rem;font:inherit;color:var(--ink)}.check{display:flex;gap:.7rem;align-items:flex-start;margin:1rem 0 1.3rem;color:#53606d}.check input{margin-top:.34rem;width:auto}.privacy{font-size:.78rem;color:var(--muted);margin-top:.85rem}.citizen-card{min-height:370px;border-radius:28px;padding:1.6rem;background:linear-gradient(145deg,#0d294b,#133b66 72%,#a97a1d 180%);color:white;box-shadow:0 28px 70px rgba(13,41,75,.26);display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;transform:rotate(.3deg);transition:.25s}.citizen-card:before{content:"✦";position:absolute;right:-30px;bottom:-82px;font-size:240px;color:rgba(255,255,255,.035)}.issued{transform:rotate(0) scale(1.01)}.cc-top,.cc-bottom{display:flex;justify-content:space-between;align-items:center;gap:1rem;position:relative;z-index:1}.cc-top{font-size:.74rem;letter-spacing:.13em;font-weight:900}.cc-top img{width:44px}.cc-main{position:relative;z-index:1}.cc-main small{color:var(--goldsoft);letter-spacing:.12em;font-weight:900}.cc-main h2{color:white;font-size:clamp(2rem,4vw,3rem);margin:.45rem 0 1.8rem}.cc-data{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.cc-data span{display:block;color:#aebed0;font-size:.66rem;letter-spacing:.1em}.cc-data strong{display:block;margin-top:.25rem}.cc-bottom{border-top:1px solid rgba(255,255,255,.17);padding-top:.9rem;font-size:.72rem;color:#d3dee9}.cc-bottom b{color:var(--goldsoft);letter-spacing:.12em}.welcome-quote{margin-top:2rem;padding:1.15rem 1.3rem;border-left:4px solid var(--gold);font-family:Georgia,serif;font-size:1.1rem;color:var(--navy);background:rgba(255,255,255,.42)}
+
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);z-index:100;background:#081b31;color:white;border:1px solid rgba(255,255,255,.15);border-radius:999px;padding:.75rem 1.05rem;box-shadow:0 14px 34px rgba(0,0,0,.22);font-size:.8rem;font-weight:750;opacity:0;pointer-events:none;transition:.18s;max-width:min(90vw,620px);text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media(max-width:980px){.hero-grid,.dashboard-shell,.split-grid,.transparency-grid,.demo-grid{grid-template-columns:1fr}.profile{position:static}.status-grid,.consult-grid{grid-template-columns:1fr}.dashboard-top{align-items:flex-start}.date-chip{text-align:left}.service-grid{grid-template-columns:1fr}.service-grid button,.service-grid a,.service-grid button:nth-child(odd),.service-grid a:nth-child(odd){border-right:0;border-bottom:1px solid var(--line)}.service-grid button:last-child,.service-grid a:last-child{border-bottom:0}}
+@media(max-width:720px){.section-heading,.dashboard-top{flex-direction:column;align-items:flex-start}.hero-grid{gap:2rem}.access-card{max-width:520px}.notice{grid-template-columns:32px minmax(0,1fr)}.notice>b{grid-column:2;justify-self:start}.cc-data{grid-template-columns:1fr 1fr}.consult{min-height:auto}}
+@media(max-width:520px){.cc-data{grid-template-columns:1fr}.citizen-card{min-height:430px}.hero-actions .btn{width:100%}}
+</style>
